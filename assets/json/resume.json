@@ -29,7 +29,7 @@
       // "url": "https://example.com",
       "startDate": "2023-12-18",
       // "endDate": "2025-12-17",
-      "summary": "Developing a full proxy system model for TEX_{86} paleotemperature proxy.",
+      "summary": "Developing a full proxy system model for TEX<sub>86</sub> paleotemperature proxy.",
       "highlights": ["GDGT", "TEX86", "Paleoceanography", "Organic Geochemistry", "Marine Ammonia-Oxidizing Archaea"]
     }
   ]
