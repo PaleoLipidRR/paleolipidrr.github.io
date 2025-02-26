@@ -2,33 +2,25 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: Gould-Simpson Building, Room 513A <br>
+  Department of Geosciences, The University of Arizona<br>
+  1040 E. 4th St., Tucson, AZ 85721 U.S.A
 
 profile:
-  align: right
-  image: prof_pic.jpg
+  align: block
+  image: profile_picture.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
 
+news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
-
-announcements:
-  enabled: true # includes a list of news items
-  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
-
-latest_posts:
-  enabled: true
-  scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 3 # leave blank to include all the blog posts
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+Welcome to my personal website!
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+I am Ronnakrit Rattanasriampaipong, but you may know me by many other names! "Ronnie" is what I normally go by in English-speaking conversations. I am currently a <a href="https://cpaess.ucar.edu/cgc">NOAA Climate & Global Change Postdoctoral Fellow</a> (<a href="https://cpaess.ucar.edu/cgc/class-33">Class 33</a>) at the Department of Geosciences at the University of Arizona in Tucson, AZ, working on the project <em>"TEXAS: Towards a full proxy system modeling of TetraEther indeX of Ammonia oxidizerS and reanalysis of temperature trends for the past 100 million years"</em> with Dr. Jessica Tierney as my mentor.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+In Fall 2023, I earned my doctoral degree in Oceanography from the <a href="https://ocean.tamu.edu/">Department of Oceanographyat Texas A&amp;M University</a> in College Station, TX. I have spent five years and one semeseter working in the with Paleoceanography and Organic Geochemistry Lab under the supervision of <a href="https://scholar.google.com/citations?user=JHoI_8wAAAAJ&hl=en">Dr. Yige Zhang</a>. My dissertation research focuses on leveraging the use of lipid biomarkers, specifically Glycerol Dialkyl Glycerol Tetraethers (GDGTs) — membrane-spanning lipids of ancient marine microbes, beyond their typical SST reconstruction application (commonly known as TEX<sub>86</sub> paleotemperature proxy). One of my dissertation chapters has published in <a href="https://doi.org/10.1073/pnas.2123193119"><i>Proceedings of the National Academy of Sciences (PNAS)</i></a> in 2022, demonstrating that GDGT compositions recorded in marine sedimentary archives likely reflect ecological shifts of source organisms over geological history. The findings holds a crucial implication TEX<sub>86</sub> proxy, one of a few geochemical proxies that can provide reliable ocean temperature reconstructions over the past 100 million years.
+
+I am a proud <a href="https://www.fulbrightthai.org/grants-for-thais/thai-graduate-scholarship-program-tgs">Thai Fulbrighter</a>, a vivid amateur <a href="https://ultrasignup.com/m_results_participant.aspx?fname=Ronnakrit&lname=Rattanasriampaipong#">long-distance runner</a>, a passionate self-taught pythonista, and a data visualization geek.
