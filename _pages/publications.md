@@ -13,8 +13,20 @@ nav_order: 2
 
 {% include bib_search.liquid %}
 
+### papers published in refereed journals
+
 <div class="publications">
 
-{% bibliography %}
+{% bibliography --file papers %}
 
+</div>
+<br>
+<br>
+
+### manuscripts in <br>
+
+#### **preparation, submitted, under review,**<br> **under revisions, preprints and/or in-press**
+
+<div class="publications">
+  {% bibliography --file preprints %}
 </div>

@@ -302,6 +302,11 @@ scholar:
   group_by: year
   group_order: descending
 
+  # Specify multiple bibliography files
+  bibliography_list:
+    papers: "papers.bib"
+    preprints: "preprints.bib"
+
 # Display different badges withs stats for your publications
 # Customize badge behavior in _layouts/bib.liquid
 enable_publication_badges:
