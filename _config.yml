@@ -197,6 +197,7 @@ exclude:
   - _pages/dropdown.md
   - _pages/teaching.md
   - _pages/profiles.md
+  - _pages/cv.md
 
 keep_files:
   - CNAME
