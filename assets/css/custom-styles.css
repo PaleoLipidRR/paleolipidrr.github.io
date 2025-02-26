@@ -1,0 +1,14 @@
+/* filepath: /c:/Users/ratta/Documents/GitHub/paleolipidrr.github.io/assets/css/custom-styles.css */
+.custom-figure {
+  width: 100%; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Crop the image */
+  object-position: center; /* Center the image */
+  box-shadow: none; /* Remove drop shadow */
+}
+
+.custom-figure-container {
+  overflow: hidden; /* Hide overflow to crop the image */
+  width: 100%; /* Adjust the container width as needed */
+  height: 300px; /* Adjust the container height as needed */
+}
