@@ -23,13 +23,6 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/projects/";
           },
-        },{id: "nav-cv",
-          title: "cv",
-          description: "",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/cv/";
-          },
         },{id: "post-a-post-with-image-galleries",
       
         title: "a post with image galleries",
@@ -472,6 +465,13 @@ ninja.data = [{
         section: 'Socials',
         handler: () => {
           window.open("https://twitter.com/paleolipidrr", "_blank");
+        },
+      },{
+        id: 'social-custom_social',
+        title: 'Custom_social',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://paleolipidrr.github.io/assets/pdf/CV_Rattanasriampaipong.pdf", "_blank");
         },
       },{
       id: 'light-theme',
