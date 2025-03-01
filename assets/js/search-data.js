@@ -3,25 +3,32 @@ const ninja = document.querySelector('ninja-keys');
 
 // add the home and posts menu items
 ninja.data = [{
-    id: "nav-about",
-    title: "about",
+    id: "nav-about-me",
+    title: "about me",
     section: "Navigation",
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "nav-publications",
+  },{id: "nav-projects",
+          title: "projects",
+          description: "A growing collection of cool GDGT projects from marine sediment studies.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-teaching",
+          title: "teaching",
+          description: "A collection of courses I have taught since 2021.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/teaching/";
+          },
+        },{id: "nav-publications",
           title: "publications",
           description: "publications by categories in reversed chronological order",
           section: "Navigation",
           handler: () => {
             window.location.href = "/publications/";
-          },
-        },{id: "nav-projects",
-          title: "projects",
-          description: "A growing collection of your cool projects.",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/projects/";
           },
         },{id: "post-a-post-with-image-galleries",
       
@@ -375,7 +382,17 @@ ninja.data = [{
           window.location.href = "/blog/2015/formatting-and-links/";
         
       },
-    },{id: "news-a-simple-inline-announcement",
+    },{id: "courses-data-analysis-methods-in-geosciences",
+          title: 'Data Analysis Methods in Geosciences',
+          description: "An lab portion for 400-level TAMU undergraduate and graduate students in the College of Arts &amp; Sciences",
+          section: "Courses",handler: () => {
+              window.location.href = "/courses/data_methods_geos/";
+            },},{id: "courses-the-blue-planet",
+          title: 'The Blue Planet',
+          description: "An asynchronous online course for non-oceanography major undergraduates at TAMU",
+          section: "Courses",handler: () => {
+              window.location.href = "/courses/the_blue_planet/";
+            },},{id: "news-a-simple-inline-announcement",
           title: 'A simple inline announcement.',
           description: "",
           section: "News",},{id: "news-a-long-announcement-with-details",
@@ -437,6 +454,13 @@ ninja.data = [{
         section: 'Socials',
         handler: () => {
           window.open("mailto:%72%72%61%74%74%61%6E@%75%63%61%72.%65%64%75", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/PaleoLipidRR", "_blank");
         },
       },{
         id: 'social-linkedin',
