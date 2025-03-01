@@ -2,9 +2,9 @@
 layout: page
 title: projects
 permalink: /projects/
-description: A growing collection of your cool projects.
+description: A growing collection of cool GDGT projects from marine sediment studies.
 nav: true
-nav_order: 3
+nav_order: 2
 display_categories: [work] #, fun
 horizontal: false
 ---
@@ -13,18 +13,22 @@ horizontal: false
 
 ### **Archaeal membrane lipids as a proxy for ocean temperatures**
 
-<br>
-<br>
-<div class="row">
-    <div class="custom-figure-container">
-        {% include figure.liquid loading="eager" path="assets/img/png/archaeal_membrane_lipids_adjustement.png" title="archaeal membrane lipids adjustment" class="img-fluid custom-figure" %}
-    </div> 
-    <br>
-    <br>
-    <div class="custom-figure-container">
-        {% include figure.liquid loading="eager" path="assets/img/png/archaeal_membrane_lipids.png" title="archaeal membrane lipids" class="img-fluid custom-figure" %}
-    </div>
+
+<div style="position: relative; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; padding-top: 400px;">
+  <div style="position: relative; flex: 1;">
+    <!-- Left Image (Main) -->
+    <img src='{{ "/assets/img/png/archaeal_membrane_lipids.png" | relative_url }}' 
+         alt="Main Image" 
+         style="width: 80%;" />
+
+    <!-- Top-Right Overlay Image -->
+    <img src='{{ "/assets/img/png/archaeal_membrane_lipids_adjustement.png" | relative_url }}' 
+         alt="Overlay Image" 
+         style="position: absolute; top: -120%; right: 0; width: 70%; z-index: 2;" />
+  </div>
 </div>
+
+
 
 
 <div class="projects">
@@ -40,7 +44,7 @@ horizontal: false
   <!-- Generate cards for each project -->
     {% if page.horizontal %}
       <div class="container">
-        <div class="row row-cols-1 row-cols-md-2">
+        <div class="row row-cols-1 row-cols-md-3">
           {% for project in visible_projects %}
             {% include projects_horizontal.liquid %}
           {% endfor %}
@@ -72,7 +76,7 @@ horizontal: false
     </div>
   </div>
   {% else %}
-  <div class="row row-cols-1 row-cols-md-3">
+  <div class="row row-cols-1 row-cols-md-2">
     {% for project in sorted_projects %}
       {% include projects.liquid %}
     {% endfor %}

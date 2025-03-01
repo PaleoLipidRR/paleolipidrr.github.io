@@ -1,6 +1,6 @@
 ---
 layout: about
-title: about
+title: about me
 permalink: /
 subtitle: Gould-Simpson Building, Room 513A <br>
   Department of Geosciences, The University of Arizona<br>
