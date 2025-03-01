@@ -24,11 +24,11 @@ To give your project a background in the portfolio page, just add the img tag to
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/png/fig2_PNAS_GDGTdistributions_revised-01.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/png/fig2_PNAS_GDGTdistributions_revised-01.png" title="Lipid distributions reflect archaea ecology fingerprints" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    This image can also have a caption. It's like magic.
+    This figure shows distribution patterns of archaeal ecology fingerprints in different archives, including
 </div>
 
 You can also put regular text between your rows of images, even citations {% cite einstein1950meaning %}.
