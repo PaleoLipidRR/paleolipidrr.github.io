@@ -403,9 +403,9 @@ ninja.data = [{
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
-          section: "News",},{id: "projects-project-1",
-          title: 'project 1',
-          description: "GDGTs trace marine AOA ecology and evolution",
+          section: "News",},{id: "projects-archaeal-lipids-track-aoa-ecology-and-evolution",
+          title: 'Archaeal lipids track AOA ecology and evolution',
+          description: "Proceedings of National Academy of Sciences",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
             },},{id: "projects-project-2",
