@@ -23,10 +23,14 @@ nav_order: 4
 <br>
 <br>
 
-### manuscripts in <br>
-
-#### **preparation, submitted, under review,**<br> **under revisions, preprints and/or in-press**
+### manuscripts **submitted, under review, preprints and/or in-press**
 
 <div class="publications">
   {% bibliography --file preprints %}
+</div>
+
+### manuscripts **in preparation**
+
+<div class="publications">
+  {% bibliography --file inpreps %}
 </div>
