@@ -8,7 +8,7 @@ permalink: /hidden/culRI-Bayesian_notes.html
 <style>
   /* Copy-button flash states */
   .code-display-wrapper button.copy:active i.fa-clipboard,
-  .code-display-wrapper button.copy:focus i.fa-clipboard {
+  .code-display-wrapper button.copy.clicked i.fa-clipboard {
     color: #E53E3E !important;
   }
   .code-display-wrapper button.copy.clicked i.fa-clipboard {
@@ -20,12 +20,54 @@ permalink: /hidden/culRI-Bayesian_notes.html
     background: #1e1e1e;
     padding: 1em;
     border-radius: 0.5em;
+    overflow-x: auto;
   }
   pre code {
     font-size: 1.1em;
     line-height: 1.4;
-    /* color: #d4d4d4; */
     background: #1e1e1e !important;
+  }
+
+  /* File-explorer window styles */
+  .page-container {
+    display: flex;
+    height: 600px;
+    border: 1px solid #ddd;
+    margin-top: 2em;
+  }
+  .sidebar {
+    width: 200px;
+    background: #f7f7f7;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+    padding: 1em;
+  }
+  .sidebar a {
+    display: block;
+    margin: 0.5em 0;
+    color: #0366d6;
+    text-decoration: none;
+  }
+  .sidebar a.selected,
+  .sidebar a:hover {
+    text-decoration: underline;
+  }
+  .content {
+    flex: 1;
+    padding: 1em;
+    overflow-y: auto;
+  }
+  .content section {
+    display: none;
+  }
+  .content section.active {
+    display: block;
+  }
+  /* Override code block inside content pane */
+  .content pre {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    border-radius: 4px;
   }
 </style>
 
@@ -48,9 +90,6 @@ permalink: /hidden/culRI-Bayesian_notes.html
   });
 </script>
 
-<!-- This is a hidden page for notes on the Bayesian analysis of the Culmination RI data. -->
-<!-- The content is not intended for public viewing. -->
-
 # **Bayesian Analysis Notes**
 ## Developing the new temperature calibration model using Ring Index.
 
@@ -64,18 +103,77 @@ permalink: /hidden/culRI-Bayesian_notes.html
   </summary>
   {% include_relative /html_figures/scaledRI_vs_Temperature.html %}
   <br>
-    <br>
-    <details>
-        <summary>Show Python example</summary>
+  <br>
+  <details>
+    <summary>Show Python example</summary>
 <pre><code class="language-python">
 def get_posteriors(data_dict, stan_file_name):
     from cmdstanpy import CmdStanModel
     # … rest of your function …
 </code></pre>
-        </details>
+  </details>
 </details>
 
 <br>
 <br>
-### Figure 2. A dashboard of posterior distributions of culRI-Bayesian models
-{% include_relative /html_figures/Bayesians_hyperparams.html %}
+<details>
+  <summary>
+    <span style="font-size:1.25em; font-weight:600;">
+    Figure 2. A dashboard of posterior distributions of culRI-Bayesian models
+    </span>
+  </summary>
+  {% include_relative /html_figures/Bayesians_hyperparams.html %}
+
+<!-- Make a window to view all stan files dynamically -->
+
+{% comment %}
+  Grab every static file whose path contains '/hidden/stan_files/'
+  (we assume you only put .stan files in there)
+{% endcomment %}
+{% assign stanfiles = site.static_files 
+   | where_exp: "f", "f.path contains '/hidden/stan_files/'" %}
+
+<div class="page-container">
+  <nav class="sidebar">
+    <strong>Stan files</strong>
+    {% for f in stanfiles %}
+      <a href="#{{ f.name | slugify }}">{{ f.name }}</a>
+    {% endfor %}
+  </nav>
+
+  <div class="content">
+    {% for f in stanfiles %}
+      <section id="{{ f.name | slugify }}">
+        <h3>{{ f.name }}</h3>
+        {%- comment -%}
+          include_relative is relative to the .md file,
+          so if your page is at hidden/culRI-Bayesian_notes.md
+          and your files live in hidden/stan_files/, do:
+        {%- endcomment -%}
+
+        <pre><code class="language-stan">
+{% include_relative stan_files/{{ f.name }} %}
+        </code></pre>
+
+      </section>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  // same tabbing logic as before
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = document.querySelectorAll('.content section');
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      sections.forEach(s => s.classList.remove('active'));
+      links.forEach(l => l.classList.remove('selected'));
+      const target = document.querySelector(link.getAttribute('href'));
+      target.classList.add('active');
+      link.classList.add('selected');
+    });
+  });
+  if (links.length) links[0].click();
+</script>
+</details>
