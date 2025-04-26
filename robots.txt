@@ -1,1 +1,1 @@
-User-agent: * Disallow: Sitemap: https://paleolipidrr.github.io/sitemap.xml
+User-agent: * Disallow: /hidden/ Sitemap: https://paleolipidrr.github.io/sitemap.xml
