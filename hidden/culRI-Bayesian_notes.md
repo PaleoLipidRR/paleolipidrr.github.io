@@ -69,6 +69,22 @@ permalink: /hidden/culRI-Bayesian_notes.html
     color: #f8f8f2;
     border-radius: 4px;
   }
+
+  /* only indent the first level of nesting */
+  details > details {
+    margin-left: 1.5em;
+  }
+
+  /* if you want deeper levels to indent further, chain the > again */
+  details > details > details {
+    margin-left: 3em;
+  }
+
+  /* and if you only want to shift the summary line */
+  details > details > summary {
+    padding-left: 1.5em;
+  }
+
 </style>
 
 <!-- Syntax highlighting with Highlight.js VS Code theme -->
@@ -124,6 +140,17 @@ def get_posteriors(data_dict, stan_file_name):
   </summary>
   {% include_relative /html_figures/Bayesians_hyperparams.html %}
 
+  <br>
+  <br>
+  <details>
+    <summary>
+      <span style="font-size:1.25em; font-weight:600;">
+      RI residuals of culRI-Bayesian models
+      </span>
+    </summary>
+    {% include_relative /html_figures/Bayesians_hyperparams_residuals.html %}
+  </details>
+
 <!-- Make a window to view all stan files dynamically -->
 
 {% comment %}
@@ -132,34 +159,41 @@ def get_posteriors(data_dict, stan_file_name):
 {% endcomment %}
 {% assign stanfiles = site.static_files 
    | where_exp: "f", "f.path contains '/hidden/stan_files/'" %}
+<br>
+<br>
+<details>
+  <summary>
+    <span style="font-size:1.25em; font-weight:600;">
+    Stan model files
+    </span>
+  </summary>
+  <div class="page-container">
+    <nav class="sidebar">
+      <strong>Stan files</strong>
+      {% for f in stanfiles %}
+        <a href="#{{ f.name | slugify }}">{{ f.name }}</a>
+      {% endfor %}
+    </nav>
 
-<div class="page-container">
-  <nav class="sidebar">
-    <strong>Stan files</strong>
-    {% for f in stanfiles %}
-      <a href="#{{ f.name | slugify }}">{{ f.name }}</a>
-    {% endfor %}
-  </nav>
+    <div class="content">
+      {% for f in stanfiles %}
+        <section id="{{ f.name | slugify }}">
+          <h3>{{ f.name }}</h3>
+          {%- comment -%}
+            include_relative is relative to the .md file,
+            so if your page is at hidden/culRI-Bayesian_notes.md
+            and your files live in hidden/stan_files/, do:
+          {%- endcomment -%}
 
-  <div class="content">
-    {% for f in stanfiles %}
-      <section id="{{ f.name | slugify }}">
-        <h3>{{ f.name }}</h3>
-        {%- comment -%}
-          include_relative is relative to the .md file,
-          so if your page is at hidden/culRI-Bayesian_notes.md
-          and your files live in hidden/stan_files/, do:
-        {%- endcomment -%}
+          <pre><code class="language-stan">
+  {% include_relative stan_files/{{ f.name }} %}
+          </code></pre>
 
-        <pre><code class="language-stan">
-{% include_relative stan_files/{{ f.name }} %}
-        </code></pre>
-
-      </section>
-    {% endfor %}
+        </section>
+      {% endfor %}
+    </div>
   </div>
-</div>
-
+</details>
 <script>
   // same tabbing logic as before
   const links = document.querySelectorAll('.sidebar a');
@@ -176,4 +210,36 @@ def get_posteriors(data_dict, stan_file_name):
   });
   if (links.length) links[0].click();
 </script>
+</details>
+
+<br>
+<br>
+<details>
+  <summary>
+    <span style="font-size:1.25em; font-weight:600;">
+    Figure 3. Paleo-showcases
+    </span>
+  </summary>
+
+  <br>
+  <br>
+  <details>
+    <summary>
+      <span style="font-size:1.25em; font-weight:600;">
+      3.1 PETM showcase
+      </span>
+    </summary>
+  {% include_relative /html_figures/WilsonLakePETM_showcase.html %}
+  </details>
+
+  <br>
+  <br>
+  <details>
+    <summary>
+      <span style="font-size:1.25em; font-weight:600;">
+      3.2 Glacial-Interglacial showcase
+      </span>
+    </summary>
+  {% include_relative /html_figures/MD98-2152_G-IG_showcase.html %}
+  </details>
 </details>
