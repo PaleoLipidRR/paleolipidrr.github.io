@@ -109,14 +109,18 @@ permalink: /hidden/culRI-Bayesian_notes.html
 # **Bayesian Analysis Notes**
 ## Developing the new temperature calibration model using Ring Index.
 
-This page contains notes for the culture-informed temperature calibration model using Ring Index using Bayesian approach. The model is called **culRI-Bayesian**.
+This page contains notes for the **cul**ture-informed temperature calibration model using **Ring Index** using **Bayesian** approach. The model is called **culRI-Bayesian**.
 
 <br>
 Based on the Temperature-RI distribution across all archives---**cultures, mesocosms, and coretop**---the **logistic functio with a fixed upper asymptote** (see the interactive plot to see how each hyperparameter impacts the curve) is selected because:
 - RI values of lab cultures at growth T < 10&deg;C and T > 35&deg;C are flatten out---RI values are less sensitive to change in T (see Figure 1).
 - The upper asymptote is fixed to 1.0, which is the theoretical maximum RI value for all cultures at the highest growth T (35&deg;C).
-- The logistic function with a fixed upper asymptote has been widely used in ecology to describe the growth of populations or the response of organisms to environmental factors. Below are examples of studies highlighting the use of logistic function to describe growth curves:
-  - Goehlich, H., Luna-Jorquera, G., Drapeau Picard, A. P., Pantoja, J., Tala, F., & Thiel, M. (2024). *Seasonal growth rates of gooseneck barnacles (Lepas spp.): Proxies for floating time of rafts in marine ecosystems*. Marine Biology, 171(1), 36. [https://doi.org/10.1007/s00227-023-04336-8](https://doi.org/10.1007/s00227-023-04336-8).
+- The logistic function has been widely used in ecology to describe the growth of populations or the response of organisms to environmental factors. Below are examples of studies highlighting the use of logistic function to describe growth curves:
+  - Harrold, Z. R., Skidmore, M. L., Hamilton, T. L., Desch, L., Amada, K., Van Gelder, W., ... & Boyd, E. S. (2016). Aerobic and anaerobic thiosulfate oxidation by a cold-adapted, subglacial chemoautotroph. *Applied and environmental microbiology*, 82(5), 1486-1495. [https://doi.org/10.1128/AEM.03398-15](https://doi.org/10.1128/AEM.03398-15)
+  - Goehlich, H., Luna-Jorquera, G., Drapeau Picard, A. P., Pantoja, J., Tala, F., & Thiel, M. (2024). Seasonal growth rates of gooseneck barnacles (Lepas spp.): Proxies for floating time of rafts in marine ecosystems. *Marine Biology*, 171(1), 36. [https://doi.org/10.1007/s00227-023-04336-8](https://doi.org/10.1007/s00227-023-04336-8).
+  - Jenkins, D. G., & Pierce, S. (2017). General allometric scaling of net primary production agrees with plant adaptive strategy theory and has tipping points. *Journal of Ecology*, 105(4), 1094-1104. [https://doi.org/10.1111/1365-2745.12726](https://doi.org/10.1111/1365-2745.12726).
+  - Sauve, D., Friesen, V. L., Hatch, S. A., Elliott, K. H., & Charmantier, A. (2023). Shifting environmental predictors of phenotypes under climate change: a case study of growth in high latitude seabirds. *Journal of Avian Biology*, 2023(5-6), e03062. [https://doi.org/10.1111/jav.03062](https://doi.org/10.1111/jav.03062).
+  - [Book Chapter] Vallina, S. M., Martinez-Garcia, R., Smith, S. L., & Bonachela, J. A. (2019). Models in microbial ecology. *Academic Press*. [https://doi.org/10.1016/B978-0-12-809633-8.20789-9](https://doi.org/10.1016/B978-0-12-809633-8.20789-9).
 
 The model is implemented using [**Stan**](https://mc-stan.org/), a probabilistic programming language for Bayesian inference. The model is fit to the data using Markov Chain Monte Carlo (MCMC) sampling.
 
