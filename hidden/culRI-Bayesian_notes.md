@@ -109,9 +109,8 @@ permalink: /hidden/culRI-Bayesian_notes.html
 # **Bayesian Analysis Notes**
 ## Developing the new temperature calibration model using Ring Index.
 
-This page contains notes for the **cul**ture-informed temperature calibration model using **Ring Index** using **Bayesian** approach. The model is called **culRI-Bayesian**.
+This page contains notes for the **cul**ture-informed temperature calibration model using **R**ing **I**ndex using **Bayesian** inference approach. The model is called **culRI-Bayesian** (to make it a homophone of "calibration").
 
-<br>
 Based on the Temperature-RI distribution across all archives---**cultures, mesocosms, and coretop**---the **logistic functio with a fixed upper asymptote** (see the interactive plot to see how each hyperparameter impacts the curve) is selected because:
 - RI values of lab cultures at growth T < 10&deg;C and T > 35&deg;C are flatten out---RI values are less sensitive to change in T (see Figure 1).
 - The upper asymptote is fixed to 1.0, which is the theoretical maximum RI value for all cultures at the highest growth T (35&deg;C).
@@ -124,7 +123,6 @@ Based on the Temperature-RI distribution across all archives---**cultures, mesoc
 
 The model is implemented using [**Stan**](https://mc-stan.org/), a probabilistic programming language for Bayesian inference. The model is fit to the data using Markov Chain Monte Carlo (MCMC) sampling.
 
-<br>
 <details>
   <summary>
     <span style="font-size:1.25em; font-weight:600;">Logistic functional forms (interactive plot)
@@ -138,8 +136,6 @@ The model is implemented using [**Stan**](https://mc-stan.org/), a probabilistic
 ></iframe>
 </details>
 
-<br>
-<br>
 <details>
   <summary>
     <span style="font-size:1.25em; font-weight:600;">
@@ -159,8 +155,6 @@ def get_posteriors(data_dict, stan_file_name):
   </details>
 </details>
 
-<br>
-<br>
 <details>
   <summary>
     <span style="font-size:1.25em; font-weight:600;">
@@ -188,8 +182,6 @@ def get_posteriors(data_dict, stan_file_name):
 {% endcomment %}
 {% assign stanfiles = site.static_files 
    | where_exp: "f", "f.path contains '/hidden/stan_files/'" %}
-<br>
-<br>
 <details>
   <summary>
     <span style="font-size:1.25em; font-weight:600;">
@@ -241,8 +233,6 @@ def get_posteriors(data_dict, stan_file_name):
 </script>
 </details>
 
-<br>
-<br>
 <details>
   <summary>
     <span style="font-size:1.25em; font-weight:600;">
