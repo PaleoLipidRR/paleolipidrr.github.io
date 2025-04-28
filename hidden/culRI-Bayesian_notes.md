@@ -111,6 +111,16 @@ permalink: /hidden/culRI-Bayesian_notes.html
 
 <br>
 <br>
+## **Logistic functional forms**
+<iframe
+  src="/assets/html/logistic_fixed_upper_interactive.html"
+  width="100%"
+  height="600"
+  frameborder="0"
+></iframe>
+
+<br>
+<br>
 <details>
   <summary>
     <span style="font-size:1.25em; font-weight:600;">
