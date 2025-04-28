@@ -109,15 +109,30 @@ permalink: /hidden/culRI-Bayesian_notes.html
 # **Bayesian Analysis Notes**
 ## Developing the new temperature calibration model using Ring Index.
 
+This page contains notes for the culture-informed temperature calibration model using Ring Index using Bayesian approach. The model is called **culRI-Bayesian**.
+
 <br>
+Based on the Temperature-RI distribution across all archives---**cultures, mesocosms, and coretop**---the **logistic functio with a fixed upper asymptote** (see the interactive plot to see how each hyperparameter impacts the curve) is selected because:
+- RI values of lab cultures at growth T < 10&deg;C and T > 35&deg;C are flatten out---RI values are less sensitive to change in T (see Figure 1).
+- The upper asymptote is fixed to 1.0, which is the theoretical maximum RI value for all cultures at the highest growth T (35&deg;C).
+- The logistic function with a fixed upper asymptote has been widely used in ecology to describe the growth of populations or the response of organisms to environmental factors. Below are examples of studies highlighting the use of logistic function to describe growth curves:
+  - Goehlich, H., Luna-Jorquera, G., Drapeau Picard, A. P., Pantoja, J., Tala, F., & Thiel, M. (2024). *Seasonal growth rates of gooseneck barnacles (Lepas spp.): Proxies for floating time of rafts in marine ecosystems*. Marine Biology, 171(1), 36. [https://doi.org/10.1007/s00227-023-04336-8](https://doi.org/10.1007/s00227-023-04336-8).
+
+The model is implemented using [**Stan**](https://mc-stan.org/), a probabilistic programming language for Bayesian inference. The model is fit to the data using Markov Chain Monte Carlo (MCMC) sampling.
+
 <br>
-## **Logistic functional forms**
+<details>
+  <summary>
+    <span style="font-size:1.25em; font-weight:600;">Logistic functional forms (interactive plot)
+    </span>
+  </summary>
 <iframe
   src="/assets/html/logistic_fixed_upper_interactive.html"
   width="100%"
   height="600"
   frameborder="0"
 ></iframe>
+</details>
 
 <br>
 <br>
