@@ -182,6 +182,7 @@ Based on the Temperature-RI distribution across all archives---**cultures, mesoc
 <br>
 The model is implemented using [**Stan**](https://mc-stan.org/), a probabilistic programming language for Bayesian inference. The model is fit to the data using Markov Chain Monte Carlo (MCMC) sampling.
 
+<!-- Interactive plot of logistic functional forms -->
 <details>
   <summary>
     <span style="font-size:1.25em; font-weight:600;">Logistic functional forms (interactive plot)
@@ -194,7 +195,24 @@ The model is implemented using [**Stan**](https://mc-stan.org/), a probabilistic
   frameborder="0"
 ></iframe>
 </details>
+<br>
+{% assign deeptealdot = '<span style="color:deepteal">&#9679;</span>' %}
+{% assign tealdot = '<span style="color:teal">&#9679;</span>' %}
+{% assign orangedot = '<span style="color:orange">&#9679;</span>' %}
+{% assign graydot = '<span style="color:gray">&#9679;</span>' %}
 
+
+| Model Name | T | scaled RI | gdgt23ratio | x0 | k | b | beta0 | beta1 |
+|------------|:--:|:---------:|:--------:|:----:|:-----:|:-----:|:-----:|:----:|
+| **joint-cul-meso** | {{ deeptealdot }} {{ tealdot }} | {{ deeptealdot }} {{ tealdot }} | | {{ graydot }} | {{ graydot }} | {{ graydot }} | | |
+| **joint-cul-meso-coretop** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | | {{ graydot }} | {{ graydot }} | {{ graydot }} | | |
+| **joint-cul-meso-coretop-multivariate** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ orangedot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} |
+| **joint-cul-meso-coretop-multivariate-fixedbeta1** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ orangedot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | |
+| **joint-all-full-multivariate** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} |
+| **joint-all-full-multivariate-fixedbeta1** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | |
+
+
+<br>
 <details>
   <summary>
     <span style="font-size:1.25em; font-weight:600;">
