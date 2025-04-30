@@ -196,7 +196,7 @@ The model is implemented using [**Stan**](https://mc-stan.org/), a probabilistic
 ></iframe>
 </details>
 <br>
-{% assign deeptealdot = '<span style="color:deepteal">&#9679;</span>' %}
+{% assign deeptealdot = '<span style="color: #006D6D">&#9679;</span>' %}
 {% assign tealdot = '<span style="color:teal">&#9679;</span>' %}
 {% assign orangedot = '<span style="color:orange">&#9679;</span>' %}
 {% assign graydot = '<span style="color:gray">&#9679;</span>' %}
@@ -211,46 +211,8 @@ The model is implemented using [**Stan**](https://mc-stan.org/), a probabilistic
 | **joint-all-full-multivariate** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} |
 | **joint-all-full-multivariate-fixedbeta1** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | |
 
-
 <br>
-<details>
-  <summary>
-    <span style="font-size:1.25em; font-weight:600;">
-      Figure 1. A scatter plot between scaledRI vs. Temperature (color by culture strains)
-    </span>
-  </summary>
-  {% include_relative /html_figures/scaledRI_vs_Temperature.html %}
-  <br>
-  <br>
-  <details>
-    <summary>Show Python example</summary>
-<pre><code class="language-python">
-def get_posteriors(data_dict, stan_file_name):
-    from cmdstanpy import CmdStanModel
-    # … rest of your function …
-</code></pre>
-  </details>
-</details>
-
-<details>
-  <summary>
-    <span style="font-size:1.25em; font-weight:600;">
-    Figure 2. A dashboard of posterior distributions of culRI-Bayesian models
-    </span>
-  </summary>
-  {% include_relative /html_figures/Bayesians_hyperparams.html %}
-
-  <br>
-  <details>
-    <summary>
-      <span style="font-size:1.25em; font-weight:600;">
-      RI residuals of culRI-Bayesian models
-      </span>
-    </summary>
-    {% include_relative /html_figures/Bayesians_hyperparams_residuals.html %}
-  </details>
-
-<!-- Make a window to view all stan files dynamically -->
+**Legend** | {{ deeptealdot }} Culture --- {{ tealdot }} Mesocosm --- {{ orangedot }} Coretop
 
 {% comment %}
   Grab every static file whose path contains '/hidden/stan_files/'
@@ -258,7 +220,7 @@ def get_posteriors(data_dict, stan_file_name):
 {% endcomment %}
 {% assign stanfiles = site.static_files 
    | where_exp: "f", "f.path contains '/hidden/stan_files/'" %}
-<br>
+
 <details>
   <summary>
     <span style="font-size:1.25em; font-weight:600;">
@@ -308,7 +270,45 @@ def get_posteriors(data_dict, stan_file_name):
   });
   if (links.length) links[0].click();
 </script>
+
+
 <br>
+<details>
+  <summary>
+    <span style="font-size:1.25em; font-weight:600;">
+      Figure 1. A scatter plot between scaledRI vs. Temperature (color by culture strains)
+    </span>
+  </summary>
+  {% include_relative /html_figures/scaledRI_vs_Temperature.html %}
+  <br>
+  <br>
+  <details>
+    <summary>Show Python example</summary>
+<pre><code class="language-python">
+def get_posteriors(data_dict, stan_file_name):
+    from cmdstanpy import CmdStanModel
+    # … rest of your function …
+</code></pre>
+  </details>
+</details>
+
+<details>
+  <summary>
+    <span style="font-size:1.25em; font-weight:600;">
+    Figure 2. A dashboard of posterior distributions of culRI-Bayesian models
+    </span>
+  </summary>
+  {% include_relative /html_figures/Bayesians_hyperparams.html %}
+
+  <br>
+  <details>
+    <summary>
+      <span style="font-size:1.25em; font-weight:600;">
+      RI residuals of culRI-Bayesian models
+      </span>
+    </summary>
+    {% include_relative /html_figures/Bayesians_hyperparams_residuals.html %}
+  </details>
 </details>
 
 <details>
