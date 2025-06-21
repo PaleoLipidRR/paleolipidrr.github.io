@@ -392,16 +392,16 @@ ninja.data = [{
           description: "An asynchronous online course for non-oceanography major undergraduates at TAMU",
           section: "Courses",handler: () => {
               window.location.href = "/courses/the_blue_planet/";
-            },},{id: "news-a-simple-inline-announcement",
-          title: 'A simple inline announcement.',
-          description: "",
-          section: "News",},{id: "news-a-long-announcement-with-details",
+            },},{id: "news-a-long-announcement-with-details",
           title: 'A long announcement with details',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_2/";
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
+          description: "",
+          section: "News",},{id: "news-new-paper-published-in-geophysical-research-letters",
+          title: 'New paper published in Geophysical Research Letters!',
           description: "",
           section: "News",},{id: "projects-archaeal-lipids-track-aoa-ecology-and-evolution",
           title: 'Archaeal lipids track AOA ecology and evolution',
