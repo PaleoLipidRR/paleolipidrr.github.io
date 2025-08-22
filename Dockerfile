@@ -74,3 +74,5 @@ COPY bin/entry_point.sh /tmp/entry_point.sh
 # USER $USERNAME
 
 CMD ["/tmp/entry_point.sh"]
+
+
