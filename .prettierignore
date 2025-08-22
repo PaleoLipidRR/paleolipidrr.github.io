@@ -9,8 +9,4 @@ lighthouse_results/**
 _posts/2015-10-20-math.md
 _sass/font-awesome/*.scss
 _sass/tabler-icons/*.scss
-_scripts/search.liquid.js
-
-# ignore the hidden notes page and all stan files
-hidden/culRI-Bayesian_notes.md
-
+_scripts/*
