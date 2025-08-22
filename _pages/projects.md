@@ -13,7 +13,6 @@ horizontal: false
 
 ### **Archaeal membrane lipids as a proxy for ocean temperatures**
 
-
 <div style="position: relative; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; padding-top: 400px;">
   <div style="position: relative; flex: 1;">
     <!-- Left Image (Main) -->
@@ -22,14 +21,12 @@ horizontal: false
          style="width: 80%;" />
 
     <!-- Top-Right Overlay Image -->
-    <img src='{{ "/assets/img/png/archaeal_membrane_lipids_adjustement.png" | relative_url }}' 
-         alt="Overlay Image" 
+    <img src='{{ "/assets/img/png/archaeal_membrane_lipids_adjustement.png" | relative_url }}'
+         alt="Overlay Image"
          style="position: absolute; top: -120%; right: 0; width: 70%; z-index: 2;" />
+
   </div>
 </div>
-
-
-
 
 <div class="projects">
 {% if site.enable_project_categories and page.display_categories %}

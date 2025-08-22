@@ -3,6 +3,7 @@ layout: default
 title: culRI-Bayesian notes
 permalink: /hidden/culRI-Bayesian_notes.html
 ---
+
 <meta name="robots" content="noindex">
 
 <style>
@@ -114,14 +115,16 @@ permalink: /hidden/culRI-Bayesian_notes.html
 </script>
 
 # **Bayesian Analysis Notes**
+
 ## Developing the new temperature calibration model using Ring Index.
 
 This page contains notes for the **cul**ture-informed temperature calibration model using **R**ing **I**ndex using **Bayesian** inference approach. The model is called **culRI-Bayesian** (to make it a homophone of "calibration").
 
 Based on the Temperature-RI distribution across all archives---**cultures, mesocosms, and coretop**---the **logistic functio with a fixed upper asymptote** (see the interactive plot to see how each hyperparameter impacts the curve) is selected because:
+
 - RI values of lab cultures at growth T < 10&deg;C and T > 35&deg;C are flatten out---RI values are less sensitive to change in T (see Figure 1).
 - The upper asymptote is fixed to 1.0, which is the theoretical maximum RI value for all cultures at the highest growth T (35&deg;C).
-- The logistic function has been widely used in ecology to describe the growth of populations or the response of organisms to environmental factors. 
+- The logistic function has been widely used in ecology to describe the growth of populations or the response of organisms to environmental factors.
 
 <details style="margin-left: 3em;">
   <summary>
@@ -201,24 +204,23 @@ The model is implemented using [**Stan**](https://mc-stan.org/), a probabilistic
 {% assign orangedot = '<span style="color:orange">&#9679;</span>' %}
 {% assign graydot = '<span style="color:gray">&#9679;</span>' %}
 
-
-| Model Name | T | scaled RI | gdgt23ratio | x0 | k | b | beta0 | beta1 |
-|------------|:--:|:---------:|:--------:|:----:|:-----:|:-----:|:-----:|:----:|
-| **joint-cul-meso** | {{ deeptealdot }} {{ tealdot }} | {{ deeptealdot }} {{ tealdot }} | | {{ graydot }} | {{ graydot }} | {{ graydot }} | | |
-| **joint-cul-meso-coretop** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | | {{ graydot }} | {{ graydot }} | {{ graydot }} | | |
-| **joint-cul-meso-coretop-multivariate** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ orangedot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} |
-| **joint-cul-meso-coretop-multivariate-fixedbeta1** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ orangedot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | |
-| **joint-all-full-multivariate** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} |
-| **joint-all-full-multivariate-fixedbeta1** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | |
+| Model Name                                         |                        T                        |                    scaled RI                    |                   gdgt23ratio                   |      x0       |       k       |       b       |     beta0     |     beta1     |
+| -------------------------------------------------- | :---------------------------------------------: | :---------------------------------------------: | :---------------------------------------------: | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: |
+| **joint-cul-meso**                                 |         {{ deeptealdot }} {{ tealdot }}         |         {{ deeptealdot }} {{ tealdot }}         |                                                 | {{ graydot }} | {{ graydot }} | {{ graydot }} |               |               |
+| **joint-cul-meso-coretop**                         | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} |                                                 | {{ graydot }} | {{ graydot }} | {{ graydot }} |               |               |
+| **joint-cul-meso-coretop-multivariate**            | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} |                 {{ orangedot }}                 | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} |
+| **joint-cul-meso-coretop-multivariate-fixedbeta1** | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} |                 {{ orangedot }}                 | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} |               |
+| **joint-all-full-multivariate**                    | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} |
+| **joint-all-full-multivariate-fixedbeta1**         | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ deeptealdot }} {{ tealdot }} {{ orangedot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} | {{ graydot }} |               |
 
 <br>
 **Legend** | {{ deeptealdot }} Culture --- {{ tealdot }} Mesocosm --- {{ orangedot }} Coretop
 
 {% comment %}
-  Grab every static file whose path contains '/hidden/stan_files/'
-  (we assume you only put .stan files in there)
+Grab every static file whose path contains '/hidden/stan_files/'
+(we assume you only put .stan files in there)
 {% endcomment %}
-{% assign stanfiles = site.static_files 
+{% assign stanfiles = site.static_files
    | where_exp: "f", "f.path contains '/hidden/stan_files/'" %}
 
 <details>
@@ -246,12 +248,14 @@ The model is implemented using [**Stan**](https://mc-stan.org/), a probabilistic
           {%- endcomment -%}
 
           <pre><code class="language-stan">
-  {% include_relative stan_files/{{ f.name }} %}
-          </code></pre>
+
+{% include_relative stan_files/{{ f.name }} %}
+</code></pre>
 
         </section>
       {% endfor %}
     </div>
+
   </div>
 </details>
 <script>
@@ -270,7 +274,6 @@ The model is implemented using [**Stan**](https://mc-stan.org/), a probabilistic
   });
   if (links.length) links[0].click();
 </script>
-
 
 <br>
 <details>

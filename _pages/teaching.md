@@ -5,12 +5,11 @@ permalink: /teaching/
 description: A collection of courses I have taught since 2021.
 nav: true
 nav_order: 3
-display_categories: [Texas A&M University]  # Add more universities if needed University of Arizona,
+display_categories: [Texas A&M University] # Add more universities if needed University of Arizona,
 horizontal: false
 ---
 
 <!-- pages/teaching.md -->
-
 
 <div class="projects">
 {% if site.enable_course_categories and page.display_categories %}

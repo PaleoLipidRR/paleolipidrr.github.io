@@ -23,7 +23,6 @@ hidden: false
     </div>
 </div>
 
-
 <div style="text-align: center; margin: 20px 0;">
   <a href="https://paleo-lipid-rr.notion.site/GEOS-470-Data-analysis-and-methods-in-Geosciences-MATLAB-ff65280b468b4395ad8a9f0a2b86d5f5" target="_blank" class="btn btn-primary">Visit My Notion Teaching Page</a>
 </div>
