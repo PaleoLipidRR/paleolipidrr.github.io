@@ -8,7 +8,7 @@ subtitle: Gould-Simpson Building, Room 513A <br>
 
 profile:
   align: block
-  image: profile_picture.jpg
+  image: 20250703_134209~2.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
 
@@ -16,7 +16,13 @@ news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
-
+<style>
+.profile img {
+    max-width: 500px !important;
+    width: 100% !important;
+    height: auto !important;
+}
+</style>
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
 Welcome to my personal website!
