@@ -160,8 +160,9 @@
     {% else %}
       {% capture entrytype %}{% endcapture %}
     {% endif %}
-    {%- comment -%} month field is intentionally ignored; users complained it was appearing even when not set
-    {% assign entrymonth = "" %}
+    {%- comment -%}
+      month field is intentionally ignored; users complained it was appearing even when not set
+      {% assign entrymonth = "" %}
     {%- endcomment -%}
     {% if entry.year %}
       {% capture entryyear %}{{ " " }}{{ entry.year }}{% endcapture %}
