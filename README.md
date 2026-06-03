@@ -22,6 +22,13 @@
 
 </div>
 
+## Working in this repo — specs & plans
+
+This site uses an AI-assisted (Claude Code) workflow with two design artifacts:
+
+- **Design specs are written as standalone HTML** (in `docs/superpowers/specs/`), so they can embed the actual rendered diagrams and page mockups instead of static images or ASCII art. The convention is captured in the `writing-design-specs` skill under `.claude/skills/`.
+- **Implementation plans remain markdown.**
+
 ## User community
 
 The vibrant community of **al-folio** users is growing!
