@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/home/ronnie-rattan/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/brainstorming/scripts/start-server.sh *)",
+      "Bash(git checkout *)",
+      "Bash(git add *)",
+      "Bash(git commit -q -m ' *)",
+      "Bash(git rm *)",
+      "Bash(bundle exec *)",
+      "Bash(git commit *)",
+      "Bash(ln -sf /usr/bin/ruby3.3 ~/.local/bin/ruby3.1)",
+      "Bash(bundle install *)",
+      "Bash(ruby -ryaml -e 'fm=File.read\\(\"_projects/aoa-ecology.md\"\\).split\\(/^---\\\\s*$/\\)[1]; YAML.safe_load\\(fm\\); puts \"YAML_OK\"')",
+      "Bash(ruby -ryaml -e 'ARGV.each{|f| fm=File.read\\(f\\).split\\(/^---\\\\s*$/\\)[1]; YAML.safe_load\\(fm\\); puts \"YAML_OK #{f}\"}' _projects/texas.md _projects/gdgtdb.md)",
+      "Bash(git push *)",
+      "Bash(gh pr *)",
+      "Bash(/home/ronnie-rattan/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/brainstorming/scripts/stop-server.sh /home/ronnie-rattan/Documents/GitHub/paleolipidrr.github.io/.superpowers/brainstorm/52073-1780497524)",
+      "Bash(gh run *)",
+      "Bash(npx --no-install prettier --version)",
+      "Bash(echo \"WATCH_EXIT=$?\")",
+      "Bash(git fetch *)"
+    ]
+  }
+}
