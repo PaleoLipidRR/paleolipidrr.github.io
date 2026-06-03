@@ -18,7 +18,16 @@
       "Bash(gh run *)",
       "Bash(npx --no-install prettier --version)",
       "Bash(echo \"WATCH_EXIT=$?\")",
-      "Bash(git fetch *)"
+      "Bash(git fetch *)",
+      "Bash(npx --no-install prettier --write .)",
+      "Bash(npx --no-install prettier . --check)",
+      "Bash(gh api *)",
+      "Bash(curl -s -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' \"https://paleolipidrr.github.io/projects/?cb=$\\(date +%s\\)\" -o /tmp/live_projects.html)",
+      "Bash(echo \"pages status: $\\(gh api repos/PaleoLipidRR/paleolipidrr.github.io/pages --jq '.status' 2>&1\\)\")",
+      "Bash(curl -s \"https://paleolipidrr.github.io/projects/?cb=$\\(date +%s%N\\)\" -o /tmp/live2.html -w \"%{http_code}\")",
+      "Bash(curl -sI \"https://paleolipidrr.github.io/projects/\")",
+      "Bash(git ls-remote *)",
+      "Bash(sed 's#.*refs/heads/# #')"
     ]
   }
 }
