@@ -2,31 +2,26 @@
 layout: page
 title: projects
 permalink: /projects/
-description: A growing collection of cool GDGT projects from marine sediment studies.
+description: Exploring new insights from a comprehensive global archaeal lipid compilation.
 nav: true
 nav_order: 2
-display_categories: [work] #, fun
+display_categories: [work]
 horizontal: false
+_styles: >
+  .post-header { display: none; }
+  .projects-hero { text-align: center; max-width: 640px; margin: 0 auto 0.5rem; }
+  .projects-hero h1 { font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; }
+  .projects-hero p { color: var(--global-text-color-light); font-size: 0.95rem; }
 ---
 
 <!-- pages/projects.md -->
 
-### **Archaeal membrane lipids as a proxy for ocean temperatures**
-
-<div style="position: relative; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; padding-top: 400px;">
-  <div style="position: relative; flex: 1;">
-    <!-- Left Image (Main) -->
-    <img src='{{ "/assets/img/png/archaeal_membrane_lipids.png" | relative_url }}' 
-         alt="Main Image" 
-         style="width: 80%;" />
-
-    <!-- Top-Right Overlay Image -->
-    <img src='{{ "/assets/img/png/archaeal_membrane_lipids_adjustement.png" | relative_url }}'
-         alt="Overlay Image"
-         style="position: absolute; top: -120%; right: 0; width: 70%; z-index: 2;" />
-
-  </div>
+<div class="projects-hero">
+  <h1>Exploring new insights from a comprehensive global archaeal lipid compilation</h1>
+  <p>GDGT membrane lipids across cultures, the water column, and marine sediments — spanning 0 to 192 Ma.</p>
 </div>
+
+{% include research_program_diagram.liquid %}
 
 <div class="projects">
 {% if site.enable_project_categories and page.display_categories %}
