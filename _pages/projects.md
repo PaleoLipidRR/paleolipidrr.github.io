@@ -9,16 +9,20 @@ display_categories: [work]
 horizontal: false
 _styles: >
   .post-header { display: none; }
-  .projects-hero { text-align: center; max-width: 640px; margin: 0 auto 0.5rem; }
-  .projects-hero h1 { font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; }
+  .projects-hero { text-align: center; max-width: 1200px; margin: 0 auto 0.5rem; }
+  .projects-hero h1 { color: var(--global-theme-color); font-weight: 800; line-height: 1; margin-bottom: 0.5rem; font-size:4rem }
+  .projects-hero h2 { font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; }
+  .projects-hero h3 { font-weight: 100; line-height: 1.25; margin-bottom: 0.5rem; }
   .projects-hero p { color: var(--global-text-color-light); font-size: 0.95rem; }
 ---
 
 <!-- pages/projects.md -->
 
 <div class="projects-hero">
-  <h1>Exploring new insights from a comprehensive global archaeal lipid compilation</h1>
-  <p>GDGT membrane lipids across cultures, the water column, and marine sediments — spanning 0 to 192 Ma.</p>
+  <h2>exploring new insights from</h2>
+  <h3>a comprehensive global compilation of</h3>
+  <h1>archaeal tetraether lipids</h1>
+  <p>GDGT membrane lipids across cultures, the water column, and marine sediments</p>
 </div>
 
 {% include research_program_diagram.liquid %}
