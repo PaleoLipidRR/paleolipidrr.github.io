@@ -5,6 +5,7 @@ description: Proceedings of National Academy of Sciences
 img: assets/img/png/fig3_PNAS_SPM_GMM_revised.png
 importance: 1
 category: work
+status: published
 related_publications: false
 hidden: false
 ---
