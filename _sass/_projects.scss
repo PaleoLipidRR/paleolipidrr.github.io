@@ -1,0 +1,26 @@
+// _sass/_projects.scss
+// Opt-in status badge for project cards (rendered when a project sets `status:`).
+
+.project-status {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #fff;
+
+  &--published {
+    background-color: #2a9d57;
+  }
+
+  &--preprint {
+    background-color: var(--global-theme-color);
+  }
+
+  &--in-progress {
+    background-color: #c9851f;
+    color: #1d1d1f;
+  }
+}
