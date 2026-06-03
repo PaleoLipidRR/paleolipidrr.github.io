@@ -28,4 +28,4 @@ Nutrient effects on TEX$_{86}$, published in GRL, are a component of the framewo
 
 ## Preprint
 
-TEXAS is currently a preprint under review at *Paleoceanography and Paleoclimatology* (PALO). _(Placeholder — add the preprint DOI/link once available.)_
+TEXAS is currently a preprint under review at _Paleoceanography and Paleoclimatology_ (PALO). _(Placeholder — add the preprint DOI/link once available.)_
