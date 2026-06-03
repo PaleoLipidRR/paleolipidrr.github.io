@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Spec — Projects Page Redesign</title>
+<style>
+  :root {
+    --bg: #f7f7f9; --panel: #ffffff; --ink: #1d1d1f; --muted: #6b6b70;
+    --line: #e2e2e7; --accent: #2c6e9c; --accent-soft: #eaf2f8;
+    --green: #2a9d57; --amber: #c9851f; --code-bg: #f0f0f3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181c; --panel: #1f2228; --ink: #e9eaec; --muted: #9aa0a8;
+      --line: #2e323a; --accent: #5aa6d6; --accent-soft: #1d2a35;
+      --green: #4cc47e; --amber: #e0a84a; --code-bg: #23262d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6; font-size: 16px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 48px 24px 80px; }
+  header.doc { border-bottom: 2px solid var(--line); padding-bottom: 20px; margin-bottom: 8px; }
+  header.doc h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 12px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.85rem; color: var(--muted); }
+  .meta b { color: var(--ink); font-weight: 600; }
+  h2 { font-size: 1.3rem; margin: 38px 0 10px; padding-top: 6px; }
+  h3 { font-size: 1.05rem; margin: 22px 0 6px; }
+  p, li { color: var(--ink); }
+  .lead { font-size: 1.05rem; color: var(--ink); }
+  code { background: var(--code-bg); padding: 1px 6px; border-radius: 5px; font-size: 0.88em; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  ul { padding-left: 22px; }
+  li { margin: 4px 0; }
+  .pill { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 2px 9px; border-radius: 20px; }
+  .pill.pub { background: var(--green); color: #fff; } .pill.prog { background: var(--amber); color: #1d1d1f; } .pill.pre { background: var(--accent); color: #fff; }
+  .callout { background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 16px 0; font-size: 0.95rem; }
+  .files h3 { margin-top: 16px; }
+
+  /* ===== Figure 1: embedded live preview of the page ===== */
+  .figure { margin: 18px 0 8px; }
+  .figcap { font-size: 0.82rem; color: var(--muted); margin-top: 8px; text-align: center; }
+  .browser { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,0.08); background: var(--panel); }
+  .browser-bar { background: var(--code-bg); border-bottom: 1px solid var(--line); padding: 8px 12px; display: flex; align-items: center; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+  .url { margin-left: 10px; font-size: 0.75rem; color: var(--muted); background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 2px 12px; }
+  .page { padding: 26px 22px; }
+  .pg { max-width: 600px; margin: 0 auto; }
+  .pg-hero { text-align: center; padding: 4px 8px 8px; }
+  .pg-hero h1 { font-size: 1.15rem; font-weight: 800; line-height: 1.3; max-width: 480px; margin: 0 auto 7px; }
+  .pg-hero p { font-size: 0.78rem; color: var(--muted); margin: 0; }
+  .pg-diagram { margin: 16px auto 22px; max-width: 440px; }
+  .dnode { border: 1px solid var(--line); border-radius: 9px; padding: 9px 11px; background: var(--panel); text-align: center; }
+  .dfound { background: var(--accent); color: #fff; border-color: var(--accent); width: 100%; }
+  .dfound .dt, .dfound .ds { color: #fff; } .dfound .ds { opacity: 0.9; }
+  .dsynth { width: 100%; border: 2px solid var(--accent); }
+  .dt { font-size: 0.72rem; font-weight: 700; margin-bottom: 2px; line-height: 1.2; }
+  .ds { font-size: 0.6rem; color: var(--muted); line-height: 1.25; }
+  .dstack { display: flex; flex-direction: column; align-items: center; }
+  .dconn { width: 1px; height: 13px; background: var(--muted); opacity: 0.5; }
+  .dbranches { display: flex; gap: 10px; width: 100%; }
+  .dbranches .dnode { flex: 1; }
+  .dlabel { font-size: 0.62rem; color: var(--accent); font-weight: 700; margin: 3px 0; }
+  .pg-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .pg-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .pg-card .img { height: 78px; position: relative; }
+  .img-pnas { background: linear-gradient(135deg, #2c6e9c, #6fb1d6); }
+  .img-texas { background: linear-gradient(135deg, #b5651d, #e0a368); }
+  .pg-card .img .pill { position: absolute; top: 8px; left: 8px; font-size: 0.6rem; }
+  .pg-body { padding: 11px 13px; }
+  .pg-title { font-size: 0.82rem; font-weight: 700; margin-bottom: 4px; line-height: 1.2; }
+  .pg-desc { font-size: 0.66rem; color: var(--muted); line-height: 1.4; }
+  @media (max-width: 560px) { .dbranches { flex-direction: column; } .pg-cards { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc">
+    <h1>Projects Page Redesign — Design Spec</h1>
+    <div class="meta">
+      <span><b>Date:</b> 2026-06-03</span>
+      <span><b>Site:</b> paleolipidrr.github.io (al-folio / Jekyll)</span>
+      <span><b>Author:</b> Ronnakrit Rattanasriampaipong (with Claude)</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Overview</h2>
+    <p class="lead">Redesign <code>/projects/</code> from a single PNAS card into a <b>research-program hub</b> that frames the work under one overarching theme — <i>exploring new insights from a comprehensive global archaeal lipid compilation</i> — and shows how the individual projects relate.</p>
+    <p>The page keeps the al-folio card system and adds two things on top: a clean hero and a relationship diagram. It stays part of the personal academic site (no separate standalone website). A future GDGTdb database site can be linked from a card when it exists; the structure is built to accommodate that without rework.</p>
+  </section>
+
+  <section>
+    <h2>Goals &amp; Non-Goals</h2>
+    <h3>Goals</h3>
+    <ul>
+      <li>Communicate the overarching research narrative at a glance.</li>
+      <li>Show that the published PNAS (archaeal ecology) and GRL (nutrient effects on TEX<sub>86</sub>) results both feed the TEXAS calibration framework (preprint, under review at <i>PALO</i>).</li>
+      <li>Present projects as cards that link to detail pages hosted on this site.</li>
+      <li>Stay backward-compatible with al-folio conventions and easy to extend as projects mature.</li>
+    </ul>
+    <h3>Non-Goals</h3>
+    <ul>
+      <li>No separate/standalone website (deferred until GDGTdb needs one).</li>
+      <li>No public exposure of GDGTdb yet.</li>
+      <li>No status-based section grouping yet — only two visible cards; the diagram carries the narrative.</li>
+      <li>No CMS, JS framework, or backend. Plain Jekyll/Liquid + SCSS.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Locked Decisions</h2>
+    <table>
+      <tr><th>Decision</th><th>Choice</th></tr>
+      <tr><td>Hosting</td><td>Projects page as hub on the existing al-folio site</td></tr>
+      <tr><td>Page structure</td><td>Hero → relationship diagram → card grid</td></tr>
+      <tr><td>Diagram form</td><td>Convergence: compilation → {PNAS, GRL} → TEXAS</td></tr>
+      <tr><td>Project name</td><td>"TEXAS" (not "TEXAS PSM")</td></tr>
+      <tr><td>Card destinations</td><td>Internal detail pages (one page per project)</td></tr>
+      <tr><td>AOA ecology file</td><td>Renamed <code>1_project.md</code> → <code>aoa-ecology.md</code> (URL becomes <code>/projects/aoa-ecology/</code>)</td></tr>
+      <tr><td>TEXAS status</td><td>Preprint — under review at <i>PALO</i></td></tr>
+      <tr><td>Nutrient effects (GRL)</td><td>A section <i>inside</i> the TEXAS page + a node in the diagram; <b>not</b> its own card. The TEXAS page cites/links the GRL paper.</td></tr>
+      <tr><td>GDGTdb</td><td>Hidden card stub created now (<code>hidden: true</code>); publish later by flipping the flag</td></tr>
+      <tr><td>Demo files</td><td>Delete the 8 unused al-folio demo project files (<code>2_project.md</code>–<code>9_project.md</code>)</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Page Anatomy</h2>
+    <p><code>/projects/</code> renders three stacked zones. The hero replaces the current overlapping-image block (the <code>padding-top: 400px</code> / <code>top: -120%</code> hack in <code>_pages/projects.md</code>). The diagram sits <b>before</b> <code>&lt;div class="projects"&gt;</code>, outside the card grid. The card loop below is unchanged in structure.</p>
+
+    <div class="figure">
+      <div class="browser">
+        <div class="browser-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="url">paleolipidrr.github.io/projects/</span>
+        </div>
+        <div class="page">
+          <div class="pg">
+            <div class="pg-hero">
+              <h1>Exploring new insights from a comprehensive global archaeal lipid compilation</h1>
+              <p>GDGT membrane lipids across cultures, the water column, and marine sediments — spanning 0 to 192 Ma.</p>
+            </div>
+            <div class="pg-diagram">
+              <div class="dstack">
+                <div class="dnode dfound"><div class="dt">Global archaeal lipid compilation</div><div class="ds">turning rich archaeal lipid data into new insights</div></div>
+                <div class="dconn"></div>
+                <div class="dbranches">
+                  <div class="dnode"><div class="dt">AOA ecology &amp; evolution</div><div class="ds">PNAS · GDGT-2 / GDGT-3</div></div>
+                  <div class="dnode"><div class="dt">Nutrient effects on TEX<sub>86</sub></div><div class="ds">GRL</div></div>
+                </div>
+                <div class="dconn"></div>
+                <div class="dlabel">↓ both inform the calibration</div>
+                <div class="dnode dsynth"><div class="dt">TEXAS</div><div class="ds">new TEX<sub>86</sub> calibration framework</div></div>
+              </div>
+            </div>
+            <div class="pg-cards">
+              <div class="pg-card">
+                <div class="img img-pnas"><span class="pill pub">Published</span></div>
+                <div class="pg-body">
+                  <div class="pg-title">Archaeal lipids track AOA ecology &amp; evolution</div>
+                  <div class="pg-desc">PNAS — GDGT-2/GDGT-3 distributions record marine archaeal ecology and evolution across 192 Myr.</div>
+                </div>
+              </div>
+              <div class="pg-card">
+                <div class="img img-texas"><span class="pill pre">Preprint</span></div>
+                <div class="pg-body">
+                  <div class="pg-title">TEXAS</div>
+                  <div class="pg-desc">A new TEX<sub>86</sub> calibration framework — synthesizing the archaeal ecology lens (PNAS) and nutrient effects on TEX<sub>86</sub> (GRL). Under review at PALO.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="figcap">Figure 1 — The assembled <code>/projects/</code> page (live HTML preview). GDGTdb is omitted (kept as a hidden card).</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The Relationship Diagram</h2>
+    <p>A small, self-contained component expressing the scientific narrative as a "diamond": one shared dataset → two published findings → one synthesis. Exact node text:</p>
+    <table>
+      <tr><th>Node</th><th>Title</th><th>Sub-text</th></tr>
+      <tr><td>Foundation</td><td>Global archaeal lipid compilation</td><td><i>turning rich archaeal lipid data into new insights</i></td></tr>
+      <tr><td>Insight A</td><td>AOA ecology &amp; evolution</td><td>PNAS · GDGT-2 / GDGT-3</td></tr>
+      <tr><td>Insight B</td><td>Nutrient effects on TEX<sub>86</sub></td><td>GRL</td></tr>
+      <tr><td>Convergence label</td><td colspan="2"><i>both inform the calibration</i></td></tr>
+      <tr><td>Synthesis</td><td>TEXAS</td><td>new TEX<sub>86</sub> calibration framework</td></tr>
+    </table>
+    <h3>Implementation</h3>
+    <ul>
+      <li>New include <code>_includes/research_program_diagram.liquid</code>, holding markup plus a <b>scoped <code>&lt;style&gt;</code> block</b> (CSS lives with the component; no global stylesheet pollution).</li>
+      <li>Colors use al-folio theme variables for light/dark: <code>--global-theme-color</code> (accent), <code>--global-bg-color</code>, <code>--global-card-bg-color</code>, <code>--global-text-color</code>, <code>--global-text-color-light</code>, <code>--global-divider-color</code>.</li>
+      <li><b>Responsive:</b> the two insight nodes sit side-by-side on wider screens and stack below ~600px; foundation and synthesis are always full-width.</li>
+      <li><b>Optional enhancement:</b> make nodes clickable — PNAS → PNAS page, GRL → GRL DOI, TEXAS → TEXAS page.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Project Inventory &amp; Card Data Model</h2>
+    <p>Cards sort by <code>importance</code>. Category stays <code>work</code>; <code>display_categories: [work]</code> unchanged.</p>
+    <table>
+      <tr><th>Project</th><th>File</th><th>Visible</th><th>importance</th><th>status</th></tr>
+      <tr><td>Archaeal lipids track AOA ecology &amp; evolution</td><td><code>_projects/aoa-ecology.md</code> (renamed from <code>1_project.md</code>)</td><td>yes</td><td>1</td><td><span class="pill pub">published</span></td></tr>
+      <tr><td>TEXAS</td><td><code>_projects/texas.md</code> (new)</td><td>yes</td><td>2</td><td><span class="pill pre">preprint</span></td></tr>
+      <tr><td>GDGTdb</td><td><code>_projects/gdgtdb.md</code> (new)</td><td>no (<code>hidden: true</code>)</td><td>3</td><td>—</td></tr>
+    </table>
+    <p><b>AOA ecology (PNAS) card</b> — rename <code>1_project.md</code> → <code>aoa-ecology.md</code> (URL <code>/projects/aoa-ecology/</code>); keep existing detail-page content; add <code>status: published</code>. Optionally surface the PNAS DOI.</p>
+    <p><b>TEXAS card</b> — <code>status: preprint</code> (under review at <i>PALO</i>). New detail page scaffolded with: Overview · Calibration framework · Archaeal ecology input (links PNAS) · Nutrient effects on TEX<sub>86</sub> (cites/links the GRL paper) · Preprint (links the PALO preprint). Draft card description: <i>"A new TEX<sub>86</sub> calibration framework — synthesizing the archaeal ecology lens (PNAS) and nutrient effects on TEX<sub>86</sub> (GRL). Preprint under review at PALO."</i></p>
+    <p><b>GDGTdb stub</b> — minimal page, <code>hidden: true</code>; publish later by setting <code>hidden: false</code> and (optionally) adding a <code>redirect:</code> to its standalone site.</p>
+  </section>
+
+  <section>
+    <h2>Status Badge</h2>
+    <ul>
+      <li><b>Front-matter:</b> optional <code>status:</code> field. Recognized values: <code>published</code>, <code>preprint</code>, <code>in-progress</code>. Absent → no badge (backward-compatible).</li>
+      <li><b>Render:</b> in <code>_includes/projects.liquid</code>, a pill at the top of <code>.card-body</code> (above the title), shown only when <code>project.status</code> is set — robust whether or not the card has an image. (Refines the mockup, which floats the badge over the image.)</li>
+      <li><b>Style:</b> a short SCSS rule in a new partial <code>_sass/_projects.scss</code>, wired in by adding <code>"projects",</code> to the <code>@import</code> list in <code>assets/css/main.scss</code>. <code>published</code> → green; <code>preprint</code> → theme color; <code>in-progress</code> → amber.</li>
+      <li>Mirror the change in <code>_includes/projects_horizontal.liquid</code> for parity.</li>
+    </ul>
+  </section>
+
+  <section class="files">
+    <h2>File-by-File Changes</h2>
+    <h3>New</h3>
+    <ul>
+      <li><code>_includes/research_program_diagram.liquid</code> — the diagram component (markup + scoped CSS).</li>
+      <li><code>_projects/texas.md</code> — TEXAS detail page (front-matter + section scaffold).</li>
+      <li><code>_projects/gdgtdb.md</code> — hidden GDGTdb stub.</li>
+      <li><code>_sass/_projects.scss</code> — status-badge styles.</li>
+    </ul>
+    <h3>Changed</h3>
+    <ul>
+      <li><code>_pages/projects.md</code> — remove the overlapping-image hero; add the clean hero + <code>{% include research_program_diagram.liquid %}</code> before <code>&lt;div class="projects"&gt;</code>. Card loop unchanged.</li>
+      <li><code>_includes/projects.liquid</code> — render the optional status badge.</li>
+      <li><code>_includes/projects_horizontal.liquid</code> — render the optional status badge (parity).</li>
+      <li><b>Rename</b> <code>_projects/1_project.md</code> → <code>_projects/aoa-ecology.md</code>; add <code>status: published</code> (URL becomes <code>/projects/aoa-ecology/</code>).</li>
+      <li><code>assets/css/main.scss</code> — add <code>"projects",</code> to the <code>@import</code> list.</li>
+    </ul>
+    <h3>Removed</h3>
+    <ul>
+      <li><code>_projects/2_project.md</code> … <code>_projects/9_project.md</code> — eight unused al-folio demo cards (all <code>hidden: true</code> boilerplate).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Content the User Provides Later (not blockers)</h2>
+    <ul>
+      <li>A thumbnail image for the TEXAS card (a placeholder is wired in until then).</li>
+      <li>Final body text/figures for the TEXAS detail page (scaffold + placeholder prose ships first).</li>
+      <li>The PNAS and GRL DOIs, and the TEXAS preprint DOI (PALO), to wire into the project pages.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Verification</h2>
+    <ul>
+      <li><code>bundle exec jekyll build</code> succeeds with no Liquid errors.</li>
+      <li>Local serve: <code>/projects/</code> shows hero → diagram → two cards (PNAS, TEXAS); GDGTdb does <b>not</b> appear.</li>
+      <li>Diagram renders correctly in light and dark themes and stacks on a narrow viewport.</li>
+      <li>Status badges show on both cards; a card with no <code>status</code> shows none.</li>
+      <li>No console errors; existing pages unaffected.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Future / Out of Scope</h2>
+    <ul>
+      <li>Standalone GDGTdb website (link from its card via <code>redirect:</code> when ready).</li>
+      <li>Status-based section grouping once the visible project count grows.</li>
+      <li>Making diagram nodes clickable links.</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>
