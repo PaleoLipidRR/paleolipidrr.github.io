@@ -1,0 +1,58 @@
+{%- comment -%} Relationship diagram for the Projects research-program hub. {%- endcomment -%}
+<div class="research-program-diagram">
+  <div class="rpd-node rpd-foundation">
+    <div class="rpd-title">Global archaeal lipid compilation</div>
+    <div class="rpd-sub">turning rich archaeal lipid data into new insights</div>
+  </div>
+  <div class="rpd-connector"></div>
+  <div class="rpd-branches">
+    <div class="rpd-node">
+      <div class="rpd-title">AOA ecology &amp; evolution</div>
+      <div class="rpd-sub">PNAS &middot; GDGT-2 / GDGT-3</div>
+    </div>
+    <div class="rpd-node">
+      <div class="rpd-title">Nutrient effects on TEX<sub>86</sub></div>
+      <div class="rpd-sub">GRL</div>
+    </div>
+  </div>
+  <div class="rpd-connector"></div>
+  <div class="rpd-label">&darr; both inform the calibration</div>
+  <div class="rpd-node rpd-synthesis">
+    <div class="rpd-title">TEXAS</div>
+    <div class="rpd-sub">new TEX<sub>86</sub> calibration framework</div>
+  </div>
+</div>
+
+<style>
+  .research-program-diagram {
+    max-width: 440px;
+    margin: 1.5rem auto 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .research-program-diagram .rpd-node {
+    width: 100%;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 10px;
+    padding: 0.6rem 0.8rem;
+    background-color: var(--global-card-bg-color);
+    text-align: center;
+  }
+  .research-program-diagram .rpd-foundation {
+    background-color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+    color: #fff;
+  }
+  .research-program-diagram .rpd-foundation .rpd-sub { color: rgba(255, 255, 255, 0.9); }
+  .research-program-diagram .rpd-synthesis { border: 2px solid var(--global-theme-color); }
+  .research-program-diagram .rpd-title { font-weight: 700; font-size: 0.9rem; line-height: 1.2; }
+  .research-program-diagram .rpd-sub { font-size: 0.75rem; color: var(--global-text-color-light); line-height: 1.25; margin-top: 0.15rem; }
+  .research-program-diagram .rpd-connector { width: 1px; height: 16px; background-color: var(--global-divider-color); }
+  .research-program-diagram .rpd-branches { display: flex; gap: 0.6rem; width: 100%; }
+  .research-program-diagram .rpd-branches .rpd-node { flex: 1; }
+  .research-program-diagram .rpd-label { font-size: 0.8rem; font-weight: 700; color: var(--global-theme-color); margin: 0.2rem 0; }
+  @media (max-width: 576px) {
+    .research-program-diagram .rpd-branches { flex-direction: column; }
+  }
+</style>
