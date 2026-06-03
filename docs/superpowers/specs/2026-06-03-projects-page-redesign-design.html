@@ -39,7 +39,7 @@
   ul { padding-left: 22px; }
   li { margin: 4px 0; }
   .pill { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 2px 9px; border-radius: 20px; }
-  .pill.pub { background: var(--green); color: #fff; } .pill.prog { background: var(--amber); color: #1d1d1f; }
+  .pill.pub { background: var(--green); color: #fff; } .pill.prog { background: var(--amber); color: #1d1d1f; } .pill.pre { background: var(--accent); color: #fff; }
   .callout { background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 16px 0; font-size: 0.95rem; }
   .files h3 { margin-top: 16px; }
 
@@ -102,7 +102,7 @@
     <h3>Goals</h3>
     <ul>
       <li>Communicate the overarching research narrative at a glance.</li>
-      <li>Show that the published PNAS (archaeal ecology) and GRL (nutrient effects on TEX<sub>86</sub>) results both feed the in-progress TEXAS calibration framework.</li>
+      <li>Show that the published PNAS (archaeal ecology) and GRL (nutrient effects on TEX<sub>86</sub>) results both feed the TEXAS calibration framework (preprint, under review at <i>PALO</i>).</li>
       <li>Present projects as cards that link to detail pages hosted on this site.</li>
       <li>Stay backward-compatible with al-folio conventions and easy to extend as projects mature.</li>
     </ul>
@@ -124,6 +124,8 @@
       <tr><td>Diagram form</td><td>Convergence: compilation → {PNAS, GRL} → TEXAS</td></tr>
       <tr><td>Project name</td><td>"TEXAS" (not "TEXAS PSM")</td></tr>
       <tr><td>Card destinations</td><td>Internal detail pages (one page per project)</td></tr>
+      <tr><td>AOA ecology file</td><td>Renamed <code>1_project.md</code> → <code>aoa-ecology.md</code> (URL becomes <code>/projects/aoa-ecology/</code>)</td></tr>
+      <tr><td>TEXAS status</td><td>Preprint — under review at <i>PALO</i></td></tr>
       <tr><td>Nutrient effects (GRL)</td><td>A section <i>inside</i> the TEXAS page + a node in the diagram; <b>not</b> its own card. The TEXAS page cites/links the GRL paper.</td></tr>
       <tr><td>GDGTdb</td><td>Hidden card stub created now (<code>hidden: true</code>); publish later by flipping the flag</td></tr>
       <tr><td>Demo files</td><td>Delete the 8 unused al-folio demo project files (<code>2_project.md</code>–<code>9_project.md</code>)</td></tr>
@@ -168,10 +170,10 @@
                 </div>
               </div>
               <div class="pg-card">
-                <div class="img img-texas"><span class="pill prog">In progress</span></div>
+                <div class="img img-texas"><span class="pill pre">Preprint</span></div>
                 <div class="pg-body">
                   <div class="pg-title">TEXAS</div>
-                  <div class="pg-desc">A new TEX<sub>86</sub> calibration framework — synthesizing the archaeal ecology lens (PNAS) and nutrient effects on TEX<sub>86</sub> (GRL).</div>
+                  <div class="pg-desc">A new TEX<sub>86</sub> calibration framework — synthesizing the archaeal ecology lens (PNAS) and nutrient effects on TEX<sub>86</sub> (GRL). Under review at PALO.</div>
                 </div>
               </div>
             </div>
@@ -207,21 +209,21 @@
     <p>Cards sort by <code>importance</code>. Category stays <code>work</code>; <code>display_categories: [work]</code> unchanged.</p>
     <table>
       <tr><th>Project</th><th>File</th><th>Visible</th><th>importance</th><th>status</th></tr>
-      <tr><td>Archaeal lipids track AOA ecology &amp; evolution</td><td><code>_projects/1_project.md</code> (existing)</td><td>yes</td><td>1</td><td><span class="pill pub">published</span></td></tr>
-      <tr><td>TEXAS</td><td><code>_projects/texas.md</code> (new)</td><td>yes</td><td>2</td><td><span class="pill prog">in-progress</span></td></tr>
+      <tr><td>Archaeal lipids track AOA ecology &amp; evolution</td><td><code>_projects/aoa-ecology.md</code> (renamed from <code>1_project.md</code>)</td><td>yes</td><td>1</td><td><span class="pill pub">published</span></td></tr>
+      <tr><td>TEXAS</td><td><code>_projects/texas.md</code> (new)</td><td>yes</td><td>2</td><td><span class="pill pre">preprint</span></td></tr>
       <tr><td>GDGTdb</td><td><code>_projects/gdgtdb.md</code> (new)</td><td>no (<code>hidden: true</code>)</td><td>3</td><td>—</td></tr>
     </table>
-    <p><b>PNAS card</b> — keep existing detail-page content; add <code>status: published</code>. Optionally surface the PNAS DOI.</p>
-    <p><b>TEXAS card</b> — new detail page scaffolded with: Overview · Calibration framework · Archaeal ecology input (links PNAS) · Nutrient effects on TEX<sub>86</sub> (cites/links the GRL paper). Draft card description: <i>"A new TEX<sub>86</sub> calibration framework — synthesizing the archaeal ecology lens (PNAS) and nutrient effects on TEX<sub>86</sub> (GRL)."</i></p>
+    <p><b>AOA ecology (PNAS) card</b> — rename <code>1_project.md</code> → <code>aoa-ecology.md</code> (URL <code>/projects/aoa-ecology/</code>); keep existing detail-page content; add <code>status: published</code>. Optionally surface the PNAS DOI.</p>
+    <p><b>TEXAS card</b> — <code>status: preprint</code> (under review at <i>PALO</i>). New detail page scaffolded with: Overview · Calibration framework · Archaeal ecology input (links PNAS) · Nutrient effects on TEX<sub>86</sub> (cites/links the GRL paper) · Preprint (links the PALO preprint). Draft card description: <i>"A new TEX<sub>86</sub> calibration framework — synthesizing the archaeal ecology lens (PNAS) and nutrient effects on TEX<sub>86</sub> (GRL). Preprint under review at PALO."</i></p>
     <p><b>GDGTdb stub</b> — minimal page, <code>hidden: true</code>; publish later by setting <code>hidden: false</code> and (optionally) adding a <code>redirect:</code> to its standalone site.</p>
   </section>
 
   <section>
     <h2>Status Badge</h2>
     <ul>
-      <li><b>Front-matter:</b> optional <code>status:</code> field. Recognized values: <code>published</code>, <code>in-progress</code>. Absent → no badge (backward-compatible).</li>
+      <li><b>Front-matter:</b> optional <code>status:</code> field. Recognized values: <code>published</code>, <code>preprint</code>, <code>in-progress</code>. Absent → no badge (backward-compatible).</li>
       <li><b>Render:</b> in <code>_includes/projects.liquid</code>, a pill at the top of <code>.card-body</code> (above the title), shown only when <code>project.status</code> is set — robust whether or not the card has an image. (Refines the mockup, which floats the badge over the image.)</li>
-      <li><b>Style:</b> a short SCSS rule in a new partial <code>_sass/_projects.scss</code>, wired in by adding <code>"projects",</code> to the <code>@import</code> list in <code>assets/css/main.scss</code>. <code>published</code> → green; <code>in-progress</code> → amber.</li>
+      <li><b>Style:</b> a short SCSS rule in a new partial <code>_sass/_projects.scss</code>, wired in by adding <code>"projects",</code> to the <code>@import</code> list in <code>assets/css/main.scss</code>. <code>published</code> → green; <code>preprint</code> → theme color; <code>in-progress</code> → amber.</li>
       <li>Mirror the change in <code>_includes/projects_horizontal.liquid</code> for parity.</li>
     </ul>
   </section>
@@ -240,7 +242,7 @@
       <li><code>_pages/projects.md</code> — remove the overlapping-image hero; add the clean hero + <code>{% include research_program_diagram.liquid %}</code> before <code>&lt;div class="projects"&gt;</code>. Card loop unchanged.</li>
       <li><code>_includes/projects.liquid</code> — render the optional status badge.</li>
       <li><code>_includes/projects_horizontal.liquid</code> — render the optional status badge (parity).</li>
-      <li><code>_projects/1_project.md</code> — add <code>status: published</code>.</li>
+      <li><b>Rename</b> <code>_projects/1_project.md</code> → <code>_projects/aoa-ecology.md</code>; add <code>status: published</code> (URL becomes <code>/projects/aoa-ecology/</code>).</li>
       <li><code>assets/css/main.scss</code> — add <code>"projects",</code> to the <code>@import</code> list.</li>
     </ul>
     <h3>Removed</h3>
@@ -254,7 +256,7 @@
     <ul>
       <li>A thumbnail image for the TEXAS card (a placeholder is wired in until then).</li>
       <li>Final body text/figures for the TEXAS detail page (scaffold + placeholder prose ships first).</li>
-      <li>The GRL and PNAS DOIs/links to wire into the TEXAS and PNAS pages.</li>
+      <li>The PNAS and GRL DOIs, and the TEXAS preprint DOI (PALO), to wire into the project pages.</li>
     </ul>
   </section>
 
