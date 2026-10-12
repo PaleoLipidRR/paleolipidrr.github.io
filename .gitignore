@@ -12,3 +12,5 @@ node_modules/
 vendor
 .idea
 .superpowers/
+# Claude Code machine-local permissions
+.claude/settings.local.json
