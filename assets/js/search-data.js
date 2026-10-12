@@ -59,11 +59,6 @@ ninja.data = [{
           description: "Proceedings of National Academy of Sciences",
           section: "Projects",handler: () => {
               window.location.href = "/projects/aoa-ecology/";
-            },},{id: "projects-gdgtdb",
-          title: 'GDGTdb',
-          description: "A global archaeal lipid (GDGT) database. In preparation — not yet public.",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/gdgtdb/";
             },},{id: "projects-texas",
           title: 'TEXAS',
           description: "A new TEX₈₆ calibration framework — synthesizing archaeal ecology (PNAS) and nutrient effects on TEX₈₆ (GRL). Preprint under review at PALO.",
