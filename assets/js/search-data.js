@@ -11,7 +11,7 @@ ninja.data = [{
     },
   },{id: "nav-projects",
           title: "projects",
-          description: "Exploring new insights from a comprehensive global archaeal lipid compilation.",
+          description: "Exploring new insights from a comprehensive global archaeal lipid compilation, from archaeal ecology (PNAS) and nutrient effects (GRL) to TEXAS, a proxy system model for TEX₈₆ paleothermometry.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/projects/";
@@ -56,14 +56,14 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "projects-archaeal-lipids-track-aoa-ecology-and-evolution",
           title: 'Archaeal lipids track AOA ecology and evolution',
-          description: "Proceedings of National Academy of Sciences",
+          description: "The GDGT-2/GDGT-3 ratio separates shallow and deep ecotypes of marine ammonia-oxidizing archaea, a fingerprint we trace back to the Mesozoic.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/aoa-ecology/";
-            },},{id: "projects-texas",
-          title: 'TEXAS',
-          description: "A new TEX₈₆ calibration framework — synthesizing archaeal ecology (PNAS) and nutrient effects on TEX₈₆ (GRL). Preprint under review at PALO.",
+            },},{id: "projects-a-nutrient-effect-on-the-tex-paleotemperature-proxy",
+          title: 'A nutrient effect on the TEX₈₆ paleotemperature proxy',
+          description: "Nutrient stress leaves a warm bias in sedimentary TEX₈₆, an effect seen in cultures that we show is also recorded in seafloor sediments.",
           section: "Projects",handler: () => {
-              window.location.href = "/projects/texas/";
+              window.location.href = "/projects/nutrient-effect/";
             },},{
         id: 'social-bluesky',
         title: 'Bluesky',
