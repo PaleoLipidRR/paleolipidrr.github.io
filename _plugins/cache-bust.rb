@@ -19,9 +19,12 @@ module Jekyll
 
       private
 
+      # Concatenated contents of `directory`: one or more directories (all files
+      # inside) or files, read in a stable order so the digest is reproducible.
       def directory_files_content
-        target_path = File.join(directory, '**', '*')
-        Dir[target_path].map{|f| File.read(f) unless File.directory?(f) }.join
+        Array(directory).flat_map { |p| File.file?(p) ? [p] : Dir[File.join(p, '**', '*')] }
+          .reject { |f| File.directory?(f) }.sort
+          .map { |f| File.read(f) }.join
       end
 
       def file_content
@@ -42,8 +45,12 @@ module Jekyll
       CacheDigester.new(file_name: file_name, directory: nil).digest!
     end
 
+    # main.css is compiled from assets/css/main.scss and the partials in _sass/,
+    # so the digest covers both. (It used to point at 'assets/_sass', which does
+    # not exist, so the digest was always that of an empty string and browsers
+    # kept serving a stale main.css after every style change.)
     def bust_css_cache(file_name)
-      CacheDigester.new(file_name: file_name, directory: 'assets/_sass').digest!
+      CacheDigester.new(file_name: file_name, directory: ['_sass', 'assets/css/main.scss']).digest!
     end
   end
 end
