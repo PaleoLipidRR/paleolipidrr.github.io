@@ -29,6 +29,16 @@ This site uses an AI-assisted (Claude Code) workflow with two design artifacts:
 - **Design specs are written as standalone HTML** (in `docs/superpowers/specs/`), so they can embed the actual rendered diagrams and page mockups instead of static images or ASCII art. The convention is captured in the `writing-design-specs` skill under `.claude/skills/`.
 - **Implementation plans remain markdown.**
 
+## Reserved paths
+
+GitHub Pages serves each project repository that has Pages enabled at `/<repo>/` on this domain, and that project site shadows any page with the same path on this site. Never create a top-level page, collection, or permalink that matches one of these paths:
+
+| Path      | Served by                                                                           | Notes                                                                                                                    |
+| --------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `/TEXAS/` | [PaleoLipidRR/TEXAS](https://github.com/PaleoLipidRR/TEXAS) (`docs/`, Jupyter Book) | `texas-psm` package docs. Cited in the TEXAS paper, so it must never move. The science page lives at `/projects/texas/`. |
+
+Add any future package repository that publishes GitHub Pages to this table. Project pages set an explicit lowercase `permalink:` (for example `/projects/texas/`); if a public slug ever has to change, keep the old one working with `redirect_from:` (the `jekyll-redirect-from` plugin is enabled).
+
 ## User community
 
 The vibrant community of **al-folio** users is growing!
