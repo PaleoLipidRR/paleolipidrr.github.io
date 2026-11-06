@@ -1,0 +1,23 @@
+{%- comment -%}
+  Header block for a project page: status badge, authors, "Venue · Year" and the
+  link buttons. Reads the shared project front matter. Usage: {% include project_meta.liquid %}
+{%- endcomment -%}
+<div class="project-meta">
+  {% if page.status %}
+    <span class="project-status project-status--{{ page.status }}">{{ page.status | replace: '-', ' ' | capitalize }}</span>
+  {% endif %}
+  {% if page.authors %}
+    <p class="project-meta__authors">{{ page.authors }}</p>
+  {% endif %}
+  {% if page.venue or page.year %}
+    <p class="project-venue">
+      <em>{{- page.venue -}}</em>
+      {%- if page.volume %} {{ page.volume }}{% endif -%}
+      {%- if page.venue and page.year %} &middot; {% endif -%}
+      {{- page.year -}}
+      {%- if page.status == 'accepted' %} &middot; accepted, DOI pending{% elsif page.status == 'under-review' %} &middot; under review{% endif -%}
+    </p>
+  {% endif %}
+  {% include project_links.liquid project=page %}
+</div>
+{% include project_jsonld.liquid %}

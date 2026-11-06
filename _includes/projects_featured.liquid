@@ -1,0 +1,52 @@
+{%- comment -%}
+  Full-width featured project card (projects with `featured: true`).
+  Unlike projects.liquid the whole card is NOT wrapped in a link, so it can hold
+  link buttons without nesting <a> elements: the title and the "Overview" button
+  link to the project page, the other buttons link out.
+  With upcoming=true (cards from _data/upcoming_projects.yml) there is no project
+  page yet: the title is plain text, there is no "Overview" button, and
+  `project.note` is shown instead.
+{%- endcomment -%}
+<article class="project-featured" aria-labelledby="featured-{{ project.slug }}">
+  {% if project.img %}
+    <div class="project-featured__media">
+      {%
+        include figure.liquid
+        loading="eager"
+        path=project.img
+        sizes="(min-width: 768px) 400px, 95vw"
+        alt=project.img_alt
+        class="img-fluid"
+      %}
+    </div>
+  {% endif %}
+  <div class="project-featured__body">
+    {% if project.status %}
+      <span class="project-status project-status--{{ project.status }}">{{ project.status | replace: '-', ' ' | capitalize }}</span>
+    {% endif %}
+    <span class="project-featured__eyebrow">Featured synthesis</span>
+    <h2 class="project-featured__title" id="featured-{{ project.slug }}">
+      {%- if include.upcoming -%}
+        {{ project.title }}
+      {%- else -%}
+        <a href="{{ project.url | relative_url }}">{{ project.title }}</a>
+      {%- endif -%}
+    </h2>
+    {% if project.venue or project.year %}
+      <p class="project-venue">
+        {{- project.venue -}}
+        {%- if project.venue and project.year %} &middot; {% endif -%}
+        {{- project.year -}}
+      </p>
+    {% endif %}
+    <p class="project-featured__text">{{ project.description }}</p>
+    {% if include.upcoming %}
+      {% if project.note %}
+        <p class="project-featured__note">{{ project.note }}</p>
+      {% endif %}
+      {% include project_links.liquid project=project %}
+    {% else %}
+      {% include project_links.liquid project=project overview=true %}
+    {% endif %}
+  </div>
+</article>
