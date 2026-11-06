@@ -41,7 +41,9 @@
     {% endif %}
     <p class="project-featured__text">{{ project.description }}</p>
     {% if include.upcoming %}
-      {% if project.note %}<p class="project-featured__note">{{ project.note }}</p>{% endif %}
+      {% if project.note %}
+        <p class="project-featured__note">{{ project.note }}</p>
+      {% endif %}
       {% include project_links.liquid project=project %}
     {% else %}
       {% include project_links.liquid project=project overview=true %}

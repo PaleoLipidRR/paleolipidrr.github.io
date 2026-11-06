@@ -17,14 +17,14 @@
   </div>
   <div class="rpd-connector"></div>
   <div class="rpd-label">&darr; both become predictors in</div>
-  {%- assign texas_page = site.projects | where: "slug", "texas" | first -%}
+  {%- assign texas_page = site.projects | where: 'slug', 'texas' | first -%}
   {%- if texas_page -%}
-  <a class="rpd-node rpd-synthesis" href="{{ texas_page.url | relative_url }}">
+    <a class="rpd-node rpd-synthesis" href="{{ texas_page.url | relative_url }}">
   {%- else -%}
-  <div class="rpd-node rpd-synthesis">
+    <div class="rpd-node rpd-synthesis">
   {%- endif %}
-    <span class="rpd-title">TEXAS</span>
-    <span class="rpd-sub">proxy system model for TEX<sub>86</sub> paleothermometry &middot; under review</span>
+  <span class="rpd-title">TEXAS</span>
+  <span class="rpd-sub">proxy system model for TEX<sub>86</sub> paleothermometry &middot; under review</span>
   {% if texas_page %}</a>{% else %}</div>{% endif %}
 </nav>
 
