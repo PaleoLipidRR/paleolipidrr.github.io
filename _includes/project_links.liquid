@@ -1,0 +1,41 @@
+{%- comment -%}
+  Link buttons for a project: Paper (from `doi`; else Preprint from `preprint`;
+  else a disabled "DOI coming soon" placeholder), PDF (from `pdf`), then each entry of `links`.
+  Usage: {% include project_links.liquid project=page %}
+  Optional: overview=true adds a leading "Overview →" button to the project page.
+  Never place this include inside an <a> element.
+{%- endcomment -%}
+{%- assign p = include.project | default: page -%}
+<div class="project-links">
+  {%- if include.overview -%}
+    <a class="project-btn project-btn--primary" href="{{ p.url | relative_url }}">Overview <span aria-hidden="true">&rarr;</span></a>
+  {%- endif -%}
+  {%- if p.doi and p.doi != '' -%}
+    <a class="project-btn" href="https://doi.org/{{ p.doi }}"><i class="ai ai-doi" aria-hidden="true"></i> Paper</a>
+  {%- elsif p.preprint and p.preprint != '' -%}
+    <a class="project-btn" href="{{ p.preprint }}"><i class="ai ai-doi" aria-hidden="true"></i> Preprint</a>
+  {%- else -%}
+    <span class="project-btn is-disabled" aria-disabled="true" title="The DOI will be added when the paper is published"
+      ><i class="fa-regular fa-clock" aria-hidden="true"></i> Paper (DOI coming soon)</span
+    >
+  {%- endif -%}
+  {%- if p.pdf and p.pdf != '' -%}
+    {%- if p.pdf contains '://' -%}
+      {%- assign pdf_url = p.pdf -%}
+    {%- else -%}
+      {%- assign pdf_url = p.pdf | prepend: '/assets/pdf/' | relative_url -%}
+    {%- endif -%}
+    <a class="project-btn" href="{{ pdf_url }}"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i> PDF</a>
+  {%- endif -%}
+  {%- for link in p.links -%}
+    {%- if link.url contains '://' -%}
+      {%- assign link_url = link.url -%}
+    {%- else -%}
+      {%- assign link_url = link.url | relative_url -%}
+    {%- endif -%}
+    <a class="project-btn" href="{{ link_url }}">
+      {%- if link.icon %}<i class="{{ link.icon }}" aria-hidden="true"></i> {% endif -%}
+      {{- link.label -}}
+    </a>
+  {%- endfor -%}
+</div>

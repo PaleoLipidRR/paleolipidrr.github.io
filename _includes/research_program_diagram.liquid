@@ -1,27 +1,32 @@
-{%- comment -%} Relationship diagram for the Projects research-program hub. {%- endcomment -%}
-<div class="research-program-diagram">
+{%- comment -%} Relationship diagram for the Projects research-program hub. Nodes link to the project pages. {%- endcomment -%}
+<nav class="research-program-diagram" aria-label="How the projects connect">
   <div class="rpd-node rpd-foundation">
     <div class="rpd-title">Global archaeal lipid compilation</div>
     <div class="rpd-sub">turning rich archaeal lipid data into new insights</div>
   </div>
   <div class="rpd-connector"></div>
   <div class="rpd-branches">
-    <div class="rpd-node">
-      <div class="rpd-title">AOA ecology &amp; evolution</div>
-      <div class="rpd-sub">PNAS &middot; GDGT-2 / GDGT-3</div>
-    </div>
-    <div class="rpd-node">
-      <div class="rpd-title">Nutrient effects on TEX<sub>86</sub></div>
-      <div class="rpd-sub">GRL</div>
-    </div>
+    <a class="rpd-node" href="{% link _projects/aoa-ecology.md %}">
+      <span class="rpd-title">AOA ecology &amp; evolution</span>
+      <span class="rpd-sub">PNAS 2022 &middot; GDGT-2/GDGT-3</span>
+    </a>
+    <a class="rpd-node" href="{% link _projects/nutrient-effect.md %}">
+      <span class="rpd-title">Nutrient effect on TEX<sub>86</sub></span>
+      <span class="rpd-sub">GRL 2025 &middot; NO<sub>3</sub><sup>&minus;</sup></span>
+    </a>
   </div>
   <div class="rpd-connector"></div>
-  <div class="rpd-label">&darr; both inform the calibration</div>
+  <div class="rpd-label">&darr; both become predictors in</div>
+  {%- assign texas_page = site.projects | where: "slug", "texas" | first -%}
+  {%- if texas_page -%}
+  <a class="rpd-node rpd-synthesis" href="{{ texas_page.url | relative_url }}">
+  {%- else -%}
   <div class="rpd-node rpd-synthesis">
-    <div class="rpd-title">TEXAS</div>
-    <div class="rpd-sub">new TEX<sub>86</sub> calibration framework</div>
-  </div>
-</div>
+  {%- endif %}
+    <span class="rpd-title">TEXAS</span>
+    <span class="rpd-sub">proxy system model for TEX<sub>86</sub> paleothermometry &middot; under review</span>
+  {% if texas_page %}</a>{% else %}</div>{% endif %}
+</nav>
 
 <style>
   .research-program-diagram {
@@ -38,6 +43,27 @@
     padding: 0.6rem 0.8rem;
     background-color: var(--global-card-bg-color);
     text-align: center;
+  }
+  .research-program-diagram a.rpd-node {
+    display: block;
+    color: var(--global-text-color);
+    text-decoration: none;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .research-program-diagram a.rpd-node:hover,
+  .research-program-diagram a.rpd-node:focus-visible {
+    border-color: var(--global-theme-color);
+    box-shadow: 0 0 0 2px var(--global-theme-color);
+    text-decoration: none;
+  }
+  .research-program-diagram a.rpd-node:hover .rpd-title {
+    color: var(--global-theme-color);
+  }
+  .research-program-diagram .rpd-title,
+  .research-program-diagram .rpd-sub {
+    display: block;
   }
   .research-program-diagram .rpd-foundation {
     background-color: var(--global-theme-color);

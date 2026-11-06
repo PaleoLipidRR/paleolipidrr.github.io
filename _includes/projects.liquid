@@ -16,6 +16,13 @@
           <span class="project-status project-status--{{ project.status }}">{{ project.status | replace: '-', ' ' | capitalize }}</span>
         {% endif %}
         <h2 class="card-title">{{ project.title }}</h2>
+        {% if project.venue or project.year %}
+          <p class="project-venue">
+            {{- project.venue -}}
+            {%- if project.venue and project.year %} &middot; {% endif -%}
+            {{- project.year -}}
+          </p>
+        {% endif %}
         <p class="card-text">{{ project.description }}</p>
         <div class="row ml-1 mr-1 p-0">
           {% if project.github %}

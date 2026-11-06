@@ -2,7 +2,7 @@
 layout: page
 title: projects
 permalink: /projects/
-description: Exploring new insights from a comprehensive global archaeal lipid compilation.
+description: Exploring new insights from a comprehensive global archaeal lipid compilation, from archaeal ecology (PNAS) and nutrient effects (GRL) to TEXAS, a proxy system model for TEX₈₆ paleothermometry.
 nav: true
 nav_order: 2
 display_categories: [work]
@@ -37,6 +37,17 @@ _styles: >
   {% assign categorized_projects = site.projects | where: "category", category %}
   {% assign sorted_projects = categorized_projects | sort: "importance" %}
   {% assign visible_projects = sorted_projects | where_exp: "project", "project.hidden != true" %}
+  {% assign featured_projects = visible_projects | where: "featured", true %}
+  {% assign visible_projects = visible_projects | where_exp: "project", "project.featured != true" %}
+  <!-- Featured (synthesis) card, full width -->
+  {% for project in featured_projects %}
+    {% include projects_featured.liquid %}
+  {% endfor %}
+  <!-- Work whose project page is not published yet (no link) -->
+  {% assign upcoming_projects = site.data.upcoming_projects | where: "category", category %}
+  {% for project in upcoming_projects %}
+    {% include projects_featured.liquid upcoming=true %}
+  {% endfor %}
   <!-- Generate cards for each project -->
     {% if page.horizontal %}
       <div class="container">

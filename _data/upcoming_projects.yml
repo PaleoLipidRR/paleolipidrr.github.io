@@ -1,0 +1,13 @@
+# Project cards shown on /projects/ before their project page is published.
+# Each card has no link to a project page. On publication day remove the entry
+# here and add the project page (see docs/publication-day/CHECKLIST.md).
+- slug: texas
+  category: work
+  title: "TEXAS: a proxy system model for TEX₈₆ paleothermometry"
+  description: A Bayesian sensor model that links archaeal lipids to ocean temperature through an S-curve constrained by cultures, and accounts for archaeal ecology and nutrient stress.
+  img: assets/img/projects/texas/thumb.png
+  img_alt: "The TEXAS-PSM framework: environment, sensor, archive and observation submodels"
+  status: under-review
+  venue: Submitted to Paleoceanography and Paleoclimatology
+  preprint: "https://doi.org/10.22541/essoar.15002926/v1"
+  note: Project page coming with publication.
