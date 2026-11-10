@@ -9,3 +9,5 @@ _data/citations.yml
 .claude/
 docs/superpowers/
 .al-folio-overrides.yml
+# Copy of the al_folio_core layout with one local edit; kept byte-close to the gem so override diffs stay small
+_layouts/bib.liquid
