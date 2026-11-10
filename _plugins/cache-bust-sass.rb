@@ -2,15 +2,15 @@
 
 # Site-local replacement for the `bust_css_cache` Liquid filter.
 #
-# The jekyll-cache-bust gem digests the directory 'assets/_sass', which does
-# not exist, so the fingerprint on main.css never changes and browsers keep a
-# stale stylesheet after a style edit. This version digests what main.css is
-# actually compiled from: the local _sass/ partials, the local
-# assets/css/main.scss, and the installed al_folio_core version (so a theme
-# upgrade also changes the fingerprint).
+# The stock filter (jekyll-cache-bust, as patched by al_folio_core) digests the
+# theme's own Sass only, so an edit to this site's _sass/ partials or to the
+# local assets/css/main.scss override would leave the fingerprint on main.css
+# unchanged and browsers would keep a stale stylesheet. This version digests
+# the local _sass/ partials, the local main.scss and the installed
+# al_folio_core version (so a theme upgrade also changes the fingerprint).
 #
-# Site plugins load before gem plugins, so the filter is registered in an
-# after_init hook to make it take precedence over the gem's.
+# Registered in an after_init hook so it takes precedence whatever the plugin
+# load order is.
 
 require 'digest'
 

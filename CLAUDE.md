@@ -15,4 +15,6 @@ Ronnakrit Rattanasriampaipong's academic website, built with Jekyll on the al-fo
 
 ## Upstream agent notes
 
+`AGENTS.md` below was written for the upstream al-folio starter. Where it conflicts with this file, this file wins: in particular this site does keep `_includes/`, `_layouts/`, `_sass/` and `_plugins/` files, as recorded overrides.
+
 @AGENTS.md

@@ -39,9 +39,9 @@ bundle exec al-folio upgrade audit
 bundle exec al-folio upgrade overrides audit
 ```
 
-Local files that shadow a gem file are recorded in `.al-folio-overrides.yml`: `_layouts/bib.liquid` (no month in the publication line), `_includes/projects.liquid` and `_includes/projects_horizontal.liquid` (status and venue on project cards), `_includes/courses.liquid` (course cards) and `assets/css/main.scss` (adds the site-owned `_sass/_projects.scss`). When the audit reports drift on one of them, review it with `bundle exec al-folio upgrade overrides diff <path>` and re-accept it. `_plugins/cache-bust-sass.rb` replaces the gem's `bust_css_cache` filter so the fingerprint on `main.css` changes when styles change.
+Local files that shadow a gem file are recorded in `.al-folio-overrides.yml`: `_layouts/bib.liquid` (no month in the publication line), `_includes/projects.liquid` and `_includes/projects_horizontal.liquid` (status and venue on project cards), `_includes/courses.liquid` (course cards) and `assets/css/main.scss` (adds the site-owned `_sass/_projects.scss`). When the audit reports drift on one of them, review it with `bundle exec al-folio upgrade overrides diff <path>` and re-accept it. `_plugins/cache-bust-sass.rb` replaces the `bust_css_cache` filter so the fingerprint on `main.css` also changes when the site-local `_sass/` partials or the `main.scss` override change (the stock filter only looks at the theme's own Sass).
 
-Google Scholar citation counts on the publications page come from `_data/citations.yml`, which `bin/update_scholar_citations.py` regenerates (the `update-citations` workflow runs it on a schedule). A paper shows the badge when its BibTeX entry has a `google_scholar_id`.
+Google Scholar citation counts on the publications page come from `_data/citations.yml`, which `bin/update_scholar_citations.py` regenerates. Run the `update-citations` workflow by hand from the Actions tab to refresh it; it commits the file to `main`, and the new counts go live with the next deploy. A paper shows the badge when its BibTeX entry has a `google_scholar_id`.
 
 ## Reserved paths
 
