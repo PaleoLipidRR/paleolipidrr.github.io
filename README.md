@@ -29,6 +29,20 @@ This site uses an AI-assisted (Claude Code) workflow with two design artifacts:
 - **Design specs are written as standalone HTML** (in `docs/superpowers/specs/`), so they can embed the actual rendered diagrams and page mockups instead of static images or ASCII art. The convention is captured in the `writing-design-specs` skill under `.claude/skills/`.
 - **Implementation plans remain markdown.**
 
+## Theme updates
+
+Since the v1 migration the al-folio theme is not copied into this repository. Layouts, includes and styles come from the pinned `al_*` gems in `Gemfile` (`theme: al_folio_core` in `_config.yml`). To take a theme update, bump the pinned versions, then run:
+
+```bash
+bundle update
+bundle exec al-folio upgrade audit
+bundle exec al-folio upgrade overrides audit
+```
+
+Local files that shadow a gem file are recorded in `.al-folio-overrides.yml`: `_layouts/bib.liquid` (no month in the publication line), `_includes/projects.liquid` and `_includes/projects_horizontal.liquid` (status and venue on project cards), `_includes/courses.liquid` (course cards) and `assets/css/main.scss` (adds the site-owned `_sass/_projects.scss`). When the audit reports drift on one of them, review it with `bundle exec al-folio upgrade overrides diff <path>` and re-accept it. `_plugins/cache-bust-sass.rb` replaces the gem's `bust_css_cache` filter so the fingerprint on `main.css` changes when styles change.
+
+Google Scholar citation counts on the publications page come from `_data/citations.yml`, which `bin/update_scholar_citations.py` regenerates (the `update-citations` workflow runs it on a schedule). A paper shows the badge when its BibTeX entry has a `google_scholar_id`.
+
 ## Reserved paths
 
 GitHub Pages serves each project repository that has Pages enabled at `/<repo>/` on this domain, and that project site shadows any page with the same path on this site. Never create a top-level page, collection, or permalink that matches one of these paths:
