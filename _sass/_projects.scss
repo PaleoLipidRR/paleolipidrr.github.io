@@ -570,3 +570,18 @@
     margin: 0.75rem 0 0;
   }
 }
+
+// Filled primary button (used on course pages). Bootstrap/MDB provided this
+// before the v1 theme; al_folio_core only styles the outlined .btn.
+.btn.btn-primary {
+  color: #fff;
+  background-color: #4285f4;
+  border-color: #4285f4;
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    background-color: #5a95f5;
+    border-color: #5a95f5;
+  }
+}

@@ -5,7 +5,7 @@ github_username: PaleoLipidRR
 linkedin_username: ronnakritr
 orcid_id: 0000-0002-1425-8737
 scholar_userid: AGcBWlAAAAAJ
-cv_url: /assets/pdf/CV_Rattanasriampaipong.pdf
+cv_pdf: /assets/pdf/CV_Rattanasriampaipong.pdf
 # # Custom CV link - this will use the else clause in social.liquid
 # cv:
 #   url: /assets/pdf/CV_Rattanasriampaipong.pdf
