@@ -210,6 +210,14 @@ if nutrient:
     if "Abstract" not in " ".join(nutrient.text):
         errors.append("pub-Rattanasriampaipong2025: no 'Abstract' text")
 
+# No matching project page: no Project page and no PDF link.
+texas = need("pub-Rattanasriampaipong2026")
+if texas:
+    labels = [t for _, t in link_texts(texas)]
+    for label in ("Project page", "PDF"):
+        if label in labels:
+            errors.append(f"pub-Rattanasriampaipong2026: unexpected {label!r} link (links: {link_texts(texas)})")
+
 elling = need("pub-Elling2026")
 if elling:
     text = " ".join(elling.text)

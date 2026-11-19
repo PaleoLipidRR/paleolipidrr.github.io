@@ -111,3 +111,40 @@ def test_wrong_argument_count(tmp_path):
     result = subprocess.run([sys.executable, str(SCRIPT), "only-one"], capture_output=True, text=True)
     assert result.returncode == 2
     assert "usage" in result.stderr.lower()
+
+
+def run_files(cv_path, links_path):
+    return subprocess.run([sys.executable, str(SCRIPT), str(cv_path), str(links_path)], capture_output=True, text=True)
+
+
+def test_top_level_list_cv_json_fails_cleanly(tmp_path):
+    result = run(tmp_path, "teaching-a:\n  - { label: A, url: /a/ }\n", cv=[1, 2])
+    assert result.returncode == 1
+    assert "Traceback" not in result.stderr
+    assert len(result.stderr.splitlines()) == 1
+
+
+def test_odd_shapes_in_cv_json_fail_cleanly(tmp_path):
+    for cv in ({}, {"sections": "x"}, {"sections": [1]}, {"sections": [{"groups": [1]}]}, {"sections": [{"groups": [{"entries": [1]}]}]}):
+        result = run(tmp_path, "", cv=cv)
+        assert result.returncode == 1, cv
+        assert "Traceback" not in result.stderr
+        assert len(result.stderr.splitlines()) == 1
+
+
+def test_missing_cv_json_fails_cleanly(tmp_path):
+    links = tmp_path / "cv_links.yml"
+    links.write_text("", encoding="utf-8")
+    result = run_files(tmp_path / "nope.json", links)
+    assert result.returncode == 1
+    assert "Traceback" not in result.stderr
+    assert result.stderr.strip()
+
+
+def test_missing_links_file_fails_cleanly(tmp_path):
+    cv_file = tmp_path / "cv.json"
+    cv_file.write_text(json.dumps(CV), encoding="utf-8")
+    result = run_files(cv_file, tmp_path / "nope.yml")
+    assert result.returncode == 1
+    assert "Traceback" not in result.stderr
+    assert result.stderr.strip()

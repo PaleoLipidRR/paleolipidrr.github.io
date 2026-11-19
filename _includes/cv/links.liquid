@@ -29,45 +29,38 @@
   {%- endfor -%}
 {%- endif -%}
 {%- assign extra_links = site.data.cv_links[entry.id] -%}
-{%- if pub or entry.links.size > 0 or extra_links.size > 0 -%}
-  <p class="cv-links">
-    {%- if pub -%}
-      {%- if pub.doi -%}
-        <a class="cv-link" href="https://doi.org/{{ pub.doi | escape }}">DOI<span aria-hidden="true"> →</span></a>
-      {%- endif -%}
-      {%- if project and project.pdf -%}
-        <a class="cv-link" href="{{ '/assets/pdf/' | append: project.pdf | relative_url | escape }}">PDF<span aria-hidden="true"> →</span></a>
-      {%- endif -%}
-      {%- if project -%}
-        <a class="cv-link" href="{{ project.url | relative_url | escape }}">Project page<span aria-hidden="true"> →</span></a>
-      {%- endif -%}
-      {%- if pub.code_url -%}
-        <a class="cv-link" href="{{ pub.code_url | escape }}">Code<span aria-hidden="true"> →</span></a>
-      {%- endif -%}
+{%- comment -%} The entry's own links, then the hand-kept ones, drawn by one loop. {%- endcomment -%}
+{%- assign none = '' | split: ',' -%}
+{%- if extra_links == null -%}{%- assign extra_links = none -%}{%- endif -%}
+{%- assign own_links = entry.links -%}
+{%- if own_links == null -%}{%- assign own_links = none -%}{%- endif -%}
+{%- assign all_links = own_links | concat: extra_links -%}
+{%- capture anchors -%}
+  {%- if pub -%}
+    {%- if pub.doi -%}
+      <a class="cv-link" href="https://doi.org/{{ pub.doi | escape }}">DOI<span aria-hidden="true"> →</span></a>
     {%- endif -%}
-    {%- for link in entry.links -%}
-      {%- assign first_char = link.url | slice: 0 -%}
-      {%- if first_char == '/' -%}
-        {%- assign link_href = link.url | relative_url -%}
-      {%- else -%}
-        {%- assign link_href = link.url -%}
-      {%- endif -%}
-      <a class="cv-link" href="{{ link_href | escape }}">
-        {{- link.label | escape -}}
-        <span aria-hidden="true"> →</span></a
-      >
-    {%- endfor -%}
-    {%- for link in extra_links -%}
-      {%- assign first_char = link.url | slice: 0 -%}
-      {%- if first_char == '/' -%}
-        {%- assign link_href = link.url | relative_url -%}
-      {%- else -%}
-        {%- assign link_href = link.url -%}
-      {%- endif -%}
-      <a class="cv-link" href="{{ link_href | escape }}">
-        {{- link.label | escape -}}
-        <span aria-hidden="true"> →</span></a
-      >
-    {%- endfor -%}
-  </p>
+    {%- if project and project.pdf -%}
+      <a class="cv-link" href="{{ '/assets/pdf/' | append: project.pdf | relative_url | escape }}">PDF<span aria-hidden="true"> →</span></a>
+    {%- endif -%}
+    {%- if project -%}
+      <a class="cv-link" href="{{ project.url | relative_url | escape }}">Project page<span aria-hidden="true"> →</span></a>
+    {%- endif -%}
+    {%- if pub.code_url -%}
+      <a class="cv-link" href="{{ pub.code_url | escape }}">Code<span aria-hidden="true"> →</span></a>
+    {%- endif -%}
+  {%- endif -%}
+  {%- for link in all_links -%}
+    {%- assign first_char = link.url | slice: 0 -%}
+    {%- if first_char == '/' -%}
+      {%- assign link_href = link.url | relative_url -%}
+    {%- else -%}
+      {%- assign link_href = link.url -%}
+    {%- endif -%}
+    <a class="cv-link" href="{{ link_href | escape }}">{{ link.label | escape }}<span aria-hidden="true"> →</span></a>
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign anchors = anchors | strip -%}
+{%- if anchors != '' -%}
+  <p class="cv-links">{{ anchors }}</p>
 {%- endif -%}

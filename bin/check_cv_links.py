@@ -16,17 +16,27 @@ import yaml
 
 
 def entry_ids(cv):
+    """The set of entry ids in cv.json; raises ValueError naming the first part of an unexpected shape."""
+    if not isinstance(cv, dict) or not isinstance(cv.get("sections"), list):
+        raise ValueError("cv.json must be an object with a list `sections`")
     ids = set()
-    for section in cv.get("sections") or []:
+    for section in cv["sections"]:
+        if not isinstance(section, dict):
+            raise ValueError("cv.json: a section is not an object")
         for group in section.get("groups") or []:
+            if not isinstance(group, dict):
+                raise ValueError("cv.json: a group is not an object")
             for entry in group.get("entries") or []:
-                if entry.get("id"):
+                if not isinstance(entry, dict):
+                    raise ValueError("cv.json: an entry is not an object")
+                if isinstance(entry.get("id"), str) and entry["id"]:
                     ids.add(entry["id"])
     return ids
 
 
 def problems(cv, links):
     if links is None:
+        entry_ids(cv)  # still reject a cv.json of the wrong shape
         return []
     if not isinstance(links, dict):
         return ["the links file must be a mapping from entry id to a list of links"]
@@ -61,10 +71,14 @@ def main(argv):
             cv = json.load(f)
         with open(argv[2], encoding="utf-8") as f:
             links = yaml.safe_load(f)
-    except (OSError, ValueError, yaml.YAMLError) as error:
+    except (OSError, UnicodeDecodeError, ValueError, yaml.YAMLError) as error:
         print(f"cannot read input: {error}".replace("\n", " "), file=sys.stderr)
         return 1
-    found = problems(cv, links)
+    try:
+        found = problems(cv, links)
+    except (ValueError, TypeError, AttributeError) as error:
+        print(f"unexpected cv.json shape: {error}".replace("\n", " "), file=sys.stderr)
+        return 1
     for line in found:
         print(line, file=sys.stderr)
     return 1 if found else 0
