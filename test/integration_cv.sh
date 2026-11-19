@@ -438,6 +438,76 @@ else:
     for r in rows:
         if any(a.tag == "details" for a in r.ancestors()):
             errors.append("pub-Elling2026: .cv-tags is inside a <details>")
+# Figures (Task 12): drawn from _data/cv_figures.yml inside the opened card, after the abstract and before the links.
+def figures_of(card_id):
+    card = by_element_id.get(card_id)
+    if card is None:
+        errors.append(f"no element with id={card_id!r}")
+        return None, []
+    return card, [n for n in card.walk() if n.tag == "figure"]
+
+
+card, figs = figures_of("pub-Rattanasriampaipong2025")
+if card is not None:
+    if len(figs) != 1:
+        errors.append(f"pub-Rattanasriampaipong2025: expected 1 figure, found {len(figs)}")
+    for fig in figs:
+        if "cv-figure" not in fig.classes:
+            errors.append("pub-Rattanasriampaipong2025: the figure is not a .cv-figure")
+        if not any(a.tag == "details" for a in fig.ancestors()):
+            errors.append("pub-Rattanasriampaipong2025: the figure is not inside the <details>")
+        if not any("cv-figures" in a.classes for a in fig.ancestors()):
+            errors.append("pub-Rattanasriampaipong2025: the figure is not inside .cv-figures")
+        imgs = [n for n in fig.walk() if n.tag == "img"]
+        caps = [n for n in fig.walk() if n.tag == "figcaption"]
+        if len(imgs) != 1:
+            errors.append(f"pub-Rattanasriampaipong2025: figure holds {len(imgs)} img elements")
+        else:
+            img = imgs[0]
+            if not img.attrs.get("src", "").endswith("nutrient-effect/fig1.png"):
+                errors.append(f"pub-Rattanasriampaipong2025: figure src is {img.attrs.get('src')!r}")
+            if not (img.attrs.get("alt") or "").strip():
+                errors.append("pub-Rattanasriampaipong2025: the figure image has no alt text")
+            if img.attrs.get("loading") != "lazy":
+                errors.append("pub-Rattanasriampaipong2025: the figure image is not loading=lazy")
+            if img.attrs.get("decoding") != "async":
+                errors.append("pub-Rattanasriampaipong2025: the figure image is not decoding=async")
+            if "data-zoomable" not in img.attrs:
+                errors.append("pub-Rattanasriampaipong2025: the figure image lacks data-zoomable (click to enlarge)")
+        if len(caps) != 1 or not caps[0].text():
+            errors.append("pub-Rattanasriampaipong2025: the figure has no non-empty figcaption")
+    # Order inside .cv-more: abstract, then figures, then links.
+    more = [n for n in card.walk() if "cv-more" in n.classes]
+    if len(more) == 1:
+        order = [c.classes[0] for c in more[0].children if isinstance(c, Node) and c.classes and c.classes[0] in ("cv-abstract", "cv-figures", "cv-links")]
+        if order != ["cv-abstract", "cv-figures", "cv-links"]:
+            errors.append(f"pub-Rattanasriampaipong2025: .cv-more order is {order}, expected abstract, figures, links")
+    summaries = [n for n in card.walk() if n.tag == "summary"]
+    if len(summaries) != 1 or "figures" not in summaries[0].text().lower():
+        errors.append("pub-Rattanasriampaipong2025: the summary does not mention figures")
+
+card, figs = figures_of("pub-Rattanasriampaipong2022")
+if card is not None:
+    if len(figs) != 2:
+        errors.append(f"pub-Rattanasriampaipong2022: expected 2 figures, found {len(figs)}")
+    summaries = [n for n in card.walk() if n.tag == "summary"]
+    if len(summaries) != 1 or "figures" not in summaries[0].text().lower():
+        errors.append("pub-Rattanasriampaipong2022: the summary does not mention figures")
+
+# An entry with no figures draws none and its summary does not promise any; only the two listed cards have figures.
+card, figs = figures_of("pub-Tran2026")
+if card is not None:
+    if figs or [n for n in card.walk() if "cv-figures" in n.classes]:
+        errors.append("pub-Tran2026: has figures but none are listed in cv_figures.yml")
+    for n in card.walk():
+        if n.tag == "summary" and "figures" in n.text().lower():
+            errors.append("pub-Tran2026: the summary mentions figures")
+for n in nodes:
+    if n.tag == "figure" and "cv-figure" in n.classes:
+        card_of = next((a for a in n.ancestors() if "cv-card" in a.classes), None)
+        if card_of is None or card_of.attrs.get("id") not in ("pub-Rattanasriampaipong2025", "pub-Rattanasriampaipong2022"):
+            errors.append(f"unexpected figure in {card_of.attrs.get('id') if card_of else '?'}")
+
 # Ids are unique across the page (sections, their -heading ids, entries and their -title ids).
 seen = {}
 for n in nodes:

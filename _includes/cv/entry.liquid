@@ -22,13 +22,18 @@
   abstract, contribution, longer author list or links) has no <details>. Publication cards also carry data-status ("published",
   "under-review" or "report") and data-first-author ("true" or "false"), which the filter buttons of the Publications section
   (see _layouts/cv_page.liquid) read. Other entries' links stay below the head, outside any <details>, unless the entry has
-  detail, when they end the folded part.
+  detail, when they end the folded part. Figures (cv/figures.liquid, from _data/cv_figures.yml, available to any entry id) count as
+  folded content: they sit in .cv-more after the detail blocks and before the links, and an entry with only figures still gets a <details>.
 {%- endcomment -%}
 {%- assign entry = include.entry -%}
 {%- capture links -%}
   {% include cv/links.liquid entry=entry %}
 {%- endcapture -%}
 {%- assign links = links | strip -%}
+{%- capture figures -%}
+  {% include cv/figures.liquid entry=entry %}
+{%- endcapture -%}
+{%- assign figures = figures | strip -%}
 {%- capture pub_body -%}
   {%- if entry.pub -%}
     {% include cv/publication.liquid entry=entry part='body' %}
@@ -48,6 +53,9 @@
 {%- if entry.pub and links != '' -%}
   {%- assign has_detail = true -%}
 {%- endif -%}
+{%- if figures != '' -%}
+  {%- assign has_detail = true -%}
+{%- endif -%}
 {%- assign title_text = entry.title_html | strip_html | strip -%}
 {%- assign title_last = title_text | slice: -1 -%}
 {%- assign inline_notes = false -%}
@@ -57,8 +65,8 @@
 
 {%- comment -%}
   The summary names what opens, in the order it appears, from the same conditions that draw it: for a publication "All authors,
-  my contribution, abstract and links"; for detail blocks, a course table (columns Term and Students (rating)) is "terms and
-  ratings" and any other table "table", a list "highlights", paragraphs "description"; then "links". Never a bare "Details".
+  my contribution, abstract, figures and links"; for detail blocks, a course table (columns Term and Students (rating)) is "terms and
+  ratings" and any other table "table", a list "highlights", paragraphs "description"; then "figures" (the entry has figures in _data/cv_figures.yml) and "links". Never a bare "Details".
 {%- endcomment -%}
 {%- if has_detail -%}
   {%- capture summary_parts -%}
@@ -81,6 +89,7 @@
           description|
       {%- endcase -%}
     {%- endfor -%}
+    {%- if figures != '' -%}figures|{%- endif -%}
     {%- if links != '' -%}links|{%- endif -%}
   {%- endcapture -%}
   {%- assign summary_parts = summary_parts | split: '|' | uniq -%}
@@ -190,6 +199,7 @@
               </div>
           {%- endcase -%}
         {%- endfor -%}
+        {{- figures -}}
         {{- links -}}
       </div>
     </details>

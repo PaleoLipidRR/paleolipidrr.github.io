@@ -7,6 +7,7 @@ on:
     paths:
       - _data/cv.json
       - _data/cv_links.yml
+      - _data/cv_figures.yml
       - bin/check_cv_links.py
       - test/test_check_cv_links.py
       - .github/workflows/cv-links.yml
@@ -16,6 +17,7 @@ on:
     paths:
       - _data/cv.json
       - _data/cv_links.yml
+      - _data/cv_figures.yml
       - bin/check_cv_links.py
       - test/test_check_cv_links.py
       - .github/workflows/cv-links.yml
@@ -38,5 +40,5 @@ jobs:
         run: pip install pyyaml pytest
       - name: Test the checker
         run: pytest test/test_check_cv_links.py
-      - name: Check that every key in cv_links.yml is a CV entry
-        run: python3 bin/check_cv_links.py _data/cv.json _data/cv_links.yml
+      - name: Check cv_links.yml and cv_figures.yml against the CV entries and the image files
+        run: python3 bin/check_cv_links.py _data/cv.json _data/cv_links.yml _data/cv_figures.yml .
