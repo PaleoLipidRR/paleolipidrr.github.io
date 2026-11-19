@@ -1,0 +1,95 @@
+---
+layout: page
+---
+{%- comment -%}
+  The CV page, rendered from _data/cv.json (generated from the LaTeX CV; never edited by hand).
+
+  Markup contract (later CV tasks and assets/js/cv.js build on it):
+  - each section: <section class="cv-section" id="<section id>" aria-labelledby="<section id>-heading">,
+    with <h2 class="cv-section-title" id="<section id>-heading">; sections listed in page.collapse_sections
+    also carry data-collapse-after="<page.collapse_after>"
+  - each group: <div class="cv-group" data-group="<group id>">, with an <h3 class="cv-group-title" data-toc-skip>
+    when it has a title (data-toc-skip keeps the theme's sidebar to one line per section)
+  - each entry: _includes/cv/entry.liquid (see there)
+
+  Fields ending in _html are trusted, already-sanitised HTML and are output as is; every other string is escaped.
+{%- endcomment -%}
+{%- assign cv = site.data.cv -%}
+{%- assign stats = cv.stats -%}
+{%- assign collapse_sections = page.collapse_sections -%}
+<div class="cv">
+  <div class="cv-top">
+    {% if cv.updated %}
+      <p class="cv-updated">Updated {{ cv.updated | date: '%B %Y' }} · same version as the PDF</p>
+    {% endif %}
+    {% if page.cv_pdf %}
+      <a class="cv-download" href="{{ page.cv_pdf | relative_url }}" download><span aria-hidden="true">↓</span> Download PDF</a>
+    {% endif %}
+  </div>
+
+  {% if stats %}
+    <p class="cv-stats">
+      {% if stats.funding %}
+        <span class="cv-stat"
+          ><b class="cv-stat-value">{{ stats.funding | escape }}</b> <span class="cv-stat-label">funding awarded</span></span
+        >
+      {% endif %}
+      {% if stats.citations %}
+        <span class="cv-stat"
+          ><b class="cv-stat-value">{{ stats.citations | escape }}</b>
+          <span class="cv-stat-label"
+            >citations{% if stats.hindex %} · h-index {{ stats.hindex | escape }}{% endif -%}
+          </span></span
+        >
+      {% endif %}
+      {% if stats.students %}
+        <span class="cv-stat"
+          ><b class="cv-stat-value">{{ stats.students | escape }}+</b> <span class="cv-stat-label">students taught</span></span
+        >
+      {% endif %}
+    </p>
+  {% endif %}
+
+  {% for section in cv.sections %}
+    <section
+      class="cv-section"
+      id="{{ section.id | escape }}"
+      aria-labelledby="{{ section.id | escape }}-heading"
+      {% if collapse_sections contains section.id %}
+        data-collapse-after="{{ page.collapse_after | escape }}"
+      {% endif %}
+    >
+      <h2 class="cv-section-title" id="{{ section.id | escape }}-heading">{{ section.title | escape }}</h2>
+
+      {% for paragraph in section.intro_html %}
+        <p class="cv-intro">{{ paragraph }}</p>
+      {% endfor %}
+
+      {% for group in section.groups %}
+        {% if group.title or group.entries.size > 0 %}
+          <div
+            class="cv-group"
+            {% if group.id %}
+              data-group="{{ group.id | escape }}"
+            {% endif %}
+          >
+            {% if group.title %}
+              <h3 class="cv-group-title" data-toc-skip>{{ group.title | escape }}</h3>
+            {% endif %}
+            {% for entry in group.entries %}
+              {% include cv/entry.liquid entry=entry section=section %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% if section.footnotes_html.size > 0 %}
+        <div class="cv-footnotes">
+          {% for footnote in section.footnotes_html %}
+            <p>{{ footnote }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </section>
+  {% endfor %}
+</div>

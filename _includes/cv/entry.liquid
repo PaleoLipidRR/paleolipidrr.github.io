@@ -1,0 +1,136 @@
+{%- comment -%}
+  One CV entry. Parameters: entry (an entry of _data/cv.json), section (its section).
+
+  Markup contract:
+    <div class="cv-row" id="<entry id>">
+      <div class="cv-when">when, or empty</div>
+      <div class="cv-entry">
+        without folded content:  <div class="cv-head">…</div> then <p class="cv-links">…</p>
+        with folded content:     <details class="cv-details">
+                                   <summary class="cv-head">…</summary>
+                                   <div class="cv-more">detail blocks, then <p class="cv-links">…</p></div>
+                                 </details>
+      </div>
+    </div>
+  .cv-head holds only phrasing content: .cv-title (plus .cv-place), .cv-roles > .cv-role lines and .cv-note lines. Notes are always
+  visible: they sit outside any <details>, or in its <summary>, never in the folded .cv-more.
+  A title ending in a colon (skills lines such as "Languages:") is followed by its notes on the same line.
+  Publication entries (entry.pub) get a plain author, year, title, venue line here.
+{%- endcomment -%}
+{%- assign entry = include.entry -%}
+{%- assign has_detail = false -%}
+{%- if entry.detail.size > 0 -%}
+  {%- assign has_detail = true -%}
+{%- endif -%}
+{%- assign title_text = entry.title_html | strip_html | strip -%}
+{%- assign title_last = title_text | slice: -1 -%}
+{%- assign inline_notes = false -%}
+{%- if title_last == ':' and entry.notes_html.size > 0 -%}
+  {%- assign inline_notes = true -%}
+{%- endif -%}
+
+{%- capture head -%}
+  {%- if entry.pub -%}
+    {%- assign pub_title_last = entry.pub.title_html | strip_html | strip | slice: -1 -%}
+    {%- assign pub_title_stop = '.' -%}
+    {%- if pub_title_last == '?' or pub_title_last == '!' or pub_title_last == '.' -%}
+      {%- assign pub_title_stop = '' -%}
+    {%- endif -%}
+    <span class="cv-title cv-pub"
+      >{{ entry.pub.authors_short_html }}{% if entry.pub.year %} ({{ entry.pub.year | escape }}){% endif %}.
+      {{ entry.pub.title_html }}{{ pub_title_stop }}{% if entry.pub.venue_html %} {{ entry.pub.venue_html }}.{% endif %}</span
+    >
+  {%- else -%}
+    <span class="cv-title">{{ entry.title_html }}</span>
+    {%- if inline_notes %}
+      <span class="cv-note cv-note-inline">{{ entry.notes_html | join: '; ' }}</span>
+    {%- endif -%}
+    {%- if entry.place %}
+      <span class="cv-place"><span aria-hidden="true">·</span> {{ entry.place | escape }}</span>
+    {%- endif -%}
+  {%- endif -%}
+  {%- if entry.roles.size > 0 -%}
+    {%- comment -%} Spans, not a list: the head may be a <summary>, which takes phrasing content only. {%- endcomment -%}
+    <span class="cv-roles">
+      {%- for role in entry.roles -%}
+        <span class="cv-role">
+          <span class="cv-role-title">{{ role.title_html }}</span>
+          {%- if role.when %} <span class="cv-role-when">{{ role.when | escape }}</span>{% endif -%}
+        </span>
+      {%- endfor -%}
+    </span>
+  {%- endif -%}
+  {%- unless inline_notes -%}
+    {%- for note in entry.notes_html -%}
+      <span class="cv-note">{{ note }}</span>
+    {%- endfor -%}
+  {%- endunless -%}
+{%- endcapture -%}
+
+{%- capture links -%}
+  {%- if entry.links.size > 0 -%}
+    <p class="cv-links">
+      {%- for link in entry.links -%}
+        {%- assign first_char = link.url | slice: 0 -%}
+        {%- if first_char == '/' -%}
+          {%- assign link_href = link.url | relative_url -%}
+        {%- else -%}
+          {%- assign link_href = link.url -%}
+        {%- endif -%}
+        <a class="cv-link" href="{{ link_href | escape }}">{{ link.label | escape }}<span aria-hidden="true"> →</span></a>
+      {%- endfor -%}
+    </p>
+  {%- endif -%}
+{%- endcapture -%}
+
+<div class="cv-row" id="{{ entry.id | escape }}">
+  <div class="cv-when">{{ entry.when | escape }}</div>
+  <div class="cv-entry">
+    {%- if has_detail -%}
+      <details class="cv-details">
+        <summary class="cv-head">{{ head }}</summary>
+        <div class="cv-more">
+          {%- for block in entry.detail -%}
+            {%- case block.type -%}
+              {%- when 'p' -%}
+                <p>{{ block.html }}</p>
+              {%- when 'ul' -%}
+                <ul>
+                  {%- for item in block.items_html -%}
+                    <li>{{ item }}</li>
+                  {%- endfor -%}
+                </ul>
+              {%- when 'table' -%}
+                <div class="cv-table-wrap">
+                  <table class="cv-table">
+                    {%- if block.columns.size > 0 -%}
+                      <thead>
+                        <tr>
+                          {%- for column in block.columns -%}
+                            <th scope="col">{{ column | escape }}</th>
+                          {%- endfor -%}
+                        </tr>
+                      </thead>
+                    {%- endif -%}
+                    <tbody>
+                      {%- for row in block.rows -%}
+                        <tr>
+                          {%- for cell in row -%}
+                            <td>{{ cell }}</td>
+                          {%- endfor -%}
+                        </tr>
+                      {%- endfor -%}
+                    </tbody>
+                  </table>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+          {{- links -}}
+        </div>
+      </details>
+    {%- else -%}
+      <div class="cv-head">{{ head }}</div>
+      {{- links -}}
+    {%- endif -%}
+  </div>
+</div>

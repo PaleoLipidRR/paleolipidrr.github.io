@@ -1,0 +1,304 @@
+// _sass/_cv.scss
+// The CV page (/cv/, _layouts/cv_timeline.liquid): a clickable timeline. Years sit on a thin left rail
+// with a dot per entry (hollow, filled while the entry is open); entries are plain lines with no borders,
+// with a faint tint under the mouse on those that open. Only the theme's colour variables are used, so
+// dark mode follows the site.
+
+.cv {
+  // Muted text mixed from the theme's text and background colours: quieter than body text but with
+  // better contrast than --global-text-color-light in both themes.
+  --cv-muted: color-mix(in srgb, var(--global-text-color) 68%, var(--global-bg-color));
+  --cv-tint: color-mix(in srgb, var(--global-theme-color) 7%, transparent);
+  --cv-rail: 5.5rem;
+  --cv-rail-gap: 14px;
+
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+// ---------------------------------------------------------------------------
+// Header line, download button, headline numbers
+// ---------------------------------------------------------------------------
+
+.cv-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 14px;
+}
+
+.cv-updated {
+  margin: 0;
+  color: var(--cv-muted);
+  font-size: 0.85rem;
+}
+
+.cv .cv-download {
+  display: inline-block;
+  padding: 7px 13px;
+  border-radius: 6px;
+  background: var(--global-theme-color);
+  color: var(--global-bg-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--global-bg-color);
+    text-decoration: underline;
+  }
+}
+
+.cv-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 26px;
+  margin: 0 0 8px;
+  padding: 10px 0;
+  border-top: 1px solid var(--global-divider-color);
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+.cv-stat-value {
+  margin-right: 5px;
+  font-size: 1.15rem;
+}
+
+.cv-stat-label {
+  color: var(--cv-muted);
+  font-size: 0.85rem;
+}
+
+// ---------------------------------------------------------------------------
+// Sections and groups
+// ---------------------------------------------------------------------------
+
+.cv-section {
+  margin-top: 26px;
+  scroll-margin-top: 80px;
+}
+
+.cv .cv-section-title {
+  margin: 0 0 6px;
+  color: var(--global-theme-color);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cv .cv-group-title {
+  margin: 14px 0 4px calc(var(--cv-rail) + var(--cv-rail-gap));
+  color: var(--global-text-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.cv-intro {
+  margin: 0 0 8px;
+}
+
+.cv-footnotes {
+  margin-top: 8px;
+  color: var(--cv-muted);
+  font-size: 0.8rem;
+
+  p {
+    margin: 0 0 4px;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Timeline rows
+// ---------------------------------------------------------------------------
+
+.cv-row {
+  display: grid;
+  grid-template-columns: var(--cv-rail) minmax(0, 1fr);
+  gap: var(--cv-rail-gap);
+  scroll-margin-top: 80px;
+}
+
+// The rail: the date, right-aligned against a thin line. Long dates wrap inside the column.
+.cv-when {
+  position: relative;
+  padding: 8px 12px 6px 0;
+  border-right: 1px solid var(--global-divider-color);
+  color: var(--cv-muted);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+  text-align: right;
+  overflow-wrap: anywhere;
+
+  // The dot on the rail; decorative (the ▸/▾ marker and the open content carry the state).
+  &::after {
+    content: "";
+    position: absolute;
+    top: 14px;
+    right: -4px;
+    width: 7px;
+    height: 7px;
+    border: 1.5px solid var(--global-theme-color);
+    border-radius: 50%;
+    background: var(--global-bg-color);
+  }
+}
+
+.cv-row:has(> .cv-entry > details[open]) > .cv-when::after {
+  background: var(--global-theme-color);
+}
+
+.cv-entry {
+  min-width: 0;
+  padding: 7px 10px;
+  border-radius: 6px;
+}
+
+.cv-head {
+  display: block;
+}
+
+.cv-place {
+  color: var(--cv-muted);
+}
+
+.cv-roles,
+.cv-role {
+  display: block;
+}
+
+.cv-role-when {
+  color: var(--cv-muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+
+  &::before {
+    content: "· ";
+  }
+}
+
+.cv-note {
+  display: block;
+  color: var(--cv-muted);
+  font-size: 0.875rem;
+}
+
+// Skills lines ("Languages: Thai, English"): the note continues the title's line in body text.
+.cv-note.cv-note-inline {
+  display: inline;
+  color: inherit;
+  font-size: inherit;
+}
+
+// ---------------------------------------------------------------------------
+// Entries that open
+// ---------------------------------------------------------------------------
+
+.cv-details > summary {
+  display: block;
+  margin: -7px -10px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::after {
+    content: "▸";
+    content: "▸" / "";
+    float: right;
+    margin-left: 10px;
+    color: var(--cv-muted);
+    font-size: 0.7rem;
+  }
+
+  &:hover {
+    background: var(--cv-tint);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: 1px;
+  }
+}
+
+.cv-details[open] > summary::after {
+  content: "▾";
+  content: "▾" / "";
+}
+
+.cv-more {
+  margin-top: 12px;
+  font-size: 0.875rem;
+
+  p,
+  ul {
+    margin: 0 0 6px;
+  }
+
+  ul {
+    padding-left: 1.2rem;
+  }
+}
+
+.cv-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 6px;
+}
+
+.cv-table {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+
+  th,
+  td {
+    padding: 2px 16px 2px 0;
+    border-bottom: 1px solid var(--global-divider-color);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    color: var(--cv-muted);
+    font-weight: 600;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Links on an entry: plain coloured text
+// ---------------------------------------------------------------------------
+
+.cv-links {
+  margin: 0;
+}
+
+.cv .cv-link {
+  display: inline-block;
+  margin: 6px 14px 0 0;
+  color: var(--global-theme-color);
+  font-size: 0.8rem;
+}
+
+// ---------------------------------------------------------------------------
+// Phones
+// ---------------------------------------------------------------------------
+
+@media (max-width: 640px) {
+  .cv {
+    --cv-rail: 56px;
+    --cv-rail-gap: 10px;
+  }
+
+  .cv-when {
+    padding-right: 8px;
+  }
+}

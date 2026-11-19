@@ -34,5 +34,5 @@ overrides:
     gem_version: 1.0.15
     upstream_path: assets/css/main.scss
     upstream_sha256: 437c6c911c596391413e435dc0ea7095e682e85c572c1fd3fff69f9597455b3e
-    local_sha256: 54bfcbd3a63e8ea00235544b2dfcc438c5f2d7b56f8d51e30285ff644158657d
-    acknowledged_at: '2026-11-10'
+    local_sha256: 971b71e94363ed06e34f6686fa1fdc00b471b183a75f127350265323e78210e6
+    acknowledged_at: '2026-11-19'
