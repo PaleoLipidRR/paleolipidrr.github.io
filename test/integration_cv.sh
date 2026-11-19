@@ -644,6 +644,14 @@ for cls, label in (("altmetric-embed", "Altmetric"), ("__dimensions_badge_embed_
 # Tag order: role, then (badge), then metrics; the role comes first.
 if first.items and "cv-tag-role" not in classes(first.items[0]):
     errors.append("pub-Rattanasriampaipong2025: the role tag is not first in the row")
+# The metric tags, in order: Google Scholar, then Dimensions, then Altmetric.
+metric_order = []
+for i in first.items:
+    for cls, label in (("cv-tag-metric", "Google Scholar"), ("__dimensions_badge_embed__", "Dimensions"), ("altmetric-embed", "Altmetric")):
+        if cls in classes(i):
+            metric_order.append(label)
+if metric_order != ["Google Scholar", "Dimensions", "Altmetric"]:
+    errors.append(f"pub-Rattanasriampaipong2025: metric tags in the order {metric_order}, expected Google Scholar, Dimensions, Altmetric")
 
 elling = row("pub-Elling2026")
 roles = [" ".join(i[2].split()) for i in elling.items if "cv-tag-role" in classes(i)]
@@ -657,8 +665,12 @@ preprint = row("pub-Rattanasriampaipong2026")
 roles = [" ".join(i[2].split()) for i in preprint.items if "cv-tag-role" in classes(i)]
 if roles != ["First author"]:
     errors.append(f"pub-Rattanasriampaipong2026: role tags {roles}, expected ['First author']")
-if not [i for i in preprint.items if " ".join(i[2].split()) == "Preprint" and "cv-tag" in classes(i)]:
+preprint_at = [n for n, i in enumerate(preprint.items) if " ".join(i[2].split()) == "Preprint" and "cv-tag" in classes(i)]
+role_at = [n for n, i in enumerate(preprint.items) if "cv-tag-role" in classes(i)]
+if not preprint_at:
     errors.append("pub-Rattanasriampaipong2026: no 'Preprint' tag")
+elif role_at and preprint_at[0] < role_at[0]:
+    errors.append("pub-Rattanasriampaipong2026: the 'Preprint' tag comes before the role tag")
 for cls in ("altmetric-embed", "__dimensions_badge_embed__", "cv-tag-metric"):
     if [i for i in preprint.items if cls in classes(i)]:
         errors.append(f"pub-Rattanasriampaipong2026: unexpected .{cls} (the paper is not in papers.bib)")

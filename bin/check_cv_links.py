@@ -9,7 +9,7 @@ passes.
 
 With the two extra arguments the figures file is checked too: every key must be an entry id, every value a
 non-empty list of mappings with exactly the keys `src`, `alt` and `caption` (non-empty strings; an empty
-alt is reported as "figure without alt text"). `src` is a path relative to the site root, with no leading
+or null alt is reported as "figure without alt text"). `src` is a path relative to the site root, with no leading
 slash and no `..` segment, and must be an existing regular file under that root. An empty or comment-only
 figures file passes.
 
@@ -98,11 +98,15 @@ def figure_problems(cv, figures, root):
             if set(item) != {"src", "alt", "caption"}:
                 found.append(f"{where} must have exactly the keys src, alt and caption, found {sorted(map(str, item))}")
                 continue
+            # `alt:` with no value loads as None; it is reported like an empty alt.
+            if item["alt"] is None or (isinstance(item["alt"], str) and not item["alt"].strip()):
+                found.append(f"figure without alt text: {key}")
+                if not all(isinstance(item[k], str) for k in ("src", "caption")):
+                    found.append(f"{where}: src and caption must be strings")
+                continue
             if not all(isinstance(item[k], str) for k in ("src", "alt", "caption")):
                 found.append(f"{where}: src, alt and caption must be strings")
                 continue
-            if not item["alt"].strip():
-                found.append(f"figure without alt text: {key}")
             if not item["caption"].strip():
                 found.append(f"{where}: caption must not be empty")
             src = item["src"]

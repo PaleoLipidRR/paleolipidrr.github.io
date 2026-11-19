@@ -430,66 +430,82 @@
   }
 }
 
-// The tag row under a citation.
-.cv-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  margin: 8px 0 0;
-}
+.cv-page {
+  // The tag row under a citation.
+  .cv-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin: 8px 0 0;
+  }
 
-// A plain tag: a quiet outlined chip. The role tag is bold; metric tags are links whose number is bold.
-.cv-tag {
-  display: inline-block;
-  padding: 0 8px;
-  border: 1px solid var(--global-divider-color);
-  border-radius: 999px;
-  color: var(--cv-muted);
-  font-size: 0.75rem;
-  line-height: 1.5;
-  white-space: nowrap;
-}
+  // A plain tag: a quiet outlined chip. The role tag is bold; metric tags are links whose number is bold.
+  .cv-tag {
+    display: inline-block;
+    padding: 0 8px;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 999px;
+    color: var(--cv-muted);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
 
-.cv-tag-role {
-  color: var(--global-text-color);
-  font-weight: 600;
-}
+  .cv-tag-role {
+    color: var(--global-text-color);
+    font-weight: 600;
+  }
 
-a.cv-tag-metric {
-  text-decoration: none;
+  a.cv-tag-metric {
+    text-decoration: none;
 
-  &:hover {
-    border-color: var(--global-theme-color);
+    &:hover {
+      border-color: var(--global-theme-color);
+      color: var(--global-theme-color);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--global-theme-color);
+      outline-offset: 2px;
+    }
+  }
+
+  // The Dimensions and Altmetric widgets are third-party and size themselves. Their elements are empty until the scripts
+  // run (or for good when the scripts are blocked), and an empty inline-flex item takes no width, so the row stays complete.
+  // The widgets draw inline images and boxes that sit on the text baseline, which leaves them a few pixels lower than the
+  // text tags; as flex items with block-level contents they centre on the row like the tags do.
+  .cv-embeds {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+
+    > * {
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+    }
+
+    img,
+    svg,
+    iframe {
+      display: block;
+    }
+  }
+
+  // "★ Journal cover": outlined in the accent colour, bold, with a star glyph, so it does not rely on colour alone.
+  .cv-badge {
+    display: inline-block;
+    padding: 0 8px;
+    border: 1px solid var(--global-theme-color);
+    border-radius: 999px;
     color: var(--global-theme-color);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: nowrap;
   }
-
-  &:focus-visible {
-    outline: 2px solid var(--global-theme-color);
-    outline-offset: 2px;
-  }
-}
-
-// The Dimensions and Altmetric widgets are third-party and size themselves. Their elements are empty until the scripts
-// run (or for good when the scripts are blocked), and an empty inline-flex item takes no width, so the row stays complete.
-.cv-embeds {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-}
-
-// "★ Journal cover": outlined in the accent colour, bold, with a star glyph, so it does not rely on colour alone.
-.cv-badge {
-  display: inline-block;
-  padding: 0 8px;
-  border: 1px solid var(--global-theme-color);
-  border-radius: 999px;
-  color: var(--global-theme-color);
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.5;
-  white-space: nowrap;
 }
 
 .cv-more .cv-abstract,
@@ -523,6 +539,7 @@ a.cv-tag-metric {
     padding: 4px;
     border: 1px solid var(--global-divider-color);
     border-radius: 4px;
+    // Plots with transparent backgrounds need a light ground to stay legible in dark mode.
     background: #fff;
     object-fit: contain;
   }

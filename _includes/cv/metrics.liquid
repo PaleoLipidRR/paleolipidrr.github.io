@@ -2,8 +2,9 @@
   The citation-metric tags of one publication card, for the tag row (cv/publication.liquid, part="tags"). Parameter: pub.
   The bibliography fields come from site.data.cv_pub_meta (_plugins/cv-pub-meta.rb), found by the bare lowercase DOI pub.doi.
     Google Scholar  a text tag, drawn only when the count is found in _data/citations.yml: the key <userid>:<article id>, then the
-                    bare article id, then any key containing it (the order _layouts/bib.liquid uses). A count of 0 is shown as 0.
-                    The visible text reads "N Google Scholar"; the link's accessible name is "N citations on Google Scholar".
+                    bare article id, then any key whose part after the last ":" is the article id. A count of 0 is shown as 0.
+                    The visible text reads "N Google Scholar"; the link's accessible name is "N citations on Google Scholar"
+                    ("1 citation on Google Scholar" for a count of one).
     Dimensions, Altmetric  the same empty embed elements as _layouts/bib.liquid, each behind its enable_publication_badges switch and
                     drawn only when the paper has the field ("true" means "use the DOI"), both inside one wrapper span. The theme's
                     scripts.liquid already loads the two third-party scripts on every page (async, no consent gating), so none is added here.
@@ -23,17 +24,21 @@
       {%- assign scholar_count = site.data.citations.papers[scholar_id].citations -%}
     {%- else -%}
       {%- for paper in site.data.citations.papers -%}
-        {%- if paper[0] contains scholar_id -%}
+        {%- assign paper_article_id = paper[0] | split: ':' | last -%}
+        {%- if paper_article_id == scholar_id -%}
           {%- assign scholar_count = paper[1].citations -%}
           {%- break -%}
         {%- endif -%}
       {%- endfor -%}
     {%- endif -%}
     {%- if scholar_count != null and scholar_count != '' -%}
+      {%- assign scholar_count_text = scholar_count | append: '' -%}
+      {%- assign scholar_noun = 'citations' -%}
+      {%- if scholar_count_text == '1' -%}{%- assign scholar_noun = 'citation' -%}{%- endif -%}
       <a
         class="cv-tag cv-tag-metric"
         href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user={{ userid | url_encode }}&amp;citation_for_view={{ scholar_key | url_encode }}"
-        ><b>{{ scholar_count | escape }}</b> <span class="cv-sr-only">citations on </span>Google Scholar</a
+        ><b>{{ scholar_count | escape }}</b> <span class="cv-sr-only">{{ scholar_noun }} on </span>Google Scholar</a
       >
     {%- endif -%}
   {%- endif -%}

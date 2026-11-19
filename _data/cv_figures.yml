@@ -11,4 +11,4 @@ pub-Rattanasriampaipong2022:
     caption: "Lipid distributions reflect archaea ecology fingerprints"
   - src: assets/img/png/fig3_PNAS_SPM_GMM_revised.png
     alt: "Gaussian mixture model clusters of GDGT-2/GDGT-3 against TEX86 for shallow and deep samples"
-    caption: "Gaussian mixture model clusters of GDGT-2/GDGT-3 against TEX86 for shallow and deep samples."
+    caption: "GDGT-2/GDGT-3 clusters from a Gaussian mixture model"

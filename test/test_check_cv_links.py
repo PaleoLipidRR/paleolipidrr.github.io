@@ -222,6 +222,26 @@ def test_paths_outside_the_site_fail(tmp_path):
         assert f"figure path outside the site: {src}" in result.stderr.splitlines()
 
 
+def test_null_alt_is_reported_as_missing_alt_text(tmp_path):
+    for item in ("{ src: img/a.png, alt: null, caption: B }", "{ src: img/a.png, alt: ~, caption: B }"):
+        result = run_figures(tmp_path, f"pub-X:\n  - {item}\n")
+        assert result.returncode == 1
+        assert "figure without alt text: pub-X" in result.stderr.splitlines()
+        assert "Traceback" not in result.stderr
+    result = run_figures(tmp_path, "pub-X:\n  - src: img/a.png\n    alt:\n    caption: B\n")
+    assert result.returncode == 1
+    assert "figure without alt text: pub-X" in result.stderr.splitlines()
+
+
+def test_symlink_resolving_outside_the_site_fails(tmp_path):
+    (tmp_path / "secret.png").write_bytes(b"x")
+    (tmp_path / "site" / "img").mkdir(parents=True)
+    (tmp_path / "site" / "img" / "link.png").symlink_to(tmp_path / "secret.png")
+    result = run_figures(tmp_path, "pub-X:\n  - { src: img/link.png, alt: A, caption: B }\n")
+    assert result.returncode == 1
+    assert "figure path outside the site: img/link.png" in result.stderr.splitlines()
+
+
 def test_bad_figure_shapes_fail_cleanly(tmp_path):
     for text in (
         "pub-X: img/a.png\n",

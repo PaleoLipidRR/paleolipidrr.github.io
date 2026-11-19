@@ -6,10 +6,11 @@
   sized in CSS (_sass/_cv.scss) because the files' dimensions are not known here. Lazy loading keeps a closed <details> from
   fetching its images.
 {%- endcomment -%}
-{%- assign figures = site.data.cv_figures[include.entry.id] -%}
-{%- if figures.size > 0 -%}
+{%- comment -%} A name of its own, so it does not overwrite the `figures` capture of cv/entry.liquid, which includes this file. {%- endcomment -%}
+{%- assign cv_entry_figure_list = site.data.cv_figures[include.entry.id] -%}
+{%- if cv_entry_figure_list.size > 0 -%}
   <div class="cv-figures">
-    {%- for figure in figures -%}
+    {%- for figure in cv_entry_figure_list -%}
       <figure class="cv-figure">
         <img src="{{ figure.src | relative_url }}" alt="{{ figure.alt | escape }}" loading="lazy" decoding="async" data-zoomable>
         <figcaption>{{ figure.caption | escape }}</figcaption>
