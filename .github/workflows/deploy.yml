@@ -108,6 +108,9 @@ jobs:
           pip3 install --upgrade nbconvert
           export JEKYLL_ENV=production
           bundle exec jekyll build
+      # Local addition (not in upstream al-folio): a broken built CV page stops the deploy.
+      - name: Check built CV page 🔎
+        run: python3 test/cv_page_check.py _site .
       - name: Purge unused CSS 🧹
         run: |
           npm install -g purgecss

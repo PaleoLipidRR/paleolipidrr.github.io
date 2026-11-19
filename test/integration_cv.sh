@@ -5,6 +5,11 @@ set -euo pipefail
 #
 # Usage: bash test/integration_cv.sh <built site directory>
 #
+# This is the local fixture test for today's data: it names particular entries (pub-Elling2026, grants-noaa,
+# the 2023–2025 date, ...) and so may need updating when the LaTeX CV changes those entries. It is not run in CI.
+# CI (the Deploy workflow) runs test/cv_page_check.py, which derives every expectation from the data files and
+# hard-codes nothing about today's CV.
+#
 # The data file is regenerated from the LaTeX CV, so the expected headline numbers are read out of
 # _data/cv.json rather than hard-coded. Production builds minify the HTML onto very few lines, so the
 # structural checks (which element holds a text, whether it sits inside a <details>) parse the page
@@ -42,10 +47,13 @@ grep -q 'Description 1\.' "${page}" && fail 'the old placeholder text "Descripti
 sections="$({ grep -o 'class="\?cv-section"\?[ >]' "${page}" || true; } | wc -l)"
 [ "${sections}" -ge 18 ] || fail "expected at least 18 class=\"cv-section\", found ${sections}"
 
-# The CV icon in the home page's social links (an <a> wrapping <i class="ai ai-cv">, from the cv_pdf key
-# of _data/socials.yml) links to the CV page. The navbar's own "cv" link does not count.
+# The CV icon in the home page's social links (an <a> wrapping <i class="ai ai-cv">, from the `cv` entry
+# of _data/socials.yml) links to the CV page and is named "CV". The navbar's own "cv" link does not count.
 grep -Eq '<a [^>]*href="/cv/"[^>]*>[[:space:]]*<i [^>]*class="[^"]*ai-cv[ "]' "${home}" ||
   fail 'the CV icon in the home page social links does not link to href="/cv/"'
+grep -Eq '<a [^>]*href="/cv/"[^>]*title="?CV"?[ >]|<a [^>]*title="?CV"?[^>]*href="/cv/"' "${home}" ||
+  fail 'the CV icon in the home page social links is not titled "CV"'
+grep -q 'title="\?Cv pdf' "${home}" && fail 'a social link on the home page is still titled "Cv pdf"'
 
 # Headline numbers, from the data file.
 python3 -I - "${data}" "${page}" <<'PY'
@@ -273,12 +281,12 @@ if errors:
 PY2
 
 # Cards and the section panel (Revision 2): the page parsed into a small element tree.
-python3 -I - "${data}" "${page}" <<'PY3'
+python3 -I - "${data}" "${page}" "${repo_root}/_data/cv_figures.yml" <<'PY3'
 import json
 import sys
 from html.parser import HTMLParser
 
-data_path, page_path = sys.argv[1], sys.argv[2]
+data_path, page_path, figures_path = sys.argv[1], sys.argv[2], sys.argv[3]
 with open(data_path, encoding="utf-8") as f:
     data = json.load(f)
 with open(page_path, encoding="utf-8") as f:
@@ -512,19 +520,32 @@ if card is not None:
     if len(summaries) != 1 or "figures" not in summaries[0].text().lower():
         errors.append("pub-Rattanasriampaipong2022: the summary does not mention figures")
 
-# An entry with no figures draws none and its summary does not promise any; only the two listed cards have figures.
-card, figs = figures_of("pub-Tran2026")
-if card is not None:
-    if figs or [n for n in card.walk() if "cv-figures" in n.classes]:
-        errors.append("pub-Tran2026: has figures but none are listed in cv_figures.yml")
+# An entry with no figures in _data/cv_figures.yml draws none and its summary does not promise any. The file's
+# top-level keys are read with a pattern so this test needs no YAML library.
+import re
+
+with open(figures_path, encoding="utf-8") as f:
+    figure_keys = set(re.findall(r"^([^\s#][^:]*):", f.read(), re.M))
+for card in with_class("cv-card"):
+    if card.attrs.get("id") in figure_keys:
+        continue
+    if [n for n in card.walk() if n.tag == "figure" or "cv-figures" in n.classes]:
+        errors.append(f"{card.attrs.get('id')}: has figures but none are listed in cv_figures.yml")
     for n in card.walk():
         if n.tag == "summary" and "figures" in n.text().lower():
-            errors.append("pub-Tran2026: the summary mentions figures")
-for n in nodes:
-    if n.tag == "figure" and "cv-figure" in n.classes:
-        card_of = next((a for a in n.ancestors() if "cv-card" in a.classes), None)
-        if card_of is None or card_of.attrs.get("id") not in ("pub-Rattanasriampaipong2025", "pub-Rattanasriampaipong2022"):
-            errors.append(f"unexpected figure in {card_of.attrs.get('id') if card_of else '?'}")
+            errors.append(f"{card.attrs.get('id')}: the summary mentions figures but none are listed")
+
+# A software entry's paper is linked to its publication card (the entry whose paper is Rattanasriampaipong2025).
+software = [e for s in data["sections"] for g in s.get("groups") or [] for e in g.get("entries") or [] if e.get("paper") == "Rattanasriampaipong2025"]
+if len(software) != 1:
+    errors.append(f"expected one entry with paper 'Rattanasriampaipong2025', found {len(software)}")
+else:
+    card = by_element_id.get(software[0]["id"])
+    hrefs = [n.attrs.get("href") for n in card.walk() if n.tag == "a"] if card else []
+    if "#pub-Rattanasriampaipong2025" not in hrefs:
+        errors.append(f"{software[0]['id']}: no <a href=\"#pub-Rattanasriampaipong2025\"> (links: {hrefs})")
+    elif hrefs[0] != "#pub-Rattanasriampaipong2025":
+        errors.append(f"{software[0]['id']}: the Paper link is not the entry's first link (links: {hrefs})")
 
 # Ids are unique across the page (sections, their -heading ids, entries and their -title ids).
 seen = {}
@@ -568,6 +589,7 @@ PY3
 
 # Tag row (Task 11): author role, Preprint and citation tags, read against papers.bib and citations.yml.
 python3 -I - "${repo_root}" "${page}" <<'PY4'
+import json
 import re
 import sys
 from html.parser import HTMLParser
@@ -689,9 +711,19 @@ if not preprint_at:
     errors.append("pub-Rattanasriampaipong2026: no 'Preprint' tag")
 elif role_at and preprint_at[0] < role_at[0]:
     errors.append("pub-Rattanasriampaipong2026: the 'Preprint' tag comes before the role tag")
-for cls in ("altmetric-embed", "__dimensions_badge_embed__", "cv-tag-metric"):
-    if [i for i in preprint.items if cls in classes(i)]:
-        errors.append(f"pub-Rattanasriampaipong2026: unexpected .{cls} (the paper is not in papers.bib)")
+# No metric tags while the preprint is not in papers.bib (matched by DOI, as the page does); once it is added there,
+# the tags are expected and this check stands down.
+with open(repo + "/_data/cv.json", encoding="utf-8") as f:
+    cv_data = json.load(f)
+preprint_doi = next(
+    (e["pub"].get("doi") for s in cv_data["sections"] for g in s.get("groups") or [] for e in g.get("entries") or [] if e["id"] == "pub-Rattanasriampaipong2026" and e.get("pub")),
+    None,
+)
+bib_dois = {d.strip().lower().removeprefix("https://doi.org/") for d in re.findall(r"\bdoi\s*=\s*[{\"]([^}\"]+)", bib, re.I)}
+if not preprint_doi or preprint_doi.lower() not in bib_dois:
+    for cls in ("altmetric-embed", "__dimensions_badge_embed__", "cv-tag-metric"):
+        if [i for i in preprint.items if cls in classes(i)]:
+            errors.append(f"pub-Rattanasriampaipong2026: unexpected .{cls} (the paper is not in papers.bib)")
 # The Preprint tag belongs to under-review papers only.
 if [i for i in first.items if " ".join(i[2].split()) == "Preprint"]:
     errors.append("pub-Rattanasriampaipong2025: a published paper has a 'Preprint' tag")
