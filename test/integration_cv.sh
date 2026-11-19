@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Checks the built CV page (/cv/), rendered from _data/cv.json by _layouts/cv_timeline.liquid.
+# Checks the built CV page (/cv/), rendered from _data/cv.json by _layouts/cv_page.liquid.
 #
 # Usage: bash test/integration_cv.sh <built site directory>
 #
@@ -267,5 +267,182 @@ if errors:
         print("FAIL: " + e, file=sys.stderr)
     sys.exit(1)
 PY2
+
+# Cards and the section panel (Revision 2): the page parsed into a small element tree.
+python3 -I - "${data}" "${page}" <<'PY3'
+import json
+import sys
+from html.parser import HTMLParser
+
+data_path, page_path = sys.argv[1], sys.argv[2]
+with open(data_path, encoding="utf-8") as f:
+    data = json.load(f)
+with open(page_path, encoding="utf-8") as f:
+    html = f.read()
+
+VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
+
+
+class Node:
+    def __init__(self, tag, attrs, parent):
+        self.tag, self.attrs, self.parent, self.children = tag, attrs, parent, []
+        self.classes = (attrs.get("class") or "").split()
+
+    def walk(self):
+        for child in self.children:
+            if isinstance(child, Node):
+                yield child
+                yield from child.walk()
+
+    def text(self):
+        return " ".join(
+            "".join(c if isinstance(c, str) else c.text() for c in self.children).split()
+        )
+
+    def ancestors(self):
+        node = self.parent
+        while node is not None:
+            yield node
+            node = node.parent
+
+
+class Tree(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.root = Node("#root", {}, None)
+        self.cur = self.root
+
+    def handle_starttag(self, tag, attrs):
+        node = Node(tag, dict(attrs), self.cur)
+        self.cur.children.append(node)
+        if tag not in VOID:
+            self.cur = node
+
+    def handle_startendtag(self, tag, attrs):
+        self.cur.children.append(Node(tag, dict(attrs), self.cur))
+
+    def handle_endtag(self, tag):
+        node = self.cur
+        while node is not self.root and node.tag != tag:
+            node = node.parent
+        if node is not self.root:
+            self.cur = node.parent
+
+    def handle_data(self, text):
+        self.cur.children.append(text)
+
+
+tree = Tree()
+tree.feed(html)
+nodes = list(tree.root.walk())
+errors = []
+
+
+def with_class(name, within=None):
+    return [n for n in (within.walk() if within else nodes) if name in n.classes]
+
+
+# The wrapper names the landing section.
+wrappers = with_class("cv-page")
+if len(wrappers) != 1:
+    errors.append(f"expected one .cv-page, found {len(wrappers)}")
+elif wrappers[0].attrs.get("data-landing") != "publications":
+    errors.append(f".cv-page has data-landing={wrappers[0].attrs.get('data-landing')!r}, expected 'publications'")
+
+# The timeline's classes are gone.
+for old in ("cv-row", "cv-when", "cv-rail"):
+    if with_class(old):
+        errors.append(f"{len(with_class(old))} element(s) still have class {old!r}")
+
+# Without the script every section is visible: none carries the hidden attribute in the built HTML.
+sections = [n for n in with_class("cv-section") if n.tag == "section"]
+for s in sections:
+    if "hidden" in s.attrs:
+        errors.append(f"section {s.attrs.get('id')!r} carries the hidden attribute")
+
+# The section panel: a named <nav class="cv-nav"> with one link per section, in page order.
+navs = [n for n in with_class("cv-nav") if n.tag == "nav"]
+if len(navs) != 1:
+    errors.append(f"expected one <nav class=\"cv-nav\">, found {len(navs)}")
+else:
+    nav = navs[0]
+    if not (nav.attrs.get("aria-label") or "").strip():
+        errors.append("<nav class=\"cv-nav\"> has no aria-label")
+    links = [n for n in with_class("cv-nav-link", nav) if n.tag == "a"]
+    section_ids = [s.attrs.get("id") for s in sections]
+    hrefs = [a.attrs.get("href") for a in links]
+    if hrefs != ["#" + i for i in section_ids]:
+        errors.append(f"panel links {hrefs} do not match the sections {section_ids} one to one")
+    for a in links:
+        if a.attrs.get("href") != "#" + (a.attrs.get("data-section") or ""):
+            errors.append(f"panel link {a.attrs.get('href')!r} has data-section={a.attrs.get('data-section')!r}")
+    by_id = {a.attrs.get("data-section"): a for a in links}
+    for section in data["sections"]:
+        a = by_id.get(section["id"])
+        if a is None:
+            continue
+        expected = sum(len(g.get("entries") or []) for g in section.get("groups") or [])
+        counts = with_class("cv-nav-count", a)
+        if expected == 0 and counts:
+            errors.append(f"panel link for {section['id']!r} shows a count but the section has no entries")
+        elif expected > 0 and [c.text() for c in counts] != [str(expected)]:
+            errors.append(f"panel link for {section['id']!r} shows count {[c.text() for c in counts]}, expected {expected}")
+    if "publications" not in by_id:
+        errors.append("no panel link for publications")
+    if "personal-interests" not in by_id:
+        errors.append("no panel link for personal-interests")
+    elif with_class("cv-nav-count", by_id["personal-interests"]):
+        errors.append("the Personal Interests panel link has a count")
+
+by_element_id = {n.attrs["id"]: n for n in nodes if n.attrs.get("id")}
+
+# An ordinary card: the NOAA fellowship, with its date in the head and its note outside any <details>.
+noaa = by_element_id.get("grants-noaa")
+if noaa is None:
+    errors.append("no element with id='grants-noaa'")
+else:
+    if "cv-card" not in noaa.classes:
+        errors.append("grants-noaa is not a .cv-card")
+    heads = [c for c in noaa.children if isinstance(c, Node) and "cv-card-head" in c.classes]
+    if len(heads) != 1:
+        errors.append(f"grants-noaa has {len(heads)} .cv-card-head children, expected 1")
+    elif [d.text() for d in with_class("cv-date", heads[0])] != ["2023–2025"]:
+        errors.append(f"grants-noaa: .cv-date in the head is {[d.text() for d in with_class('cv-date', heads[0])]}")
+    notes = [n for n in with_class("cv-note", noaa) if "$200,000 over two years" in n.text()]
+    if not notes:
+        errors.append("grants-noaa: no .cv-note with '$200,000 over two years'")
+    for n in notes:
+        if any(a.tag == "details" for a in n.ancestors()):
+            errors.append("grants-noaa: the note is inside a <details>")
+
+# A card without a date has no .cv-date at all.
+education = by_element_id.get("education-texas-a-m-university")
+if education is None:
+    errors.append("no element with id='education-texas-a-m-university'")
+elif with_class("cv-date", education):
+    errors.append("education-texas-a-m-university has a .cv-date but no date")
+
+# The badge sits in the tag row under the citation, outside the <details>; no tag row is empty.
+elling = by_element_id.get("pub-Elling2026")
+if elling is not None:
+    rows = [r for r in with_class("cv-tags", elling) if r.tag == "p"]
+    if not any("Journal cover" in r.text() for r in rows):
+        errors.append("pub-Elling2026: 'Journal cover' is not in a <p class=\"cv-tags\">")
+    for r in rows:
+        if any(a.tag == "details" for a in r.ancestors()):
+            errors.append("pub-Elling2026: .cv-tags is inside a <details>")
+# Citations read cleanly: no doubled full stop where the year used to separate the authors from the title.
+for c in with_class("cv-pub"):
+    if ".." in c.text():
+        errors.append(f"citation has a doubled full stop: {c.text()[:80]!r}")
+for r in with_class("cv-tags"):
+    if not r.text():
+        errors.append(f"empty .cv-tags in {next((a.attrs.get('id') for a in r.ancestors() if 'cv-card' in a.classes), '?')!r}")
+
+if errors:
+    for e in errors:
+        print("FAIL: " + e, file=sys.stderr)
+    sys.exit(1)
+PY3
 
 echo "PASS: CV page checks (${sections} sections)"

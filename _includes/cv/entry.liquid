@@ -1,26 +1,28 @@
 {%- comment -%}
-  One CV entry. Parameters: entry (an entry of _data/cv.json), section (its section).
+  One CV entry, drawn as a card. Parameters: entry (an entry of _data/cv.json), section (its section).
 
   Markup contract:
-    <div class="cv-row" id="<entry id>">
-      <div class="cv-when">when, or empty</div>
-      <div class="cv-entry">
-        without folded content:  <div class="cv-head">…</div> then <p class="cv-links">…</p>
-        with folded content:     <details class="cv-details">
-                                   <summary class="cv-head">…</summary>
-                                   <div class="cv-more">detail blocks, then <p class="cv-links">…</p></div>
-                                 </details>
+    <div class="cv-card" id="<entry id>">
+      <div class="cv-card-head">
+        <div class="cv-head">…</div>
+        <span class="cv-date">when</span>             (only when the entry has a date)
       </div>
+      <p class="cv-tags">…</p>                         (publications, only when there is a tag; see cv/publication.liquid)
+      without folded content:  <p class="cv-links">…</p>
+      with folded content:     <details class="cv-details">
+                                 <summary class="cv-summary">what opens, e.g. "Abstract and links"</summary>
+                                 <div class="cv-more">detail blocks, then <p class="cv-links">…</p></div>
+                               </details>
     </div>
-  .cv-head holds only phrasing content: .cv-title (plus .cv-place), .cv-roles > .cv-role lines and .cv-note lines. Notes are always
-  visible: they sit outside any <details>, or in its <summary>, never in the folded .cv-more.
+  .cv-head holds .cv-title (plus .cv-place), .cv-roles > .cv-role lines (entries made of roles have no date of their own; each
+  role carries its own) and .cv-note lines. Notes are always visible: they sit in the head, outside the <details>.
   A title ending in a colon (skills lines such as "Languages:") is followed by its notes on the same line.
-  Publication entries (entry.pub) take their head and their folded abstract, contribution and full author list from
-  cv/publication.liquid, and always have their links (cv/links.liquid) in the folded part, as the mockup shows. A publication
-  with nothing to fold (no abstract, contribution, longer author list or links) is not a <details>. Publication rows also carry
-  data-status ("published", "under-review" or "report") and data-first-author ("true" or "false"), which the filter buttons of
-  the Publications section (see _layouts/cv_timeline.liquid) read. Other entries' links stay below the head, outside any <details>,
-  unless the entry has detail, when they end the folded part.
+  Publication entries (entry.pub) take their head, their tag row and their folded abstract, contribution and full author list from
+  cv/publication.liquid, and always have their links (cv/links.liquid) in the folded part. A publication with nothing to fold (no
+  abstract, contribution, longer author list or links) has no <details>. Publication cards also carry data-status ("published",
+  "under-review" or "report") and data-first-author ("true" or "false"), which the filter buttons of the Publications section
+  (see _layouts/cv_page.liquid) read. Other entries' links stay below the head, outside any <details>, unless the entry has
+  detail, when they end the folded part.
 {%- endcomment -%}
 {%- assign entry = include.entry -%}
 {%- capture links -%}
@@ -33,6 +35,12 @@
   {%- endif -%}
 {%- endcapture -%}
 {%- assign pub_body = pub_body | strip -%}
+{%- capture tags -%}
+  {%- if entry.pub -%}
+    {% include cv/publication.liquid entry=entry part='tags' %}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign tags = tags | strip -%}
 {%- assign has_detail = false -%}
 {%- if entry.detail.size > 0 or pub_body != '' -%}
   {%- assign has_detail = true -%}
@@ -45,6 +53,25 @@
 {%- assign inline_notes = false -%}
 {%- if title_last == ':' and entry.notes_html.size > 0 -%}
   {%- assign inline_notes = true -%}
+{%- endif -%}
+
+{%- comment -%} The summary names what opens, in the order it appears: "All authors, my contribution, abstract and links". {%- endcomment -%}
+{%- if has_detail -%}
+  {%- capture summary_parts -%}
+    {%- if entry.pub -%}
+      {%- if entry.pub.authors_full_html and entry.pub.authors_full_html != entry.pub.authors_short_html -%}all authors|{%- endif -%}
+      {%- if entry.pub.contribution_html -%}my contribution|{%- endif -%}
+      {%- if entry.pub.abstract -%}abstract|{%- endif -%}
+    {%- endif -%}
+    {%- if entry.detail.size > 0 -%}details|{%- endif -%}
+    {%- if links != '' -%}links|{%- endif -%}
+  {%- endcapture -%}
+  {%- assign summary_parts = summary_parts | split: '|' -%}
+  {%- assign summary_label = summary_parts | last -%}
+  {%- if summary_parts.size > 1 -%}
+    {%- assign summary_label = summary_parts | pop | join: ', ' | append: ' and ' | append: summary_label -%}
+  {%- endif -%}
+  {%- assign summary_label = summary_label | capitalize -%}
 {%- endif -%}
 
 {%- capture head -%}
@@ -60,7 +87,6 @@
     {%- endif -%}
   {%- endif -%}
   {%- if entry.roles.size > 0 -%}
-    {%- comment -%} Spans, not a list: the head may be a <summary>, which takes phrasing content only. {%- endcomment -%}
     <span class="cv-roles">
       {%- for role in entry.roles -%}
         <span class="cv-role">
@@ -78,7 +104,7 @@
 {%- endcapture -%}
 
 <div
-  class="cv-row"
+  class="cv-card"
   {% if entry.id %}
     id="{{ entry.id | escape }}"
   {% endif %}
@@ -87,54 +113,57 @@
     data-first-author="{% if entry.pub.first_author %}true{% else %}false{% endif %}"
   {% endif %}
 >
-  <div class="cv-when">{{ entry.when | escape }}</div>
-  <div class="cv-entry">
-    {%- if has_detail -%}
-      <details class="cv-details">
-        <summary class="cv-head">{{ head }}</summary>
-        <div class="cv-more">
-          {{- pub_body -}}
-          {%- for block in entry.detail -%}
-            {%- case block.type -%}
-              {%- when 'p' -%}
-                <p>{{ block.html }}</p>
-              {%- when 'ul' -%}
-                <ul>
-                  {%- for item in block.items_html -%}
-                    <li>{{ item }}</li>
-                  {%- endfor -%}
-                </ul>
-              {%- when 'table' -%}
-                <div class="cv-table-wrap">
-                  <table class="cv-table">
-                    {%- if block.columns.size > 0 -%}
-                      <thead>
-                        <tr>
-                          {%- for column in block.columns -%}
-                            <th scope="col">{{ column | escape }}</th>
-                          {%- endfor -%}
-                        </tr>
-                      </thead>
-                    {%- endif -%}
-                    <tbody>
-                      {%- for row in block.rows -%}
-                        <tr>
-                          {%- for cell in row -%}
-                            <td>{{ cell }}</td>
-                          {%- endfor -%}
-                        </tr>
-                      {%- endfor -%}
-                    </tbody>
-                  </table>
-                </div>
-            {%- endcase -%}
-          {%- endfor -%}
-          {{- links -}}
-        </div>
-      </details>
-    {%- else -%}
-      <div class="cv-head">{{ head }}</div>
-      {{- links -}}
+  <div class="cv-card-head">
+    <div class="cv-head">{{ head }}</div>
+    {%- if entry.when -%}
+      <span class="cv-date">{{ entry.when | escape }}</span>
     {%- endif -%}
   </div>
+  {{- tags -}}
+  {%- if has_detail -%}
+    <details class="cv-details">
+      <summary class="cv-summary">{{ summary_label | escape }}</summary>
+      <div class="cv-more">
+        {{- pub_body -}}
+        {%- for block in entry.detail -%}
+          {%- case block.type -%}
+            {%- when 'p' -%}
+              <p>{{ block.html }}</p>
+            {%- when 'ul' -%}
+              <ul>
+                {%- for item in block.items_html -%}
+                  <li>{{ item }}</li>
+                {%- endfor -%}
+              </ul>
+            {%- when 'table' -%}
+              <div class="cv-table-wrap">
+                <table class="cv-table">
+                  {%- if block.columns.size > 0 -%}
+                    <thead>
+                      <tr>
+                        {%- for column in block.columns -%}
+                          <th scope="col">{{ column | escape }}</th>
+                        {%- endfor -%}
+                      </tr>
+                    </thead>
+                  {%- endif -%}
+                  <tbody>
+                    {%- for row in block.rows -%}
+                      <tr>
+                        {%- for cell in row -%}
+                          <td>{{ cell }}</td>
+                        {%- endfor -%}
+                      </tr>
+                    {%- endfor -%}
+                  </tbody>
+                </table>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+        {{- links -}}
+      </div>
+    </details>
+  {%- else -%}
+    {{- links -}}
+  {%- endif -%}
 </div>

@@ -1,21 +1,38 @@
 // _sass/_cv.scss
-// The CV page (/cv/, _layouts/cv_timeline.liquid): a clickable timeline. Years sit on a thin left rail
-// with a dot per entry (hollow, filled while the entry is open); entries are plain lines with no borders,
-// with a faint tint under the mouse on those that open. Only the theme's colour variables are used, so
-// dark mode follows the site.
+// The CV page (/cv/, _layouts/cv_page.liquid), Revision 2: every entry is a card with a quiet border, and a section panel
+// sits beside the content. Without the CV script every section shows, one after another, and the panel is a list of in-page
+// links; the "one section at a time" rules apply only under .cv-page.cv-js, the class the script adds. Only the theme's
+// colour variables are used, so dark mode follows the site.
 
 .cv-page {
   // Muted text mixed from the theme's text and background colours: quieter than body text but with
   // better contrast than --global-text-color-light in both themes.
   --cv-muted: color-mix(in srgb, var(--global-text-color) 68%, var(--global-bg-color));
+  // The cards' and the current panel link's background: the page background with a trace of the text colour, so it is a
+  // shade lighter than the page in dark mode and a shade darker in light mode.
+  --cv-soft: color-mix(in srgb, var(--global-text-color) 3.5%, var(--global-bg-color));
   --cv-tint: color-mix(in srgb, var(--global-theme-color) 7%, transparent);
-  --cv-rail: 5.5rem;
-  --cv-rail-gap: 14px;
+  // Clears the theme's fixed navbar (57px) for in-page jumps and the sticky panel.
+  --cv-navbar-clearance: 76px;
   --cv-font-size: 0.95rem;
   --cv-line-height: 1.5;
+  --cv-summary-size: 0.8rem;
 
   font-size: var(--cv-font-size);
   line-height: var(--cv-line-height);
+}
+
+// Text for screen readers only (the ", 11 entries" after a panel link's title).
+.cv-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 // ---------------------------------------------------------------------------
@@ -59,7 +76,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px 26px;
-  margin: 0 0 8px;
+  margin: 0 0 20px;
   padding: 10px 0;
   border-top: 1px solid var(--global-divider-color);
   border-bottom: 1px solid var(--global-divider-color);
@@ -76,16 +93,86 @@
 }
 
 // ---------------------------------------------------------------------------
+// The panel beside the content
+// ---------------------------------------------------------------------------
+
+.cv-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 26px;
+  align-items: start;
+}
+
+// Sticky on wide screens so it stays at hand on the long script-less page; a panel taller than the window scrolls on its own.
+.cv-nav {
+  position: sticky;
+  top: var(--cv-navbar-clearance);
+  max-height: calc(100vh - var(--cv-navbar-clearance) - 16px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.cv-page .cv-nav-link {
+  // Positioned so the absolutely placed .cv-sr-only stays inside the link (and inside the phone row's scroller).
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding: 7px 12px;
+  border-left: 2px solid var(--global-divider-color);
+  color: var(--cv-muted);
+  font-size: 0.85rem;
+  line-height: 1.35;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--global-text-color);
+    background: var(--cv-tint);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: -2px;
+  }
+
+  // The current section: accent colour, a heavier weight and the soft background, so it does not rely on colour alone.
+  &[aria-current="true"] {
+    border-left-color: var(--global-theme-color);
+    background: var(--cv-soft);
+    color: var(--global-theme-color);
+    font-weight: 600;
+  }
+}
+
+.cv-nav-count {
+  flex: none;
+  color: var(--cv-muted);
+  font-size: 0.75rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+// ---------------------------------------------------------------------------
 // Sections and groups
 // ---------------------------------------------------------------------------
 
 .cv-section {
-  margin-top: 26px;
-  scroll-margin-top: 80px;
+  margin-bottom: 26px;
+  scroll-margin-top: var(--cv-navbar-clearance);
+}
+
+// Without the script nothing is hidden; with it, the sections it marks hidden are not displayed.
+.cv-page:not(.cv-js) .cv-section[hidden] {
+  display: block;
+}
+
+.cv-page.cv-js .cv-section[hidden] {
+  display: none;
 }
 
 .cv-page .cv-section-title {
-  margin: 0 0 6px;
+  margin: 0 0 10px;
   color: var(--global-theme-color);
   font-size: 0.8rem;
   font-weight: 700;
@@ -94,14 +181,14 @@
 }
 
 .cv-page .cv-group-title {
-  margin: 14px 0 4px calc(var(--cv-rail) + var(--cv-rail-gap));
+  margin: 16px 0 8px;
   color: var(--global-text-color);
   font-size: 0.9rem;
   font-weight: 600;
 }
 
 .cv-intro {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   overflow-wrap: anywhere;
 }
 
@@ -117,56 +204,41 @@
 }
 
 // ---------------------------------------------------------------------------
-// Timeline rows
+// Cards
 // ---------------------------------------------------------------------------
 
-.cv-row {
-  display: grid;
-  grid-template-columns: var(--cv-rail) minmax(0, 1fr);
-  gap: var(--cv-rail-gap);
-  scroll-margin-top: 80px;
-}
-
-// The rail: the date, right-aligned against a thin line. Long dates wrap inside the column.
-.cv-when {
-  position: relative;
-  padding: 8px 12px 6px 0;
-  border-right: 1px solid var(--global-divider-color);
-  color: var(--cv-muted);
-  font-size: 0.8rem;
-  font-variant-numeric: tabular-nums;
-  line-height: 1.35;
-  text-align: right;
-  overflow-wrap: anywhere;
-
-  // The dot on the rail; decorative (the ▸/▾ marker and the open content carry the state).
-  &::after {
-    content: "";
-    position: absolute;
-    top: 14px;
-    right: -4px;
-    width: 7px;
-    height: 7px;
-    border: 1.5px solid var(--global-theme-color);
-    border-radius: 50%;
-    background: var(--global-bg-color);
-  }
-}
-
-.cv-row:has(> .cv-entry > details[open]) > .cv-when::after {
-  background: var(--global-theme-color);
-}
-
-.cv-entry {
+.cv-card {
   min-width: 0;
-  padding: 7px 10px;
-  border-radius: 6px;
+  margin-bottom: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 10px;
+  background: var(--cv-soft);
   // Long unbroken strings (URLs, long names) wrap instead of overflowing on a narrow screen.
   overflow-wrap: anywhere;
+  scroll-margin-top: var(--cv-navbar-clearance);
+}
+
+// The title block on the left, the date on the right; a long date wraps within its share of the line.
+.cv-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
 }
 
 .cv-head {
-  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.cv-date {
+  flex: 0 0 auto;
+  max-width: 40%;
+  color: var(--cv-muted);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
 }
 
 .cv-place {
@@ -176,6 +248,10 @@
 .cv-roles,
 .cv-role {
   display: block;
+}
+
+.cv-roles {
+  margin-top: 2px;
 }
 
 .cv-role-when {
@@ -202,16 +278,18 @@
 }
 
 // ---------------------------------------------------------------------------
-// Entries that open
+// What opens inside a card
 // ---------------------------------------------------------------------------
 
 .cv-details > summary {
   position: relative;
   display: block;
-  margin: -7px -10px;
-  // Right padding keeps the title clear of the marker.
-  padding: 7px 28px 7px 10px;
-  border-radius: 6px;
+  margin-top: 8px;
+  // Right padding keeps the label clear of the marker.
+  padding: 2px 22px 2px 0;
+  border-radius: 4px;
+  color: var(--global-theme-color);
+  font-size: var(--cv-summary-size);
   cursor: pointer;
   list-style: none;
 
@@ -219,17 +297,17 @@
     display: none;
   }
 
-  // The ▸/▾ marker, pinned to the top right and centred on the title's first line (one line box of the
-  // summary's text, below the 7px top padding), whatever follows in the summary (roles, notes).
+  // The ▸/▾ marker, pinned to the top right and centred on the summary's first line (one line box of the
+  // summary's text, below its 2px top padding).
   &::after {
     content: "▸";
     content: "▸" / "";
     position: absolute;
-    top: 7px;
-    right: 10px;
+    top: 2px;
+    right: 4px;
     display: flex;
     align-items: center;
-    height: calc(var(--cv-font-size) * var(--cv-line-height));
+    height: calc(var(--cv-summary-size) * var(--cv-line-height));
     color: var(--cv-muted);
     font-size: 0.7rem;
     line-height: 1;
@@ -237,6 +315,7 @@
 
   &:hover {
     background: var(--cv-tint);
+    text-decoration: underline;
   }
 
   &:focus-visible {
@@ -251,7 +330,7 @@
 }
 
 .cv-more {
-  margin-top: 12px;
+  margin-top: 8px;
   font-size: 0.875rem;
 
   p,
@@ -303,7 +382,7 @@
 }
 
 // ---------------------------------------------------------------------------
-// Publications: filter chips, the badge, folded paragraphs
+// Publications: filter chips, the tag row, folded paragraphs
 // ---------------------------------------------------------------------------
 
 // The bar carries the hidden attribute in the markup and is shown by the CV script; the explicit rule keeps
@@ -348,10 +427,17 @@
   }
 }
 
+// The tag row under a citation.
+.cv-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 0;
+}
+
 // "★ Journal cover": outlined in the accent colour, bold, with a star glyph, so it does not rely on colour alone.
 .cv-badge {
   display: inline-block;
-  margin-left: 6px;
   padding: 0 8px;
   border: 1px solid var(--global-theme-color);
   border-radius: 999px;
@@ -369,16 +455,36 @@
 }
 
 // ---------------------------------------------------------------------------
-// Phones
+// Phones: one column, the panel a single horizontally scrolling row
 // ---------------------------------------------------------------------------
 
 @media (max-width: 640px) {
-  .cv-page {
-    --cv-rail: 56px;
-    --cv-rail-gap: 10px;
+  .cv-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
   }
 
-  .cv-when {
-    padding-right: 8px;
+  .cv-nav {
+    position: static;
+    display: flex;
+    gap: 4px;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .cv-page .cv-nav-link {
+    flex: none;
+    white-space: nowrap;
+    border-left: 0;
+    border-bottom: 2px solid var(--global-divider-color);
+
+    &[aria-current="true"] {
+      border-bottom-color: var(--global-theme-color);
+    }
+  }
+
+  .cv-card {
+    padding: 10px 12px;
   }
 }

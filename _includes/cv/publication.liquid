@@ -1,6 +1,9 @@
 {%- comment -%}
   The publication-specific parts of one CV entry (entry.pub). Parameters: entry, part.
-    part="head"  phrasing content for the entry's .cv-head: authors (year). title. venue. and the badge chip
+    part="head"  the citation for the card's .cv-head: authors (year). title. venue. The year is left out when the card shows
+                 the entry's date at its right (entry.when), as the Revision 2 mockup does.
+    part="tags"  the tag row <p class="cv-tags"> under the citation, outside the <details>: the badge chip for now (the role,
+                 "Preprint" and metric tags follow in later tasks). Nothing is drawn when there is no tag.
     part="body"  the folded material before the links: full author list (when it differs from the short one),
                  "My contribution", "Abstract"; each only when the data has it
   pub.abstract and the *_html fields are trusted sanitised HTML and are output as is; pub.year and the badge are escaped.
@@ -13,15 +16,31 @@
   {%- if pub_title_last == '?' or pub_title_last == '!' or pub_title_last == '.' -%}
     {%- assign pub_title_stop = '' -%}
   {%- endif -%}
+  {%- comment -%} Without the year, an author list ending in an initial ("D.") or an ellipsis takes no extra full stop. {%- endcomment -%}
+  {%- assign pub_authors_last = pub.authors_short_html | strip_html | strip | slice: -1 -%}
+  {%- assign pub_authors_stop = '. ' -%}
+  {%- if pub.year and entry.when == null -%}
+    {%- assign pub_authors_stop = ' (' | append: pub.year | escape | append: '). ' -%}
+  {%- elsif pub_authors_last == '.' or pub_authors_last == '…' -%}
+    {%- assign pub_authors_stop = ' ' -%}
+  {%- endif -%}
   <span class="cv-title cv-pub">
     {{- pub.authors_short_html -}}
-    {%- if pub.year %} ({{ pub.year | escape }}){% endif %}. {{ pub.title_html -}}
+    {{- pub_authors_stop -}}
+    {{- pub.title_html -}}
     {{- pub_title_stop -}}
     {%- if pub.venue_html %} {{ pub.venue_html }}.{% endif -%}
   </span>
-  {%- if entry.badge -%}
-    {%- comment -%} The text carries the meaning; the star is decoration, and the chip also differs in border and weight, not in colour alone. {%- endcomment -%}
-    <span class="cv-badge"><span aria-hidden="true">★ </span>{{ entry.badge | escape }}</span>
+{%- elsif include.part == 'tags' -%}
+  {%- capture pub_tags -%}
+    {%- if entry.badge -%}
+      {%- comment -%} The text carries the meaning; the star is decoration, and the chip also differs in border and weight, not in colour alone. {%- endcomment -%}
+      <span class="cv-badge"><span aria-hidden="true">★ </span>{{ entry.badge | escape }}</span>
+    {%- endif -%}
+  {%- endcapture -%}
+  {%- assign pub_tags = pub_tags | strip -%}
+  {%- if pub_tags != '' -%}
+    <p class="cv-tags">{{ pub_tags }}</p>
   {%- endif -%}
 {%- elsif include.part == 'body' -%}
   {%- if pub.authors_full_html and pub.authors_full_html != pub.authors_short_html -%}
