@@ -1,0 +1,36 @@
+{%- comment -%}
+  The publication-specific parts of one CV entry (entry.pub). Parameters: entry, part.
+    part="head"  phrasing content for the entry's .cv-head: authors (year). title. venue. and the badge chip
+    part="body"  the folded material before the links: full author list (when it differs from the short one),
+                 "My contribution", "Abstract"; each only when the data has it
+  pub.abstract and the *_html fields are trusted sanitised HTML and are output as is; pub.year and the badge are escaped.
+{%- endcomment -%}
+{%- assign entry = include.entry -%}
+{%- assign pub = entry.pub -%}
+{%- if include.part == 'head' -%}
+  {%- assign pub_title_last = pub.title_html | strip_html | strip | slice: -1 -%}
+  {%- assign pub_title_stop = '.' -%}
+  {%- if pub_title_last == '?' or pub_title_last == '!' or pub_title_last == '.' -%}
+    {%- assign pub_title_stop = '' -%}
+  {%- endif -%}
+  <span class="cv-title cv-pub">
+    {{- pub.authors_short_html -}}
+    {%- if pub.year %} ({{ pub.year | escape }}){% endif %}. {{ pub.title_html -}}
+    {{- pub_title_stop -}}
+    {%- if pub.venue_html %} {{ pub.venue_html }}.{% endif -%}
+  </span>
+  {%- if entry.badge -%}
+    {%- comment -%} The text carries the meaning; the star is decoration, and the chip also differs in border and weight, not in colour alone. {%- endcomment -%}
+    <span class="cv-badge"><span aria-hidden="true">★ </span>{{ entry.badge | escape }}</span>
+  {%- endif -%}
+{%- elsif include.part == 'body' -%}
+  {%- if pub.authors_full_html and pub.authors_full_html != pub.authors_short_html -%}
+    <p class="cv-authors"><b>All authors.</b> {{ pub.authors_full_html }}</p>
+  {%- endif -%}
+  {%- if pub.contribution_html -%}
+    <p class="cv-contribution"><b>My contribution.</b> {{ pub.contribution_html }}</p>
+  {%- endif -%}
+  {%- if pub.abstract -%}
+    <p class="cv-abstract"><b>Abstract.</b> {{ pub.abstract }}</p>
+  {%- endif -%}
+{%- endif -%}

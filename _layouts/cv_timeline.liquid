@@ -11,6 +11,10 @@ layout: page
   - each group: <div class="cv-group" data-group="<group id>">, with an <h3 class="cv-group-title" data-toc-skip>
     when it has a title (data-toc-skip keeps the theme's sidebar to one line per section)
   - each entry: _includes/cv/entry.liquid (see there)
+  - a section with publications also has, after its intro, <div class="cv-filters" role="group" aria-label="Filter publications" hidden>
+    holding <button type="button" class="cv-filter" data-filter="all|first-author|published|under-review" aria-pressed="true|false">;
+    "all" starts pressed. The bar is hidden in the markup, so without JavaScript it is not shown; the CV script reveals it and filters
+    the .cv-row elements by their data-status and data-first-author.
 
   Fields ending in _html are trusted, already-sanitised HTML and are output as is; every other string is escaped.
 {%- endcomment -%}
@@ -64,6 +68,23 @@ layout: page
       {% for paragraph in section.intro_html %}
         <p class="cv-intro">{{ paragraph }}</p>
       {% endfor %}
+
+      {% assign has_pubs = false %}
+      {% for group in section.groups %}
+        {% for entry in group.entries %}
+          {% if entry.pub %}
+            {% assign has_pubs = true %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      {% if has_pubs %}
+        <div class="cv-filters" role="group" aria-label="Filter publications" hidden>
+          <button type="button" class="cv-filter" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="cv-filter" data-filter="first-author" aria-pressed="false">First author</button>
+          <button type="button" class="cv-filter" data-filter="published" aria-pressed="false">Published</button>
+          <button type="button" class="cv-filter" data-filter="under-review" aria-pressed="false">Under review</button>
+        </div>
+      {% endif %}
 
       {% for group in section.groups %}
         {% if group.title or group.entries.size > 0 %}

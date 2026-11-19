@@ -117,4 +117,147 @@ if errors:
     sys.exit(1)
 PY
 
+# Publication details, cross-links and the filter bar (Task 7): the element with the given id, found with the
+# same parser, must contain the given link texts / hrefs / texts / attributes.
+python3 -I - "${page}" <<'PY2'
+import sys
+from html.parser import HTMLParser
+
+VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
+
+
+class Subtree(HTMLParser):
+    """Collects, for the element with the given id, its own attributes, link (href, text) pairs and all text."""
+
+    def __init__(self, wanted):
+        super().__init__(convert_charrefs=True)
+        self.wanted, self.depth, self.attrs, self.done = wanted, 0, None, False
+        self.links, self.text, self._href, self._link_text = [], [], None, []
+
+    def handle_starttag(self, tag, attrs):
+        if self.done:
+            return
+        a = dict(attrs)
+        if self.attrs is None and a.get("id") == self.wanted:
+            self.attrs, self.depth = a, 0
+        if self.attrs is None:
+            return
+        if tag in VOID:
+            return
+        self.depth += 1
+        if tag == "a":
+            self._href, self._link_text = a.get("href"), []
+
+    def handle_endtag(self, tag):
+        if self.attrs is None or self.done or tag in VOID:
+            return
+        if tag == "a" and self._href is not None:
+            self.links.append((self._href, " ".join("".join(self._link_text).split())))
+            self._href = None
+        self.depth -= 1
+        if self.depth == 0:
+            self.done = True
+
+    def handle_data(self, data):
+        if self.attrs is None or self.done:
+            return
+        self.text.append(data)
+        if self._href is not None:
+            self._link_text.append(data)
+
+
+def element(page_html, element_id):
+    parser = Subtree(element_id)
+    parser.feed(page_html)
+    return parser
+
+
+with open(sys.argv[1], encoding="utf-8") as f:
+    html = f.read()
+
+errors = []
+
+
+def need(element_id):
+    el = element(html, element_id)
+    if el.attrs is None:
+        errors.append(f"no element with id={element_id!r}")
+        return None
+    return el
+
+
+def link_texts(el):
+    # The decorative arrow is aria-hidden; compare on the label without it.
+    return [(href, text.removesuffix("→").strip()) for href, text in el.links]
+
+
+nutrient = need("pub-Rattanasriampaipong2025")
+if nutrient:
+    if nutrient.attrs.get("data-first-author") != "true":
+        errors.append("pub-Rattanasriampaipong2025: data-first-author is not 'true'")
+    if nutrient.attrs.get("data-status") != "published":
+        errors.append("pub-Rattanasriampaipong2025: data-status is not 'published'")
+    links = link_texts(nutrient)
+    for label in ("DOI", "PDF", "Project page", "Code"):
+        if label not in [t for _, t in links]:
+            errors.append(f"pub-Rattanasriampaipong2025: no link with text {label!r} (links: {links})")
+    if ("/projects/nutrient-effect/", "Project page") not in links:
+        errors.append(f"pub-Rattanasriampaipong2025: Project page does not link to /projects/nutrient-effect/ (links: {links})")
+    if ("https://doi.org/10.1029/2025gl115237", "DOI") not in links:
+        errors.append(f"pub-Rattanasriampaipong2025: DOI link is not https://doi.org/10.1029/2025gl115237 (links: {links})")
+    if not any(t == "PDF" and h.startswith("/assets/pdf/") for h, t in links):
+        errors.append(f"pub-Rattanasriampaipong2025: PDF link does not point into /assets/pdf/ (links: {links})")
+    if "Abstract" not in " ".join(nutrient.text):
+        errors.append("pub-Rattanasriampaipong2025: no 'Abstract' text")
+
+elling = need("pub-Elling2026")
+if elling:
+    text = " ".join(elling.text)
+    for needle in ("Journal cover", "My contribution"):
+        if needle not in text:
+            errors.append(f"pub-Elling2026: no {needle!r} text")
+
+course = need("teaching-ocng-251")
+if course:
+    if ("/courses/the_blue_planet/", "Course page") not in link_texts(course):
+        errors.append(f"teaching-ocng-251: no 'Course page' link to /courses/the_blue_planet/ (links: {link_texts(course)})")
+
+course = need("teaching-geos-470")
+if course:
+    if ("/courses/data_methods_geos/", "Course page") not in link_texts(course):
+        errors.append(f"teaching-geos-470: no 'Course page' link to /courses/data_methods_geos/ (links: {link_texts(course)})")
+
+# The filter bar: hidden until the script shows it, with one real button per filter, "All" pressed.
+class Tags(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.tags = []
+
+    def handle_starttag(self, tag, attrs):
+        self.tags.append((tag, dict(attrs)))
+
+
+tags = Tags()
+tags.feed(html)
+bars = [a for t, a in tags.tags if "cv-filters" in (a.get("class") or "").split()]
+if len(bars) != 1:
+    errors.append(f"expected one .cv-filters, found {len(bars)}")
+elif "hidden" not in bars[0]:
+    errors.append(".cv-filters does not carry the hidden attribute")
+buttons = {a.get("data-filter"): a for t, a in tags.tags if t == "button" and a.get("data-filter")}
+for name in ("all", "first-author", "published", "under-review"):
+    button = buttons.get(name)
+    if button is None:
+        errors.append(f"no <button data-filter={name!r}>")
+    elif button.get("type") != "button":
+        errors.append(f"button {name!r} has no type=button")
+    elif button.get("aria-pressed") != ("true" if name == "all" else "false"):
+        errors.append(f"button {name!r} has aria-pressed={button.get('aria-pressed')!r}")
+
+if errors:
+    for e in errors:
+        print("FAIL: " + e, file=sys.stderr)
+    sys.exit(1)
+PY2
+
 echo "PASS: CV page checks (${sections} sections)"

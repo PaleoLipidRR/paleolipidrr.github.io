@@ -15,11 +15,29 @@
   .cv-head holds only phrasing content: .cv-title (plus .cv-place), .cv-roles > .cv-role lines and .cv-note lines. Notes are always
   visible: they sit outside any <details>, or in its <summary>, never in the folded .cv-more.
   A title ending in a colon (skills lines such as "Languages:") is followed by its notes on the same line.
-  Publication entries (entry.pub) get a plain author, year, title, venue line here.
+  Publication entries (entry.pub) take their head and their folded abstract, contribution and full author list from
+  cv/publication.liquid, and always have their links (cv/links.liquid) in the folded part, as the mockup shows. A publication
+  with nothing to fold (no abstract, contribution, longer author list or links) is not a <details>. Publication rows also carry
+  data-status ("published", "under-review" or "report") and data-first-author ("true" or "false"), which the filter buttons of
+  the Publications section (see _layouts/cv_timeline.liquid) read. Other entries' links stay below the head, outside any <details>,
+  unless the entry has detail, when they end the folded part.
 {%- endcomment -%}
 {%- assign entry = include.entry -%}
+{%- capture links -%}
+  {% include cv/links.liquid entry=entry %}
+{%- endcapture -%}
+{%- assign links = links | strip -%}
+{%- capture pub_body -%}
+  {%- if entry.pub -%}
+    {% include cv/publication.liquid entry=entry part='body' %}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign pub_body = pub_body | strip -%}
 {%- assign has_detail = false -%}
-{%- if entry.detail.size > 0 -%}
+{%- if entry.detail.size > 0 or pub_body != '' -%}
+  {%- assign has_detail = true -%}
+{%- endif -%}
+{%- if entry.pub and links != '' -%}
   {%- assign has_detail = true -%}
 {%- endif -%}
 {%- assign title_text = entry.title_html | strip_html | strip -%}
@@ -31,15 +49,7 @@
 
 {%- capture head -%}
   {%- if entry.pub -%}
-    {%- assign pub_title_last = entry.pub.title_html | strip_html | strip | slice: -1 -%}
-    {%- assign pub_title_stop = '.' -%}
-    {%- if pub_title_last == '?' or pub_title_last == '!' or pub_title_last == '.' -%}
-      {%- assign pub_title_stop = '' -%}
-    {%- endif -%}
-    <span class="cv-title cv-pub"
-      >{{ entry.pub.authors_short_html }}{% if entry.pub.year %} ({{ entry.pub.year | escape }}){% endif %}.
-      {{ entry.pub.title_html }}{{ pub_title_stop }}{% if entry.pub.venue_html %} {{ entry.pub.venue_html }}.{% endif %}</span
-    >
+    {% include cv/publication.liquid entry=entry part='head' %}
   {%- else -%}
     <span class="cv-title">{{ entry.title_html }}</span>
     {%- if inline_notes %}
@@ -67,26 +77,14 @@
   {%- endunless -%}
 {%- endcapture -%}
 
-{%- capture links -%}
-  {%- if entry.links.size > 0 -%}
-    <p class="cv-links">
-      {%- for link in entry.links -%}
-        {%- assign first_char = link.url | slice: 0 -%}
-        {%- if first_char == '/' -%}
-          {%- assign link_href = link.url | relative_url -%}
-        {%- else -%}
-          {%- assign link_href = link.url -%}
-        {%- endif -%}
-        <a class="cv-link" href="{{ link_href | escape }}">{{ link.label | escape }}<span aria-hidden="true"> →</span></a>
-      {%- endfor -%}
-    </p>
-  {%- endif -%}
-{%- endcapture -%}
-
 <div
   class="cv-row"
   {% if entry.id %}
     id="{{ entry.id | escape }}"
+  {% endif %}
+  {% if entry.pub %}
+    data-status="{{ entry.pub.status | escape }}"
+    data-first-author="{% if entry.pub.first_author %}true{% else %}false{% endif %}"
   {% endif %}
 >
   <div class="cv-when">{{ entry.when | escape }}</div>
@@ -95,6 +93,7 @@
       <details class="cv-details">
         <summary class="cv-head">{{ head }}</summary>
         <div class="cv-more">
+          {{- pub_body -}}
           {%- for block in entry.detail -%}
             {%- case block.type -%}
               {%- when 'p' -%}

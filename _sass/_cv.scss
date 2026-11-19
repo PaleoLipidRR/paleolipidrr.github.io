@@ -303,6 +303,72 @@
 }
 
 // ---------------------------------------------------------------------------
+// Publications: filter chips, the badge, folded paragraphs
+// ---------------------------------------------------------------------------
+
+// The bar carries the hidden attribute in the markup and is shown by the CV script; the explicit rule keeps
+// `display: flex` from overriding [hidden].
+.cv-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 10px;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.cv-page .cv-filter {
+  padding: 1px 10px;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cv-muted);
+  font: inherit;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--cv-tint);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: 2px;
+  }
+
+  // The pressed state is shown by fill and weight as well as by aria-pressed, not by colour alone.
+  &[aria-pressed="true"] {
+    border-color: var(--global-text-color);
+    background: var(--global-text-color);
+    color: var(--global-bg-color);
+    font-weight: 600;
+  }
+}
+
+// "★ Journal cover": outlined in the accent colour, bold, with a star glyph, so it does not rely on colour alone.
+.cv-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 8px;
+  border: 1px solid var(--global-theme-color);
+  border-radius: 999px;
+  color: var(--global-theme-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.cv-more .cv-abstract,
+.cv-more .cv-contribution,
+.cv-more .cv-authors {
+  margin: 0 0 6px;
+}
+
+// ---------------------------------------------------------------------------
 // Phones
 // ---------------------------------------------------------------------------
 

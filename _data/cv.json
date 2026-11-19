@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated": "2026-11-18",
-  "source_commit": "d9e27c3",
+  "source_commit": "bac7a7b",
   "stats": {
     "funding": "$326,000",
     "citations": "158",
@@ -492,7 +492,7 @@
                 "year": "2026",
                 "title_html": "TEXAS: A proxy system model for TEX<sub>86</sub> paleothermometry",
                 "venue_html": "<i>ESS Open Archive</i>",
-                "doi": "10.22541/essoar.15002926/v3",
+                "doi": "10.22541/essoar.15002926/v1",
                 "abstract": null,
                 "contribution_html": null,
                 "code_url": "https://github.com/PaleoLipidRR/TEXAS"
