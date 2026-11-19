@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated": "2026-11-18",
-  "source_commit": "bac7a7b",
+  "source_commit": "4237d085ef7038eb3c5740c11d614f0215ca1b1a",
   "stats": {
     "funding": "$326,000",
     "citations": "158",
@@ -747,7 +747,7 @@
                   "type": "ul",
                   "items_html": [
                     "Designed and developed a comprehensive proxy system modeling framework for the TEX<sub>86</sub> paleotemperature proxy to reconstruct ancient climate conditions",
-                    "Discovered and quantified the influence of nutrient levels on TEX<sub>86</sub> proxy accuracy, identifying “nutrient stress\" effects in surface marine sediments through analysis of global and regional lipid distribution patterns",
+                    "Discovered and quantified the influence of nutrient levels on TEX<sub>86</sub> proxy accuracy, identifying “nutrient stress” effects in surface marine sediments through analysis of global and regional lipid distribution patterns",
                     "Developing an innovative lipid-based paleotemperature proxy using Bayesian inference methodology implemented in Stan programming language"
                   ]
                 }
@@ -766,7 +766,7 @@
               "notes_html": [
                 "Committee: Yige Zhang (Chair), Ethan Grossman, Robert Korty, Jason Sylvan",
                 "Collaborators &amp; Mentors: Ann Pearson (Harvard), Brian Hedlund (UNLV), Shuang Zhang (TAMU)",
-                "“<i>Beyond TEX<sub>86</sub>: Evaluating Archaeal Evolution Coupled with Oceans and Climate Changes using Tetraether Lipids</i>\""
+                "“<i>Beyond TEX<sub>86</sub>: Evaluating Archaeal Evolution Coupled with Oceans and Climate Changes using Tetraether Lipids</i>”"
               ],
               "detail": [
                 {
@@ -791,7 +791,7 @@
               "roles": [],
               "notes_html": [
                 "Advisor: John Warren",
-                "“<i>Potential Sources of Mercury in Southern Pattani Basin, the Gulf of Thailand</i>\""
+                "“<i>Potential Sources of Mercury in Southern Pattani Basin, the Gulf of Thailand</i>”"
               ],
               "detail": [],
               "links": [],
@@ -807,7 +807,7 @@
               "roles": [],
               "notes_html": [
                 "Advisor: Kruawun Jankaew",
-                "“<i>Quantification of Tsunami Magnitude from Sedimentation Modeling of Re-occurring Indian Ocean Tsunamiites at Phra Thong Island, Phang Nga, Thailand</i>\""
+                "“<i>Quantification of Tsunami Magnitude from Sedimentation Modeling of Re-occurring Indian Ocean Tsunamiites at Phra Thong Island, Phang Nga, Thailand</i>”"
               ],
               "detail": [],
               "links": [],
@@ -921,7 +921,7 @@
         "Taught and mentored over <b>700</b> undergraduate students, the large majority of them non-majors, across four sections as <b>instructor of record</b> for an introductory ocean-and-climate course and two courses as a <b>teaching assistant</b>. My teaching emphasizes active learning through hands-on data analysis, real-world applications of Earth science, and practices that support students from a wide range of backgrounds and preparation levels."
       ],
       "footnotes_html": [
-        "** Student evaluations of my own teaching, on the item <i>“The instructor fostered an effective learning environment\"</i> (Scale: 1 = Strongly Disagree, 5 = Strongly Agree). Ratings are shown only for roles in which students evaluated me directly."
+        "** Student evaluations of my own teaching, on the item <i>“The instructor fostered an effective learning environment”</i> (Scale: 1 = Strongly Disagree, 5 = Strongly Agree). Ratings are shown only for roles in which students evaluated me directly."
       ],
       "groups": [
         {
