@@ -53,6 +53,56 @@ GitHub Pages serves each project repository that has Pages enabled at `/<repo>/`
 
 Add any future package repository that publishes GitHub Pages to this table. Project pages set an explicit lowercase `permalink:` (for example `/projects/texas/`); if a public slug ever has to change, keep the old one working with `redirect_from:` (the `jekyll-redirect-from` plugin is enabled).
 
+## CV page
+
+The CV page at `/cv/` is built from `_data/cv.json`, which the private CV repository's "Publish web CV" Action generates from the LaTeX CV and pushes here together with `assets/pdf/CV_Rattanasriampaipong.pdf`. Never edit either file by hand: change the LaTeX CV, and the page and the PDF follow. Everything else on the page comes from the hand-kept files below.
+
+Every CV entry has an id, which is also its web address: `/cv/#grants-noaa` opens that entry, and `/cv/#publications` opens a section. To find an entry's id, search `_data/cv.json` for a few words of its title; the `"id"` is a few lines above. Ids are made from the entry's text, so editing an entry's title or date in the LaTeX CV can change its id.
+
+### Add a link to an entry
+
+Add the entry id to `_data/cv_links.yml` with a label and an address. A site page starts with `/`; anything else is a full web address. The link shows on the entry after its own links.
+
+```yaml
+teaching-ocng-251:
+  - { label: Course page, url: /courses/the_blue_planet/ }
+```
+
+### Add a figure to a paper
+
+Put the image under `assets/img/` and add it to `_data/cv_figures.yml` under the entry id. `alt` describes what the figure shows for someone who cannot see it; `caption` is the short line printed under the thumbnail and should not repeat the alt text. The figure appears as a thumbnail when the entry is opened and enlarges on click. Post only figures you have the right to share: your own work, or a figure whose journal licence (for example CC BY) allows it, with the credit the licence asks for in the caption.
+
+```yaml
+pub-Rattanasriampaipong2025:
+  - src: assets/img/projects/nutrient-effect/fig1.png
+    alt: "What the figure shows, in a sentence or two"
+    caption: "Figure 1. The short caption"
+```
+
+### Citation tags on papers
+
+The Google Scholar, Dimensions and Altmetric tags come from the paper's entry in `_bibliography/papers.bib` (the `google_scholar_id`, `dimensions` and `altmetric` fields), matched to the CV by DOI. A CV paper that is not in `papers.bib` shows no tags until it is added there. The Google Scholar number is the one stored in `_data/citations.yml`, refreshed when the "Update Google Scholar Citations" workflow is run from the Actions tab.
+
+### When the "CV links check" fails
+
+The "CV links check" workflow runs whenever `_data/cv.json`, `_data/cv_links.yml` or `_data/cv_figures.yml` changes. Open the failed run on GitHub; each line names one problem:
+
+- `orphan key: <id>` or `orphan figure key: <id>`: no CV entry has that id any more, usually because the entry's title or date changed in the LaTeX CV. Find the entry's new id in `_data/cv.json` and rename the key, or delete the lines if the entry is gone.
+- `missing figure file: <path>`: the image is not at that path; fix the path or add the file.
+- `figure without alt text: <id>`: give the figure an `alt` line.
+- `figure path outside the site: <path>`: write `src` as a path inside the site, such as `assets/img/...`, without a leading `/` or `..`.
+
+The same check runs locally with `python3 bin/check_cv_links.py _data/cv.json _data/cv_links.yml _data/cv_figures.yml .` (it needs PyYAML).
+
+### Where things live (for developers)
+
+- `_pages/cv.md`: the page's settings: the section it opens on (`landing_section`), the sections whose groups fold after a few entries behind a "Show all" button (`collapse_sections`, `collapse_after`), and the PDF.
+- `_layouts/cv_page.liquid` and `_includes/cv/`: the markup; the markup contract is in the comments at the top of each file.
+- `_sass/_cv.scss`: the styles, including the print rules.
+- `assets/js/cv.js`: the page script (one section at a time, addresses and the back button, publication filters, "Show all", printing). Without JavaScript the page shows every section, one after another.
+- `_plugins/cv-pub-meta.rb`: reads the citation-tag fields from `_bibliography/papers.bib` for the CV page.
+- Checks: `bin/check_cv_links.py` with `test/test_check_cv_links.py` (the "CV links check" workflow); `bash test/integration_cv.sh <built site>` checks the built page; `bash test/cv_page_smoke.sh <built site>` is a local-only check that loads the built page in headless Chrome and checks which section shows for several addresses (it skips when Chrome is not installed).
+
 ## User community
 
 The vibrant community of **al-folio** users is growing!

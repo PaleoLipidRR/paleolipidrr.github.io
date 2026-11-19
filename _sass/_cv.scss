@@ -553,6 +553,55 @@
 }
 
 // ---------------------------------------------------------------------------
+// Added by the CV script: "Show all" buttons and focus moved to a heading or a card
+// ---------------------------------------------------------------------------
+
+.cv-page .cv-show-all {
+  display: block;
+  min-height: 24px;
+  margin: 0 0 10px;
+  padding: 3px 12px;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--global-theme-color);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--cv-tint);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: 2px;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+// The script focuses a section heading after a switch and a card after a deep link or "Show all"; the ring shows for
+// keyboard users only.
+.cv-page .cv-section-title:focus,
+.cv-page .cv-card:focus {
+  outline: none;
+}
+
+.cv-page .cv-section-title:focus-visible,
+.cv-page .cv-card:focus-visible {
+  outline: 2px solid var(--global-theme-color);
+  outline-offset: 2px;
+}
+
+// Shown only in print (see below).
+.cv-print-note {
+  display: none;
+}
+
+// ---------------------------------------------------------------------------
 // Phones: one column, the panel a single horizontally scrolling row
 // ---------------------------------------------------------------------------
 
@@ -584,5 +633,49 @@
 
   .cv-card {
     padding: 10px 12px;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Print: every section and entry, in PDF order, without the controls. The CV script also shows every section and card
+// and opens every <details> on beforeprint; these rules cover printing with JavaScript off as well.
+// ---------------------------------------------------------------------------
+
+@media print {
+  .cv-layout {
+    display: block;
+  }
+
+  .cv-nav,
+  .cv-filters,
+  .cv-page .cv-show-all,
+  .cv-page .cv-download {
+    display: none !important;
+  }
+
+  .cv-page .cv-section[hidden],
+  .cv-page .cv-card[hidden],
+  .cv-page .cv-group-title[hidden] {
+    display: block !important;
+  }
+
+  .cv-page .cv-section-title,
+  .cv-page .cv-group-title {
+    break-after: avoid;
+  }
+
+  .cv-print-note {
+    display: block;
+    margin: 0 0 14px;
+    font-size: 0.85rem;
+  }
+}
+
+// Printing with JavaScript off: show the contents of closed <details> where the browser supports ::details-content
+// (a separate rule, so a browser that does not know the selector drops only this one).
+@media print {
+  .cv-details::details-content {
+    display: block;
+    content-visibility: visible;
   }
 }

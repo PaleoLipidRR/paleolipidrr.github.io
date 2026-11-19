@@ -31,6 +31,8 @@ grep -Eq '<a [^>]*href="?/assets/pdf/CV_Rattanasriampaipong\.pdf"?[^>]*download|
 
 grep -Eq 'id="?grants-noaa"?[ >]' "${page}" || fail 'no element with id="grants-noaa"'
 
+[ -s "${site}/assets/js/cv.js" ] || fail "${site}/assets/js/cv.js (the CV page script) is missing from the build"
+
 grep -Eq 'Updated (January|February|March|April|May|June|July|August|September|October|November|December) [0-9]{4}' "${page}" ||
   fail 'no "Updated <Month> <YYYY>" line'
 
@@ -361,6 +363,22 @@ sections = [n for n in with_class("cv-section") if n.tag == "section"]
 for s in sections:
     if "hidden" in s.attrs:
         errors.append(f"section {s.attrs.get('id')!r} carries the hidden attribute")
+
+# The page script (Task 13): loaded with defer; section headings take focus; a polite live region for announcements.
+scripts = [n for n in nodes if n.tag == "script" and (n.attrs.get("src") or "").split("?")[0].endswith("/assets/js/cv.js")]
+if len(scripts) != 1:
+    errors.append(f"expected one <script src=\".../assets/js/cv.js\">, found {len(scripts)}")
+elif "defer" not in scripts[0].attrs:
+    errors.append("the CV script is not loaded with defer")
+for s in sections:
+    headings = [n for n in s.walk() if n.tag == "h2" and "cv-section-title" in n.classes]
+    if len(headings) != 1 or headings[0].attrs.get("tabindex") != "-1":
+        errors.append(f"section {s.attrs.get('id')!r}: its <h2 class=\"cv-section-title\"> lacks tabindex=\"-1\"")
+lives = [n for n in nodes if n.attrs.get("aria-live") == "polite" and "cv-live" in n.classes]
+if len(lives) != 1:
+    errors.append(f"expected one .cv-live with aria-live=\"polite\", found {len(lives)}")
+elif "cv-sr-only" not in lives[0].classes:
+    errors.append(".cv-live is not visually hidden (class cv-sr-only)")
 
 # The section panel: a named <nav class="cv-nav"> with one link per section, in page order.
 navs = [n for n in with_class("cv-nav") if n.tag == "nav"]

@@ -24,6 +24,10 @@ layout: page
     "all" starts pressed. The bar is hidden in the markup, so without JavaScript it is not shown; the CV script reveals it and filters
     the .cv-card elements by their data-status and data-first-author.
 
+  - each section heading carries tabindex="-1", so the script can move focus to it after a switch; after the layout come a
+    visually hidden <p class="cv-live" aria-live="polite"> for the script's filter announcements, and <p class="cv-print-note">
+    (shown only in print) naming where the PDF is. The script itself is assets/js/cv.js, loaded with defer on this page only.
+
   Fields ending in _html are trusted, already-sanitised HTML and are output as is; every other string is escaped.
 {%- endcomment -%}
 {%- assign cv = site.data.cv -%}
@@ -99,7 +103,7 @@ layout: page
             data-collapse-after="{{ page.collapse_after | escape }}"
           {% endif %}
         >
-          <h2 class="cv-section-title" id="{{ section.id | escape }}-heading">{{ section.title | escape }}</h2>
+          <h2 class="cv-section-title" id="{{ section.id | escape }}-heading" tabindex="-1">{{ section.title | escape }}</h2>
 
           {% for paragraph in section.intro_html %}
             <p class="cv-intro">{{ paragraph }}</p>
@@ -152,4 +156,15 @@ layout: page
       {% endfor %}
     </div>
   </div>
+
+  {% comment %} Filter results are announced here by the CV script ("Showing 4 of 11 publications"). {% endcomment %}
+  <p class="cv-sr-only cv-live" aria-live="polite" aria-atomic="true"></p>
+
+  {% if page.cv_pdf %}
+    <p class="cv-print-note">
+      The PDF version is at {{ site.url | remove: 'https://' | remove: 'http://' -}}
+      {{- page.cv_pdf | relative_url }}
+    </p>
+  {% endif %}
 </div>
+<script defer src="{{ '/assets/js/cv.js' | relative_url | bust_file_cache }}"></script>
