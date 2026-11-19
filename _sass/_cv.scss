@@ -4,16 +4,18 @@
 // with a faint tint under the mouse on those that open. Only the theme's colour variables are used, so
 // dark mode follows the site.
 
-.cv {
+.cv-page {
   // Muted text mixed from the theme's text and background colours: quieter than body text but with
   // better contrast than --global-text-color-light in both themes.
   --cv-muted: color-mix(in srgb, var(--global-text-color) 68%, var(--global-bg-color));
   --cv-tint: color-mix(in srgb, var(--global-theme-color) 7%, transparent);
   --cv-rail: 5.5rem;
   --cv-rail-gap: 14px;
+  --cv-font-size: 0.95rem;
+  --cv-line-height: 1.5;
 
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: var(--cv-font-size);
+  line-height: var(--cv-line-height);
 }
 
 // ---------------------------------------------------------------------------
@@ -35,7 +37,7 @@
   font-size: 0.85rem;
 }
 
-.cv .cv-download {
+.cv-page .cv-download {
   display: inline-block;
   padding: 7px 13px;
   border-radius: 6px;
@@ -82,7 +84,7 @@
   scroll-margin-top: 80px;
 }
 
-.cv .cv-section-title {
+.cv-page .cv-section-title {
   margin: 0 0 6px;
   color: var(--global-theme-color);
   font-size: 0.8rem;
@@ -91,7 +93,7 @@
   text-transform: uppercase;
 }
 
-.cv .cv-group-title {
+.cv-page .cv-group-title {
   margin: 14px 0 4px calc(var(--cv-rail) + var(--cv-rail-gap));
   color: var(--global-text-color);
   font-size: 0.9rem;
@@ -100,10 +102,12 @@
 
 .cv-intro {
   margin: 0 0 8px;
+  overflow-wrap: anywhere;
 }
 
 .cv-footnotes {
   margin-top: 8px;
+  overflow-wrap: anywhere;
   color: var(--cv-muted);
   font-size: 0.8rem;
 
@@ -157,6 +161,8 @@
   min-width: 0;
   padding: 7px 10px;
   border-radius: 6px;
+  // Long unbroken strings (URLs, long names) wrap instead of overflowing on a narrow screen.
+  overflow-wrap: anywhere;
 }
 
 .cv-head {
@@ -176,7 +182,6 @@
   color: var(--cv-muted);
   font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
 
   &::before {
     content: "· ";
@@ -201,9 +206,11 @@
 // ---------------------------------------------------------------------------
 
 .cv-details > summary {
+  position: relative;
   display: block;
   margin: -7px -10px;
-  padding: 7px 10px;
+  // Right padding keeps the title clear of the marker.
+  padding: 7px 28px 7px 10px;
   border-radius: 6px;
   cursor: pointer;
   list-style: none;
@@ -212,13 +219,20 @@
     display: none;
   }
 
+  // The ▸/▾ marker, pinned to the top right and centred on the title's first line (one line box of the
+  // summary's text, below the 7px top padding), whatever follows in the summary (roles, notes).
   &::after {
     content: "▸";
     content: "▸" / "";
-    float: right;
-    margin-left: 10px;
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    height: calc(var(--cv-font-size) * var(--cv-line-height));
     color: var(--cv-muted);
     font-size: 0.7rem;
+    line-height: 1;
   }
 
   &:hover {
@@ -281,7 +295,7 @@
   margin: 0;
 }
 
-.cv .cv-link {
+.cv-page .cv-link {
   display: inline-block;
   margin: 6px 14px 0 0;
   color: var(--global-theme-color);
@@ -293,7 +307,7 @@
 // ---------------------------------------------------------------------------
 
 @media (max-width: 640px) {
-  .cv {
+  .cv-page {
     --cv-rail: 56px;
     --cv-rail-gap: 10px;
   }

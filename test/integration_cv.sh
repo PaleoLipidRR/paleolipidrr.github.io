@@ -36,11 +36,14 @@ grep -Eq 'Updated (January|February|March|April|May|June|July|August|September|O
 
 grep -q 'Description 1\.' "${page}" && fail 'the old placeholder text "Description 1." is still on the page'
 
-sections="$(grep -o 'class="\?cv-section"\?[ >]' "${page}" | wc -l)"
+# `|| true`: with no match grep exits 1, which pipefail would turn into a silent exit.
+sections="$({ grep -o 'class="\?cv-section"\?[ >]' "${page}" || true; } | wc -l)"
 [ "${sections}" -ge 18 ] || fail "expected at least 18 class=\"cv-section\", found ${sections}"
 
-# The CV icon on the home page links to the CV page.
-grep -Eq "href=[\"']?/cv/[\"' >]" "${home}" || fail 'the home page has no href="/cv/"'
+# The CV icon in the home page's social links (an <a> wrapping <i class="ai ai-cv">, from the cv_pdf key
+# of _data/socials.yml) links to the CV page. The navbar's own "cv" link does not count.
+grep -Eq '<a [^>]*href="/cv/"[^>]*>[[:space:]]*<i [^>]*class="[^"]*ai-cv[ "]' "${home}" ||
+  fail 'the CV icon in the home page social links does not link to href="/cv/"'
 
 # Headline numbers, from the data file.
 python3 -I - "${data}" "${page}" <<'PY'

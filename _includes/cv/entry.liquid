@@ -83,7 +83,12 @@
   {%- endif -%}
 {%- endcapture -%}
 
-<div class="cv-row" id="{{ entry.id | escape }}">
+<div
+  class="cv-row"
+  {% if entry.id %}
+    id="{{ entry.id | escape }}"
+  {% endif %}
+>
   <div class="cv-when">{{ entry.when | escape }}</div>
   <div class="cv-entry">
     {%- if has_detail -%}
