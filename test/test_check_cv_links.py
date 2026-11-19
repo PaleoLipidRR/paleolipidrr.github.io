@@ -477,3 +477,46 @@ def test_unknown_collapse_section_fails(tmp_path):
 
 def test_unreadable_page_front_matter_fails_cleanly(tmp_path):
     clean_failure(run_settings(tmp_path, "---\nlanding_section: [unclosed\n---\n"))
+
+
+# Residual fixes: unfinished or unclosed markup, malformed detail blocks, odd page settings.
+def test_unfinished_markup_fails(tmp_path):
+    for text in ("x<img src=x onerror=alert(1)//", "x<!x", "<a href='https://x' onclick='y'"):
+        result = run(tmp_path, "", cv=cv_with(entry={"title_html": text}))
+        assert result.returncode == 1, text
+        assert "Traceback" not in result.stderr
+        assert any(line.startswith("disallowed HTML in teaching-a: unfinished markup") for line in result.stderr.splitlines()), result.stderr
+
+
+def test_less_than_in_text_passes(tmp_path):
+    for text in ("a &lt; b", "P&lt;.001", "a < b", "P < .001"):
+        result = run(tmp_path, "", cv=cv_with(entry={"title_html": text, "notes_html": [text]}))
+        assert result.returncode == 0, (text, result.stderr)
+
+
+def test_unclosed_allowed_tag_fails(tmp_path):
+    data_failure(tmp_path, cv_with(entry={"title_html": "<b>bold"}), "disallowed HTML in teaching-a: <b> is not closed")
+    data_failure(tmp_path, cv_with(entry={"title_html": "<i><b>x</i>"}), "disallowed HTML in teaching-a: <b> is not closed")
+    assert run(tmp_path, "", cv=cv_with(entry={"title_html": "<b><i>x</i></b> H<sub>2</sub>"})).returncode == 0
+
+
+def test_malformed_detail_blocks_fail(tmp_path):
+    cases = (
+        ({"type": "table", "columns": ["A"], "rows": "<script>x</script>"}, "entry teaching-a: a table block's rows must be a list of lists of strings"),
+        ({"type": "table", "columns": ["A"], "rows": [["ok"], "a row as a string"]}, "entry teaching-a: a table block's rows must be a list of lists of strings"),
+        ({"type": "table", "columns": ["A"], "rows": [["ok", 3]]}, "entry teaching-a: a table block's rows must be a list of lists of strings"),
+        ({"type": "table", "columns": "A", "rows": [["ok"]]}, "entry teaching-a: a table block's columns must be a list of strings"),
+        ({"type": "ul", "items_html": "<b>one</b>"}, "entry teaching-a: a ul block's items_html must be a list of strings"),
+        ({"type": "p", "html": ["x"]}, "entry teaching-a: a p block's html must be a string"),
+    )
+    for block, line in cases:
+        data_failure(tmp_path, cv_with(entry={"detail": [block]}), line)
+
+
+def test_unhashable_collapse_section_is_reported_against_the_page(tmp_path):
+    result = run_settings(tmp_path, "---\nlanding_section: nope\ncollapse_sections: [teaching, {a: 1}]\n---\n")
+    assert result.returncode == 1
+    lines = result.stderr.splitlines()
+    assert "unexpected cv.json shape" not in result.stderr
+    assert "unknown section id in _pages/cv.md: nope" in lines
+    assert "_pages/cv.md: a section id must be a string, found {'a': 1}" in lines

@@ -65,9 +65,12 @@ class _Html(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.bad = []
+        self.open = []  # allowed tags opened and not yet closed
 
     def handle_starttag(self, tag, attrs):
         names = [name for name, _ in attrs]
+        if tag in PLAIN_TAGS or tag == "a":
+            self.open.append(tag)
         if tag in PLAIN_TAGS:
             if names:
                 self.bad.append(f"<{tag} {' '.join(names)}>")
@@ -82,6 +85,11 @@ class _Html(HTMLParser):
     def handle_endtag(self, tag):
         if tag not in PLAIN_TAGS and tag != "a":
             self.bad.append(f"</{tag}>")
+        elif tag in self.open:
+            # Close the innermost matching tag (and anything left open inside it, which is reported at the end).
+            index = len(self.open) - 1 - self.open[::-1].index(tag)
+            self.bad.extend(f"<{t}> is not closed" for t in self.open[index + 1 :])
+            del self.open[index:]
 
     def handle_comment(self, data):
         self.bad.append("<!--")
@@ -100,7 +108,12 @@ def html_problems(text, owner):
     """One line per disallowed tag or attribute in an HTML-bearing string; `owner` is an entry or section id."""
     parser = _Html()
     parser.feed(text)
+    # html.parser keeps an unfinished construct ("x<img src=x onerror=..." with no ">") in rawdata without reporting it,
+    # and close() would drop it; a leftover "<" means markup the browser may still complete.
+    if "<" in parser.rawdata:
+        parser.bad.append(f"unfinished markup {parser.rawdata[parser.rawdata.index('<'):][:40]!r}")
     parser.close()
+    parser.bad.extend(f"<{tag}> is not closed" for tag in parser.open)
     found = []
     for bad in parser.bad:
         line = f"disallowed HTML in {owner}: {bad}"
@@ -143,6 +156,28 @@ def _walk_html(node, owner, found):
             _walk_html(item, owner, found)
 
 
+def _strings(value):
+    return isinstance(value, list) and all(isinstance(item, str) for item in value)
+
+
+def block_shape_problems(block, entry_id):
+    """The fields a detail block of a known type must have, in the shape the page loops over."""
+    kind = block["type"]
+    if kind == "p" and not isinstance(block.get("html"), str):
+        return [f"entry {entry_id}: a p block's html must be a string"]
+    if kind == "ul" and not _strings(block.get("items_html")):
+        return [f"entry {entry_id}: a ul block's items_html must be a list of strings"]
+    if kind == "table":
+        found = []
+        if "columns" in block and block["columns"] is not None and not _strings(block["columns"]):
+            found.append(f"entry {entry_id}: a table block's columns must be a list of strings")
+        rows = block.get("rows")
+        if not (isinstance(rows, list) and all(_strings(row) for row in rows)):
+            found.append(f"entry {entry_id}: a table block's rows must be a list of lists of strings")
+        return found
+    return []
+
+
 def data_problems(cv):
     """Problems of cv.json's own shape and content; assumes the structure entry_ids() accepts."""
     found = []
@@ -178,6 +213,8 @@ def data_problems(cv):
                     block_type = block.get("type") if isinstance(block, dict) else None
                     if block_type not in BLOCK_TYPES:
                         found.append(f"unknown detail block type '{block_type}' in entry {entry_id}")
+                    else:
+                        found.extend(block_shape_problems(block, entry_id))
                 _walk_html(entry, entry_id, found)
                 pub = entry.get("pub")
                 if isinstance(pub, dict):
@@ -211,7 +248,13 @@ def settings_problems(cv, root):
     collapse = settings.get("collapse_sections")
     if collapse is not None:
         wanted.extend(collapse if isinstance(collapse, list) else [collapse])
-    return [f"unknown section id in _pages/cv.md: {name}" for name in wanted if name not in section_ids]
+    found = []
+    for name in wanted:
+        if not isinstance(name, str):
+            found.append(f"_pages/cv.md: a section id must be a string, found {name!r}")
+        elif name not in section_ids:
+            found.append(f"unknown section id in _pages/cv.md: {name}")
+    return found
 
 
 def problems(cv, links):
