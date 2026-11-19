@@ -1,0 +1,77 @@
+{%- comment -%}
+  The citation-metric tags of one publication card, for the tag row (cv/publication.liquid, part="tags"). Parameter: pub.
+  The bibliography fields come from site.data.cv_pub_meta (_plugins/cv-pub-meta.rb), found by the bare lowercase DOI pub.doi.
+    Google Scholar  a text tag, drawn only when the count is found in _data/citations.yml: the key <userid>:<article id>, then the
+                    bare article id, then any key containing it (the order _layouts/bib.liquid uses). A count of 0 is shown as 0.
+                    The visible text reads "N Google Scholar"; the link's accessible name is "N citations on Google Scholar".
+    Dimensions, Altmetric  the same empty embed elements as _layouts/bib.liquid, each behind its enable_publication_badges switch and
+                    drawn only when the paper has the field ("true" means "use the DOI"), both inside one wrapper span. The theme's
+                    scripts.liquid already loads the two third-party scripts on every page (async, no consent gating), so none is added here.
+  Every value placed in an attribute or URL is escaped. Nothing is drawn when the paper is not in the bibliography.
+{%- endcomment -%}
+{%- assign pub = include.pub -%}
+{%- assign meta = site.data.cv_pub_meta[pub.doi] -%}
+{%- if pub.doi and meta -%}
+  {%- assign userid = site.data.socials.scholar_userid -%}
+  {%- assign scholar_id = meta.google_scholar_id -%}
+  {%- if scholar_id and site.enable_publication_badges.google_scholar -%}
+    {%- assign scholar_count = null -%}
+    {%- assign scholar_key = userid | append: ':' | append: scholar_id -%}
+    {%- if site.data.citations.papers[scholar_key] -%}
+      {%- assign scholar_count = site.data.citations.papers[scholar_key].citations -%}
+    {%- elsif site.data.citations.papers[scholar_id] -%}
+      {%- assign scholar_count = site.data.citations.papers[scholar_id].citations -%}
+    {%- else -%}
+      {%- for paper in site.data.citations.papers -%}
+        {%- if paper[0] contains scholar_id -%}
+          {%- assign scholar_count = paper[1].citations -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+    {%- if scholar_count != null and scholar_count != '' -%}
+      <a
+        class="cv-tag cv-tag-metric"
+        href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user={{ userid | url_encode }}&amp;citation_for_view={{ scholar_key | url_encode }}"
+        ><b>{{ scholar_count | escape }}</b> <span class="cv-sr-only">citations on </span>Google Scholar</a
+      >
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- assign has_dimensions = false -%}
+  {%- if site.enable_publication_badges.dimensions and meta.dimensions and meta.dimensions != 'false' -%}
+    {%- assign has_dimensions = true -%}
+  {%- endif -%}
+  {%- assign has_altmetric = false -%}
+  {%- if site.enable_publication_badges.altmetric and meta.altmetric and meta.altmetric != 'false' -%}
+    {%- assign has_altmetric = true -%}
+  {%- endif -%}
+  {%- if has_dimensions or has_altmetric -%}
+    <span class="cv-embeds">
+      {%- if has_dimensions -%}
+        <span
+          class="__dimensions_badge_embed__"
+          {% if meta.dimensions != 'true' %}
+            data-id="{{ meta.dimensions | escape }}"
+          {% else %}
+            data-doi="{{ pub.doi | escape }}"
+          {% endif %}
+          data-style="small_rectangle"
+          data-legend="hover-right"
+        ></span>
+      {%- endif -%}
+      {%- if has_altmetric -%}
+        <span
+          class="altmetric-embed"
+          data-badge-type="2"
+          data-badge-popover="right"
+          {% if meta.altmetric != 'true' %}
+            data-altmetric-id="{{ meta.altmetric | escape }}"
+          {% else %}
+            data-doi="{{ pub.doi | escape }}"
+          {% endif %}
+        ></span>
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+{%- endif -%}

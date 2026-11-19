@@ -252,7 +252,7 @@ if len(bars) != 1:
 elif "hidden" not in bars[0]:
     errors.append(".cv-filters does not carry the hidden attribute")
 buttons = {a.get("data-filter"): a for t, a in tags.tags if t == "button" and a.get("data-filter")}
-for name in ("all", "first-author", "published", "under-review"):
+for name in ("all", "first-author", "co-author", "published", "under-review"):
     button = buttons.get(name)
     if button is None:
         errors.append(f"no <button data-filter={name!r}>")
@@ -260,6 +260,9 @@ for name in ("all", "first-author", "published", "under-review"):
         errors.append(f"button {name!r} has no type=button")
     elif button.get("aria-pressed") != ("true" if name == "all" else "false"):
         errors.append(f"button {name!r} has aria-pressed={button.get('aria-pressed')!r}")
+labels = {"all": "All", "first-author": "First author", "co-author": "Co-author", "published": "Published", "under-review": "Under review / preprint"}
+if [a.get("data-filter") for t, a in tags.tags if t == "button" and a.get("data-filter")] != list(labels):
+    errors.append("the filter buttons are not, in order, " + ", ".join(labels))
 
 if errors:
     for e in errors:
@@ -474,5 +477,129 @@ if errors:
         print("FAIL: " + e, file=sys.stderr)
     sys.exit(1)
 PY3
+
+# Tag row (Task 11): author role, Preprint and citation tags, read against papers.bib and citations.yml.
+python3 -I - "${repo_root}" "${page}" <<'PY4'
+import re
+import sys
+from html.parser import HTMLParser
+
+repo, page_path = sys.argv[1], sys.argv[2]
+with open(page_path, encoding="utf-8") as f:
+    html = f.read()
+with open(repo + "/_bibliography/papers.bib", encoding="utf-8") as f:
+    bib = f.read()
+with open(repo + "/_data/citations.yml", encoding="utf-8") as f:
+    citations = f.read()
+with open(repo + "/_data/socials.yml", encoding="utf-8") as f:
+    userid = re.search(r"^scholar_userid:\s*(\S+)", f.read(), re.M).group(1)
+
+# The Scholar id and the count for the first-author paper, read straight from the two data files.
+entry = re.search(r"@article\{Rattanasriampaipong2025,.*?\n\}", bib, re.S).group(0)
+article_id = re.search(r"google_scholar_id\s*=\s*\{([^}]+)\}", entry).group(1)
+count = re.search(r"^  " + re.escape(userid + ":" + article_id) + r":\n    citations: (\d+)", citations, re.M).group(1)
+
+VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
+
+
+class Card(HTMLParser):
+    """For the card with the given id: every element inside its <p class="cv-tags"> as (tag, attrs, text)."""
+
+    def __init__(self, wanted):
+        super().__init__(convert_charrefs=True)
+        self.wanted, self.in_card, self.depth, self.in_row, self.row_depth = wanted, False, 0, False, 0
+        self.items, self.stack, self.rows = [], [], 0
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        if not self.in_card and a.get("id") == self.wanted:
+            self.in_card, self.depth = True, 0
+        if not self.in_card or tag in VOID:
+            return
+        self.depth += 1
+        if tag == "p" and "cv-tags" in (a.get("class") or "").split():
+            self.in_row, self.row_depth, self.rows = True, self.depth, self.rows + 1
+        elif self.in_row:
+            item = [tag, a, ""]
+            self.items.append(item)
+            self.stack.append(item)
+
+    def handle_endtag(self, tag):
+        if not self.in_card or tag in VOID:
+            return
+        if self.in_row and self.depth == self.row_depth:
+            self.in_row = False
+        elif self.in_row and self.stack:
+            self.stack.pop()
+        self.depth -= 1
+        if self.depth == 0:
+            self.in_card = False
+
+    def handle_data(self, data):
+        if self.in_row:
+            for item in self.stack:
+                item[2] += data
+
+
+def row(card_id):
+    parser = Card(card_id)
+    parser.feed(html)
+    return parser
+
+
+def classes(item):
+    return (item[1].get("class") or "").split()
+
+
+errors = []
+
+first = row("pub-Rattanasriampaipong2025")
+roles = [" ".join(i[2].split()) for i in first.items if "cv-tag-role" in classes(i)]
+if roles != ["First author"]:
+    errors.append(f"pub-Rattanasriampaipong2025: role tags {roles}, expected ['First author']")
+scholar = [i for i in first.items if i[0] == "a" and "cv-tag-metric" in classes(i)]
+if len(scholar) != 1:
+    errors.append(f"pub-Rattanasriampaipong2025: expected one Google Scholar tag, found {len(scholar)}")
+else:
+    href = scholar[0][1].get("href", "")
+    if "citation_for_view=" not in href or article_id not in href:
+        errors.append(f"pub-Rattanasriampaipong2025: Scholar href {href!r} lacks citation_for_view= and the article id")
+    number = [i[2] for i in first.items if i[0] == "b" and i[2].strip() == count]
+    if not number:
+        errors.append(f"pub-Rattanasriampaipong2025: the Scholar tag does not show the count {count} from citations.yml")
+for cls, label in (("altmetric-embed", "Altmetric"), ("__dimensions_badge_embed__", "Dimensions")):
+    n = len([i for i in first.items if cls in classes(i)])
+    if n != 1:
+        errors.append(f"pub-Rattanasriampaipong2025: expected one .{cls} ({label}), found {n}")
+# Tag order: role, then (badge), then metrics; the role comes first.
+if first.items and "cv-tag-role" not in classes(first.items[0]):
+    errors.append("pub-Rattanasriampaipong2025: the role tag is not first in the row")
+
+elling = row("pub-Elling2026")
+roles = [" ".join(i[2].split()) for i in elling.items if "cv-tag-role" in classes(i)]
+if roles != ["Co-author"]:
+    errors.append(f"pub-Elling2026: role tags {roles}, expected ['Co-author']")
+kinds = [("badge" if "cv-badge" in classes(i) else "role" if "cv-tag-role" in classes(i) else None) for i in elling.items]
+if [k for k in kinds if k] != ["role", "badge"]:
+    errors.append(f"pub-Elling2026: the row does not hold the role tag then the badge (got {[k for k in kinds if k]})")
+
+preprint = row("pub-Rattanasriampaipong2026")
+roles = [" ".join(i[2].split()) for i in preprint.items if "cv-tag-role" in classes(i)]
+if roles != ["First author"]:
+    errors.append(f"pub-Rattanasriampaipong2026: role tags {roles}, expected ['First author']")
+if not [i for i in preprint.items if " ".join(i[2].split()) == "Preprint" and "cv-tag" in classes(i)]:
+    errors.append("pub-Rattanasriampaipong2026: no 'Preprint' tag")
+for cls in ("altmetric-embed", "__dimensions_badge_embed__", "cv-tag-metric"):
+    if [i for i in preprint.items if cls in classes(i)]:
+        errors.append(f"pub-Rattanasriampaipong2026: unexpected .{cls} (the paper is not in papers.bib)")
+# The Preprint tag belongs to under-review papers only.
+if [i for i in first.items if " ".join(i[2].split()) == "Preprint"]:
+    errors.append("pub-Rattanasriampaipong2025: a published paper has a 'Preprint' tag")
+
+if errors:
+    for e in errors:
+        print("FAIL: " + e, file=sys.stderr)
+    sys.exit(1)
+PY4
 
 echo "PASS: CV page checks (${sections} sections)"

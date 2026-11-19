@@ -3,8 +3,8 @@
     part="head"  the citation for the card's .cv-head: authors (year). title. venue. The year is left out when the card shows
                  the entry's date at its right (entry.when), as the Revision 2 mockup does. The citation carries
                  id="<entry id>-title", which the card's <summary> names in aria-describedby.
-    part="tags"  the tag row <p class="cv-tags"> under the citation, outside the <details>: the badge chip for now (the role,
-                 "Preprint" and metric tags follow in later tasks). Nothing is drawn when there is no tag.
+    part="tags"  the tag row <p class="cv-tags"> under the citation, outside the <details>: in order the role tag ("First author" or
+                 "Co-author"), the badge chip, "Preprint" (status under-review), then the metric tags (cv/metrics.liquid).
     part="body"  the folded material before the links: full author list (when it differs from the short one),
                  "My contribution", "Abstract"; each only when the data has it
   pub.abstract and the *_html fields are trusted sanitised HTML and are output as is; pub.year and the badge are escaped.
@@ -39,10 +39,19 @@
   </span>
 {%- elsif include.part == 'tags' -%}
   {%- capture pub_tags -%}
+    {%- if pub.first_author -%}
+      <span class="cv-tag cv-tag-role">First author</span>
+    {%- else -%}
+      <span class="cv-tag cv-tag-role">Co-author</span>
+    {%- endif -%}
     {%- if entry.badge -%}
       {%- comment -%} The text carries the meaning; the star is decoration, and the chip also differs in border and weight, not in colour alone. {%- endcomment -%}
       <span class="cv-badge"><span aria-hidden="true">★ </span>{{ entry.badge | escape }}</span>
     {%- endif -%}
+    {%- if pub.status == 'under-review' -%}
+      <span class="cv-tag">Preprint</span>
+    {%- endif -%}
+    {%- include cv/metrics.liquid pub=pub -%}
   {%- endcapture -%}
   {%- assign pub_tags = pub_tags | strip -%}
   {%- if pub_tags != '' -%}
