@@ -97,6 +97,11 @@ jobs:
           valueFile: "_config.yml"
           propertyPath: "giscus.repo"
           value: ${{ github.repository }}
+      # Local addition (not in upstream al-folio): a bad or changed _data/cv.json stops the deploy before the build.
+      - name: Check CV data 🔎
+        run: |
+          pip3 install pyyaml
+          python3 bin/check_cv_links.py _data/cv.json _data/cv_links.yml _data/cv_figures.yml .
       - name: Install and Build 🔧
         run: |
           sudo apt-get update && sudo apt-get install -y imagemagick
