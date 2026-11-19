@@ -104,10 +104,9 @@ holders = [stack for t, stack in parser.texts if note in t]
 if not holders:
     errors.append(f"text {note!r} not found")
 for stack in holders:
-    # Notes are always visible: outside any <details>, or in its <summary>, never in the folded body.
-    tags = [tag for tag, _ in stack]
-    if "details" in tags and "summary" not in tags[tags.index("details") :]:
-        errors.append(f"text {note!r} is folded inside a <details>")
+    # Notes are always visible: they sit in the card's head, outside any <details>.
+    if any(tag == "details" for tag, _ in stack):
+        errors.append(f"text {note!r} is inside a <details>")
     if not any("cv-note" in c for _, c in stack):
         errors.append(f"text {note!r} is not inside an element with class cv-note")
 
@@ -414,6 +413,9 @@ else:
     for n in notes:
         if any(a.tag == "details" for a in n.ancestors()):
             errors.append("grants-noaa: the note is inside a <details>")
+    # Nothing to fold: no <details> at all.
+    if any(n.tag == "details" for n in noaa.walk()):
+        errors.append("grants-noaa has nothing to fold but has a <details>")
 
 # A card without a date has no .cv-date at all.
 education = by_element_id.get("education-texas-a-m-university")
@@ -424,13 +426,41 @@ elif with_class("cv-date", education):
 
 # The badge sits in the tag row under the citation, outside the <details>; no tag row is empty.
 elling = by_element_id.get("pub-Elling2026")
-if elling is not None:
+if elling is None:
+    errors.append("no element with id='pub-Elling2026'")
+else:
     rows = [r for r in with_class("cv-tags", elling) if r.tag == "p"]
     if not any("Journal cover" in r.text() for r in rows):
         errors.append("pub-Elling2026: 'Journal cover' is not in a <p class=\"cv-tags\">")
     for r in rows:
         if any(a.tag == "details" for a in r.ancestors()):
             errors.append("pub-Elling2026: .cv-tags is inside a <details>")
+# Ids are unique across the page (sections, their -heading ids, entries and their -title ids).
+seen = {}
+for n in nodes:
+    i = n.attrs.get("id")
+    if i:
+        seen[i] = seen.get(i, 0) + 1
+duplicates = sorted(i for i, c in seen.items() if c > 1)
+if duplicates:
+    errors.append(f"duplicate ids: {duplicates}")
+
+# Summaries name what opens and point at their own card's title.
+for summary in (n for n in nodes if n.tag == "summary"):
+    card = next((a for a in summary.ancestors() if "cv-card" in a.classes), None)
+    card_id = card.attrs.get("id") if card else None
+    label = summary.text()
+    if not label or label == "Details":
+        errors.append(f"{card_id!r}: summary reads {label!r}")
+    described = summary.attrs.get("aria-describedby")
+    if card_id:
+        if described != f"{card_id}-title":
+            errors.append(f"{card_id!r}: summary has aria-describedby={described!r}, expected {card_id + '-title'!r}")
+        else:
+            target = by_element_id.get(described)
+            if target is None or "cv-title" not in target.classes or card not in target.ancestors():
+                errors.append(f"{card_id!r}: aria-describedby does not point at the .cv-title of the same card")
+
 # Citations read cleanly: no doubled full stop where the year used to separate the authors from the title.
 for c in with_class("cv-pub"):
     if ".." in c.text():

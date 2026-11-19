@@ -163,6 +163,7 @@
 }
 
 // Without the script nothing is hidden; with it, the sections it marks hidden are not displayed.
+// The page script must add cv-js no later than it sets hidden on a section.
 .cv-page:not(.cv-js) .cv-section[hidden] {
   display: block;
 }
@@ -286,7 +287,9 @@
   display: block;
   margin-top: 8px;
   // Right padding keeps the label clear of the marker.
-  padding: 2px 22px 2px 0;
+  // At least 24px tall, the minimum click target size.
+  min-height: 24px;
+  padding: 3px 22px 3px 0;
   border-radius: 4px;
   color: var(--global-theme-color);
   font-size: var(--cv-summary-size);
@@ -298,12 +301,12 @@
   }
 
   // The ▸/▾ marker, pinned to the top right and centred on the summary's first line (one line box of the
-  // summary's text, below its 2px top padding).
+  // summary's text, below its 3px top padding).
   &::after {
     content: "▸";
     content: "▸" / "";
     position: absolute;
-    top: 2px;
+    top: 3px;
     right: 4px;
     display: flex;
     align-items: center;

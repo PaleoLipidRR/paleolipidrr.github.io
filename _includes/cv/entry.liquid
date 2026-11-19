@@ -10,11 +10,11 @@
       <p class="cv-tags">…</p>                         (publications, only when there is a tag; see cv/publication.liquid)
       without folded content:  <p class="cv-links">…</p>
       with folded content:     <details class="cv-details">
-                                 <summary class="cv-summary">what opens, e.g. "Abstract and links"</summary>
+                                 <summary class="cv-summary" aria-describedby="<entry id>-title">what opens</summary>
                                  <div class="cv-more">detail blocks, then <p class="cv-links">…</p></div>
                                </details>
     </div>
-  .cv-head holds .cv-title (plus .cv-place), .cv-roles > .cv-role lines (entries made of roles have no date of their own; each
+  .cv-head holds .cv-title (id="<entry id>-title"; plus .cv-place), .cv-roles > .cv-role lines (entries made of roles have no date of their own; each
   role carries its own) and .cv-note lines. Notes are always visible: they sit in the head, outside the <details>.
   A title ending in a colon (skills lines such as "Languages:") is followed by its notes on the same line.
   Publication entries (entry.pub) take their head, their tag row and their folded abstract, contribution and full author list from
@@ -55,7 +55,11 @@
   {%- assign inline_notes = true -%}
 {%- endif -%}
 
-{%- comment -%} The summary names what opens, in the order it appears: "All authors, my contribution, abstract and links". {%- endcomment -%}
+{%- comment -%}
+  The summary names what opens, in the order it appears, from the same conditions that draw it: for a publication "All authors,
+  my contribution, abstract and links"; for detail blocks, a course table (columns Term and Students (rating)) is "terms and
+  ratings" and any other table "table", a list "highlights", paragraphs "description"; then "links". Never a bare "Details".
+{%- endcomment -%}
 {%- if has_detail -%}
   {%- capture summary_parts -%}
     {%- if entry.pub -%}
@@ -63,10 +67,23 @@
       {%- if entry.pub.contribution_html -%}my contribution|{%- endif -%}
       {%- if entry.pub.abstract -%}abstract|{%- endif -%}
     {%- endif -%}
-    {%- if entry.detail.size > 0 -%}details|{%- endif -%}
+    {%- for block in entry.detail -%}
+      {%- case block.type -%}
+        {%- when 'table' -%}
+          {%- if block.columns contains 'Term' and block.columns contains 'Students (rating)' -%}
+            terms and ratings|
+          {%- else -%}
+            table|
+          {%- endif -%}
+        {%- when 'ul' -%}
+          highlights|
+        {%- when 'p' -%}
+          description|
+      {%- endcase -%}
+    {%- endfor -%}
     {%- if links != '' -%}links|{%- endif -%}
   {%- endcapture -%}
-  {%- assign summary_parts = summary_parts | split: '|' -%}
+  {%- assign summary_parts = summary_parts | split: '|' | uniq -%}
   {%- assign summary_label = summary_parts | last -%}
   {%- if summary_parts.size > 1 -%}
     {%- assign summary_label = summary_parts | pop | join: ', ' | append: ' and ' | append: summary_label -%}
@@ -78,7 +95,13 @@
   {%- if entry.pub -%}
     {% include cv/publication.liquid entry=entry part='head' %}
   {%- else -%}
-    <span class="cv-title">{{ entry.title_html }}</span>
+    <span
+      class="cv-title"
+      {% if entry.id %}
+        id="{{ entry.id | escape }}-title"
+      {% endif %}
+      >{{ entry.title_html }}</span
+    >
     {%- if inline_notes %}
       <span class="cv-note cv-note-inline">{{ entry.notes_html | join: '; ' }}</span>
     {%- endif -%}
@@ -115,14 +138,21 @@
 >
   <div class="cv-card-head">
     <div class="cv-head">{{ head }}</div>
-    {%- if entry.when -%}
+    {%- if entry.when != blank -%}
       <span class="cv-date">{{ entry.when | escape }}</span>
     {%- endif -%}
   </div>
   {{- tags -}}
   {%- if has_detail -%}
     <details class="cv-details">
-      <summary class="cv-summary">{{ summary_label | escape }}</summary>
+      <summary
+        class="cv-summary"
+        {% if entry.id %}
+          aria-describedby="{{ entry.id | escape }}-title"
+        {% endif %}
+      >
+        {{- summary_label | escape -}}
+      </summary>
       <div class="cv-more">
         {{- pub_body -}}
         {%- for block in entry.detail -%}

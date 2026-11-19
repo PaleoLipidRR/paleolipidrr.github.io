@@ -1,7 +1,8 @@
 {%- comment -%}
   The publication-specific parts of one CV entry (entry.pub). Parameters: entry, part.
     part="head"  the citation for the card's .cv-head: authors (year). title. venue. The year is left out when the card shows
-                 the entry's date at its right (entry.when), as the Revision 2 mockup does.
+                 the entry's date at its right (entry.when), as the Revision 2 mockup does. The citation carries
+                 id="<entry id>-title", which the card's <summary> names in aria-describedby.
     part="tags"  the tag row <p class="cv-tags"> under the citation, outside the <details>: the badge chip for now (the role,
                  "Preprint" and metric tags follow in later tasks). Nothing is drawn when there is no tag.
     part="body"  the folded material before the links: full author list (when it differs from the short one),
@@ -19,12 +20,17 @@
   {%- comment -%} Without the year, an author list ending in an initial ("D.") or an ellipsis takes no extra full stop. {%- endcomment -%}
   {%- assign pub_authors_last = pub.authors_short_html | strip_html | strip | slice: -1 -%}
   {%- assign pub_authors_stop = '. ' -%}
-  {%- if pub.year and entry.when == null -%}
+  {%- if pub.year and entry.when == blank -%}
     {%- assign pub_authors_stop = ' (' | append: pub.year | escape | append: '). ' -%}
   {%- elsif pub_authors_last == '.' or pub_authors_last == '…' -%}
     {%- assign pub_authors_stop = ' ' -%}
   {%- endif -%}
-  <span class="cv-title cv-pub">
+  <span
+    class="cv-title cv-pub"
+    {% if entry.id %}
+      id="{{ entry.id | escape }}-title"
+    {% endif %}
+  >
     {{- pub.authors_short_html -}}
     {{- pub_authors_stop -}}
     {{- pub.title_html -}}
