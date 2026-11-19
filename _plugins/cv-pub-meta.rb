@@ -14,9 +14,12 @@ module SiteCvPubMeta
   FIELDS = %w[google_scholar_id altmetric dimensions].freeze
   DOI_PREFIX = %r{\Ahttps?://(?:dx\.)?doi\.org/}i.freeze
 
-  # Lowercase DOI without a resolver prefix, or nil when blank.
+  # Lowercase DOI without a resolver prefix, or nil when absent or blank (an entry without a DOI is skipped quietly).
   def self.normalise_doi(value)
-    doi = plain(value).sub(DOI_PREFIX, '').strip.downcase
+    text = plain(value)
+    return nil if text.nil?
+
+    doi = text.sub(DOI_PREFIX, '').strip.downcase
     doi.empty? ? nil : doi
   end
 

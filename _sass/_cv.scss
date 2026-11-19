@@ -14,6 +14,9 @@
   --cv-tint: color-mix(in srgb, var(--global-theme-color) 7%, transparent);
   // Clears the theme's fixed navbar (57px) for in-page jumps and the sticky panel.
   --cv-navbar-clearance: 76px;
+  // Clears the theme's fixed footer (footer.fixed-bottom, 35px tall, above the page at z-index 1030) under the sticky
+  // panel, plus a small gap, so the panel's last link stays visible and clickable when the panel is scrolled to its end.
+  --cv-footer-clearance: 51px;
   --cv-font-size: 0.95rem;
   --cv-line-height: 1.5;
   --cv-summary-size: 0.8rem;
@@ -107,7 +110,7 @@
 .cv-nav {
   position: sticky;
   top: var(--cv-navbar-clearance);
-  max-height: calc(100vh - var(--cv-navbar-clearance) - 16px);
+  max-height: calc(100vh - var(--cv-navbar-clearance) - var(--cv-footer-clearance));
   overflow-y: auto;
   overscroll-behavior: contain;
 }

@@ -1,11 +1,27 @@
 {%- comment -%}
   The links of one CV entry, as <p class="cv-links"> of a.cv-link; nothing is drawn when there are none. Parameter: entry.
-  Order: for a publication, DOI, PDF, Project page, Code; then the entry's own links (entry.links); then the hand-kept
-  links of _data/cv_links.yml for this entry id. A link whose URL starts with "/" is a site page and goes through relative_url.
-  The PDF link is the PDF of the project page whose doi matches the publication's.
+  Order: first "Paper", when the entry names a paper (entry.paper, as software entries do) and the page has that publication's
+  card (id "pub-<paper>"): a same-page link to #pub-<paper>, which the CV script turns into "switch to Publications and open
+  the card"; a paper with no card on the page draws nothing. Then, for a publication, DOI, PDF, Project page, Code; then the
+  entry's own links (entry.links); then the hand-kept links of _data/cv_links.yml for this entry id. A link whose URL starts
+  with "/" is a site page and goes through relative_url. The PDF link is the PDF of the project page whose doi matches the
+  publication's.
 {%- endcomment -%}
 {%- assign entry = include.entry -%}
 {%- assign pub = entry.pub -%}
+{%- assign cv_paper_href = '' -%}
+{%- if entry.paper -%}
+  {%- assign cv_paper_id = 'pub-' | append: entry.paper -%}
+  {%- for cv_paper_section in site.data.cv.sections -%}
+    {%- for cv_paper_group in cv_paper_section.groups -%}
+      {%- for cv_paper_entry in cv_paper_group.entries -%}
+        {%- if cv_paper_entry.id == cv_paper_id and cv_paper_entry.pub -%}
+          {%- assign cv_paper_href = '#' | append: cv_paper_id -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endif -%}
 {%- assign project = null -%}
 {%- if pub and pub.doi -%}
   {%- for candidate in site.projects -%}
@@ -36,6 +52,9 @@
 {%- if own_links == null -%}{%- assign own_links = none -%}{%- endif -%}
 {%- assign all_links = own_links | concat: extra_links -%}
 {%- capture anchors -%}
+  {%- if cv_paper_href != '' -%}
+    <a class="cv-link" href="{{ cv_paper_href | escape }}">Paper<span aria-hidden="true"> →</span></a>
+  {%- endif -%}
   {%- if pub -%}
     {%- if pub.doi -%}
       <a class="cv-link" href="https://doi.org/{{ pub.doi | escape }}">DOI<span aria-hidden="true"> →</span></a>

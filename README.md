@@ -81,18 +81,21 @@ pub-Rattanasriampaipong2025:
 
 ### Citation tags on papers
 
-The Google Scholar, Dimensions and Altmetric tags come from the paper's entry in `_bibliography/papers.bib` (the `google_scholar_id`, `dimensions` and `altmetric` fields), matched to the CV by DOI. A CV paper that is not in `papers.bib` shows no tags until it is added there. The Google Scholar number is the one stored in `_data/citations.yml`, refreshed when the "Update Google Scholar Citations" workflow is run from the Actions tab.
+The Google Scholar, Dimensions and Altmetric tags come from the paper's entry in `_bibliography/papers.bib` (the `google_scholar_id`, `dimensions` and `altmetric` fields), matched to the CV by DOI. A CV paper that is not in `papers.bib` shows no tags until it is added there. The Google Scholar number is the one stored in `_data/citations.yml`. The "Update Google Scholar Citations" workflow (run from the Actions tab) updates that file; the number on the page changes at the next deploy after it has done so.
 
-### When the "CV links check" fails
+### When the "CV links check" or the Deploy fails
 
-The "CV links check" workflow runs whenever `_data/cv.json`, `_data/cv_links.yml` or `_data/cv_figures.yml` changes. Open the failed run on GitHub; each line names one problem:
+The same check, `bin/check_cv_links.py`, runs in the "CV links check" workflow whenever `_data/cv.json`, `_data/cv_links.yml`, `_data/cv_figures.yml` or `_pages/cv.md` changes, and before the build in every Deploy. It checks the hand-kept files against the CV entries, the data file itself (its `schema_version`, its sections and entry ids, its detail block types, and that its HTML holds only simple formatting and links), and that `landing_section` and `collapse_sections` in `_pages/cv.md` name real sections. After the build, Deploy also runs `test/cv_page_check.py`, which checks the built page against the same files. Either check failing stops the deploy, so the live site keeps the previous CV.
+
+If the Deploy run of an "Update CV from CV repo" commit fails, the generated `_data/cv.json` was rejected: open the run and read the failed step's lines. A problem in the data file itself (`unsupported cv.json schema_version`, `duplicate entry id`, `unknown detail block type`, `disallowed HTML in ...`) is fixed in the CV repository's generator or the LaTeX CV, and the next publish replaces the file. A problem in a hand-kept file (below) is fixed here. Open the failed run on GitHub; each line names one problem:
 
 - `orphan key: <id>` or `orphan figure key: <id>`: no CV entry has that id any more, usually because the entry's title or date changed in the LaTeX CV. Find the entry's new id in `_data/cv.json` and rename the key, or delete the lines if the entry is gone.
 - `missing figure file: <path>`: the image is not at that path; fix the path or add the file.
 - `figure without alt text: <id>`: give the figure an `alt` line.
 - `figure path outside the site: <path>`: write `src` as a path inside the site, such as `assets/img/...`, without a leading `/` or `..`.
+- `unknown section id in _pages/cv.md: <id>`: a section was renamed or removed; update `landing_section` or `collapse_sections`.
 
-The same check runs locally with `python3 bin/check_cv_links.py _data/cv.json _data/cv_links.yml _data/cv_figures.yml .` (it needs PyYAML).
+The same check runs locally with `python3 bin/check_cv_links.py _data/cv.json _data/cv_links.yml _data/cv_figures.yml .` (it needs PyYAML), and the built-page check with `python3 test/cv_page_check.py _site .` after a build.
 
 ### Where things live (for developers)
 
@@ -101,7 +104,7 @@ The same check runs locally with `python3 bin/check_cv_links.py _data/cv.json _d
 - `_sass/_cv.scss`: the styles, including the print rules.
 - `assets/js/cv.js`: the page script (one section at a time, addresses and the back button, publication filters, "Show all", printing). Without JavaScript the page shows every section, one after another.
 - `_plugins/cv-pub-meta.rb`: reads the citation-tag fields from `_bibliography/papers.bib` for the CV page.
-- Checks: `bin/check_cv_links.py` with `test/test_check_cv_links.py` (the "CV links check" workflow); `bash test/integration_cv.sh <built site>` checks the built page; `bash test/cv_page_smoke.sh <built site>` is a local-only check that loads the built page in headless Chrome and checks which section shows for several addresses (it skips when Chrome is not installed).
+- Checks: `bin/check_cv_links.py` with `test/test_check_cv_links.py` (the "CV links check" workflow, and before the build in Deploy); `test/cv_page_check.py <built site> <repo root>` checks the built page against the data (in Deploy, after the build); `bash test/integration_cv.sh <built site>` is a local check of the built page with today's entries named; `bash test/cv_page_smoke.sh <built site>` is a local-only check that loads the built page in headless Chrome and checks which section shows for several addresses (it skips when Chrome is not installed).
 
 ## User community
 

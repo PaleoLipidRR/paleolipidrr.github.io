@@ -4,7 +4,7 @@
 // Without this script every section shows, one after another, the panel links are in-page jumps and the filter bar
 // stays hidden. With it:
 // - one section at a time: the address (#<section id> or #<entry id>) picks the section; with no usable address the
-//   wrapper's data-landing section shows. Panel clicks switch sections and push the address, so back and forward work.
+//   wrapper's data-landing section shows. An address naming an element inside a card (#<entry id>-title) opens that card. Panel clicks switch sections and push the address, so back and forward work.
 // - the publication filters filter the cards of the section that holds the bar.
 // - "Show all": in a section with data-collapse-after="N", each group shows its first N cards and a button for the rest.
 // - printing shows every section, every card and every <details>, and puts the page back afterwards.
@@ -32,16 +32,17 @@
     }
   }
 
-  // What an id points at: { section, card }, both possibly null. `byId` looks an id up; `isSection` and `isCard` say
-  // what an element is; `sectionOf` finds the section holding an element. An id that exists but is neither a section
-  // nor a card (a "-heading" or "-title" id, say) resolves to the section that holds it.
+  // What an id points at: { section, card }, both possibly null. `byId` looks an id up; `isSection` says whether an
+  // element is a section; `cardOf` finds the card that is or holds an element; `sectionOf` finds the section holding an
+  // element. An id inside a card (the card's "-title" id, say) resolves to that card; any other id inside a section (a
+  // "-heading" id) resolves to the section alone.
   function resolveId(id, lookup) {
     const element = id ? lookup.byId(id) : null;
     if (!element) return { section: null, card: null };
     if (lookup.isSection(element)) return { section: element, card: null };
     const section = lookup.sectionOf(element);
     if (!section) return { section: null, card: null };
-    return { section, card: lookup.isCard(element) ? element : null };
+    return { section, card: lookup.cardOf(element) };
   }
 
   // Whether a card with these data attributes passes a filter. Only papers (data-status "published" or "under-review")
@@ -75,7 +76,7 @@
         return element && page.contains(element) ? element : null;
       },
       isSection: (element) => sections.includes(element),
-      isCard: (element) => element.classList.contains("cv-card"),
+      cardOf: (element) => element.closest(".cv-card"),
       sectionOf: (element) => sections.find((s) => s.contains(element)) || null,
     };
 
@@ -174,7 +175,8 @@
       const card = target.card;
       if (card) {
         if (card.hasAttribute(CUT)) expandGroup(card.parentElement);
-        if (card.hidden && section === filterSection) setFilter("all", false);
+        // Announced, so the live region never still reports the filter that was just reset.
+        if (card.hidden && section === filterSection) setFilter("all", true);
         const details = card.querySelector(":scope > details.cv-details");
         if (details) details.open = true;
         focusCard(card);

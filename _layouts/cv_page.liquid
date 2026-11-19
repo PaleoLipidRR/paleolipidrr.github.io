@@ -28,7 +28,9 @@ layout: page
     visually hidden <p class="cv-live" aria-live="polite"> for the script's filter announcements, and <p class="cv-print-note">
     (shown only in print) naming where the PDF is. The script itself is assets/js/cv.js, loaded with defer on this page only.
 
-  Fields ending in _html are trusted, already-sanitised HTML and are output as is; every other string is escaped.
+  Escaping: trusted, already-sanitised HTML is output as is: fields whose name is html or ends in _html (here a section's intro_html
+  and footnotes_html), table row cells, and pub.abstract (see cv/entry.liquid). Every other string is escaped. bin/check_cv_links.py,
+  run before every deploy, limits the trusted HTML to the tags b, i, em, sub, sup, code and a href.
 {%- endcomment -%}
 {%- assign cv = site.data.cv -%}
 {%- assign stats = cv.stats -%}

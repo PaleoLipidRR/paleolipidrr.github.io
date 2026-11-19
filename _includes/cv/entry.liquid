@@ -24,6 +24,14 @@
   (see _layouts/cv_page.liquid) read. Other entries' links stay below the head, outside any <details>, unless the entry has
   detail, when they end the folded part. Figures (cv/figures.liquid, from _data/cv_figures.yml, available to any entry id) count as
   folded content: they sit in .cv-more after the detail blocks and before the links, and an entry with only figures still gets a <details>.
+  Detail blocks are of type "p", "ul" or "table"; a block of any other type draws nothing and adds nothing to the summary, and an entry
+  whose only folded content is such blocks has no <details> (bin/check_cv_links.py is what reports an unknown type). No <summary> is
+  ever empty: when nothing names what opens, there is no <details>.
+
+  Escaping: trusted, already-sanitised HTML is output as is: fields whose name is html or ends in _html (title_html, notes_html,
+  roles' title_html, a "p" block's html, a "ul" block's items_html, the pub fields ending in _html), table row cells, and
+  pub.abstract. Every other string (place, when, columns, badge, link labels and URLs, ids) is escaped.
+  bin/check_cv_links.py limits the trusted HTML to b, i, em, sub, sup, code and a href.
 {%- endcomment -%}
 {%- assign entry = include.entry -%}
 {%- capture links -%}
@@ -46,8 +54,14 @@
   {%- endif -%}
 {%- endcapture -%}
 {%- assign tags = tags | strip -%}
+{%- assign known_blocks = 0 -%}
+{%- for block in entry.detail -%}
+  {%- if block.type == 'p' or block.type == 'ul' or block.type == 'table' -%}
+    {%- assign known_blocks = known_blocks | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
 {%- assign has_detail = false -%}
-{%- if entry.detail.size > 0 or pub_body != '' -%}
+{%- if known_blocks > 0 or pub_body != '' -%}
   {%- assign has_detail = true -%}
 {%- endif -%}
 {%- if entry.pub and links != '' -%}
@@ -87,6 +101,8 @@
           highlights|
         {%- when 'p' -%}
           description|
+        {%- else -%}
+          {%- comment -%} An unknown block type names nothing. {%- endcomment -%}
       {%- endcase -%}
     {%- endfor -%}
     {%- if figures != '' -%}figures|{%- endif -%}
@@ -98,6 +114,9 @@
     {%- assign summary_label = summary_parts | pop | join: ', ' | append: ' and ' | append: summary_label -%}
   {%- endif -%}
   {%- assign summary_label = summary_label | capitalize -%}
+  {%- if summary_label == blank -%}
+    {%- assign has_detail = false -%}
+  {%- endif -%}
 {%- endif -%}
 
 {%- capture head -%}
@@ -197,6 +216,8 @@
                   </tbody>
                 </table>
               </div>
+            {%- else -%}
+              {%- comment -%} An unknown block type draws nothing. {%- endcomment -%}
           {%- endcase -%}
         {%- endfor -%}
         {{- figures -}}

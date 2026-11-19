@@ -71,10 +71,14 @@ from html.parser import HTMLParser
 dom_path, want_section, want_card = sys.argv[1], sys.argv[2], sys.argv[3]
 
 
+VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
+
+
 class Dom(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.sections, self.page, self.bar, self.card = [], None, None, None
+        self.card_depth, self.details = 0, []  # open elements inside the wanted card; its <details> attributes
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -85,8 +89,16 @@ class Dom(HTMLParser):
             self.page = classes
         elif "cv-filters" in classes:
             self.bar = a
+        if self.card_depth and tag not in VOID:
+            self.card_depth += 1
+            if tag == "details":
+                self.details.append(a)
         if want_card and a.get("id") == want_card:
-            self.card = a
+            self.card, self.card_depth = a, 1
+
+    def handle_endtag(self, tag):
+        if self.card_depth and tag not in VOID:
+            self.card_depth -= 1
 
 
 dom = Dom()
@@ -107,6 +119,8 @@ if want_card:
         problems.append(f"no element with id {want_card!r}")
     elif "hidden" in dom.card:
         problems.append(f"card {want_card!r} is hidden")
+    elif dom.details and "open" not in dom.details[0]:
+        problems.append(f"card {want_card!r} is shown but its <details> is not open")
 if problems:
     print("  " + "; ".join(problems), file=sys.stderr)
     sys.exit(1)
@@ -125,5 +139,7 @@ check "/cv/#no-such-id falls back to the landing section" "#no-such-id" publicat
 check "/cv/#%E0%A4%A (malformed) falls back to the landing section" "#%E0%A4%A" publications
 check "/cv/#teaching-experience-heading shows the heading's section" "#teaching-experience-heading" teaching-experience
 check "/cv/#${cut_entry} (past the cut) shows Presentations and the entry" "#${cut_entry}" presentations "${cut_entry}"
+check "/cv/#${cut_entry}-title (inside a card past the cut) shows and opens that card" "#${cut_entry}-title" presentations "${cut_entry}"
+check "/cv/#pub-Rattanasriampaipong2025 (a software entry's Paper link) shows Publications and the card" "#pub-Rattanasriampaipong2025" publications pub-Rattanasriampaipong2025
 
 [ "${failures}" -eq 0 ] || exit 1
