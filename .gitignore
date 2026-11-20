@@ -22,3 +22,5 @@ __pycache__/
 .superpowers/
 # Claude Code machine-local permissions
 .claude/settings.local.json
+# Local planning notes (specs and plans)
+docs/superpowers/
