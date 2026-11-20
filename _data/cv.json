@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "updated": "2026-11-20",
-  "source_commit": "dd997fe18129230e722362a7d9a5801c7e77490b",
+  "source_commit": "8788dff4a9a4c13e8e06c8cbb9237f6ceb80e049",
   "stats": {
     "funding": "$326,000",
-    "citations": "158",
+    "citations": "159",
     "hindex": "4",
     "students": "700"
   },
