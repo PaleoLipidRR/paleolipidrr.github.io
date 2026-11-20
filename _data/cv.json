@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-18",
-  "source_commit": "4237d085ef7038eb3c5740c11d614f0215ca1b1a",
+  "updated": "2026-11-20",
+  "source_commit": "dd997fe18129230e722362a7d9a5801c7e77490b",
   "stats": {
     "funding": "$326,000",
     "citations": "158",
@@ -267,7 +267,7 @@
               "notes_html": [],
               "detail": [],
               "links": [],
-              "badge": "Journal cover",
+              "badge": "Journal cover and Eos highlight",
               "paper": null,
               "pub": {
                 "key": "Elling2026",
@@ -280,7 +280,7 @@
                 "venue_html": "<i>Paleoceanography and Paleoclimatology</i>, 41(7)",
                 "doi": "10.1029/2025pa005373",
                 "abstract": "Archaea are single-celled microorganisms that are abundant in marine environments and play a key role in the carbon and nitrogen cycles. Archaea can biosynthesize a wide variety of isoprenoid membrane lipids, including isoprenoid glycerol dibiphytanyl glycerol tetraethers (isoGDGTs). Experimental and empirical evidence demonstrates that the number of cyclopentane moieties in isoGDGTs is related to growth temperature, leading to the formulation and development of the TEX86 ocean temperature proxy. The TEX86 proxy has been widely applied to marine sediments spanning the last 190 million years and has revealed unique insights into the evolution of ocean temperatures over diverse timescales. Other indices have been developed using archaeal lipids to reconstruct ecological and biogeochemical processes that operate within the marine realm. However, several knowledge gaps (e.g., depth of export production, non-temperature controls, application in non-analogue climates) limit the application of archaeal lipid-based proxies in modern and ancient marine environments. In this review, we critically assess the utility of archaeal lipids as tracers for (paleo) environmental change, with an emphasis on the TEX86 paleotemperature proxy.",
-                "contribution_html": "<i>Contributing author. Drafted the review's synthesis of the biological sources of marine tetraether lipids, distributed across several sections of the final paper. Produced the figure featured on the journal cover, 41(7), July 2026.</i>",
+                "contribution_html": "<i>Contributing author. Drafted the review's synthesis of the biological sources of marine tetraether lipids, distributed across several sections of the final paper. Designed the first draft of the figure (Figure 13) and finalized it with Felix Elling; it is featured on the journal cover, 41(7), July 2026. The paper was also an <i>Eos</i> Editors' Highlight (3 August 2026), which used the figure.</i>",
                 "code_url": null
               }
             },
@@ -492,7 +492,7 @@
                 "year": "2026",
                 "title_html": "TEXAS: A proxy system model for TEX<sub>86</sub> paleothermometry",
                 "venue_html": "<i>ESS Open Archive</i>",
-                "doi": "10.22541/essoar.15002926/v1",
+                "doi": "10.22541/essoar.15002926/v3",
                 "abstract": null,
                 "contribution_html": null,
                 "code_url": "https://github.com/PaleoLipidRR/TEXAS"
@@ -1752,8 +1752,21 @@
           "title": "Honors",
           "entries": [
             {
-              "id": "invitations-awards-honors-cover-image-figure-by-r-rattanasriampaipong-paleoceanography-and-paleoclimatology-volume-41-issue-7-july-2026",
-              "title_html": "Cover image (figure by R. Rattanasriampaipong), <i>Paleoceanography and Paleoclimatology</i>, Volume 41, Issue 7, July 2026.",
+              "id": "invitations-awards-honors-cover-image-figure-drafted-by-r-rattanasriampaipong-and-finalized-with-f-j-elling-paleoceanography-and-paleoclimatology-volume-41-issue-7-july-2026",
+              "title_html": "Cover image (figure drafted by R. Rattanasriampaipong and finalized with F. J. Elling), <i>Paleoceanography and Paleoclimatology</i>, Volume 41, Issue 7, July 2026.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invitations-awards-honors-paper-highlighted-in-eos-editors-highlights-the-definitive-guide-to-the-tex86-paleothermometer-3-august-2026-the-highlight-used-the-figure-by-r-rattanasriampaipong",
+              "title_html": "Paper highlighted in <i>Eos</i> Editors' Highlights (“The Definitive Guide to the TEX<sub>86</sub> Paleothermometer”), 3 August 2026; the highlight used the figure by R. Rattanasriampaipong.",
               "place": null,
               "when": null,
               "roles": [],
