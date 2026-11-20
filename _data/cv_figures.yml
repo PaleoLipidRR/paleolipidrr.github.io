@@ -1,0 +1,14 @@
+# Figures shown inside an opened CV entry, keyed by the entry id in _data/cv.json.
+# Each value is a list of { src, alt, caption }; src is a path under the site root.
+# Add only figures you have the right to post. A missing file or empty alt fails CI.
+pub-Rattanasriampaipong2025:
+  - src: assets/img/projects/nutrient-effect/fig1.png
+    alt: "Panel a: coretop TEX86 against thermocline-integrated temperature. Panel b: TEX86 residuals against nitrate on a log scale. Panel c: world map of coretop TEX86 residuals over modern nitrate."
+    caption: "Figure 1. Positive TEX86 residuals in coretop sediments match low-nutrient regions. (a) TEX86 against thermocline-integrated temperature. (b) Residuals from that fit fall as nitrate rises, most clearly below 2.7 µmol/L (blue). (c) Map of residuals over modern nitrate."
+pub-Rattanasriampaipong2022:
+  - src: assets/img/png/fig2_PNAS_GDGTdistributions_revised-01.png
+    alt: "GDGT distributions across cultures, suspended particulate matter and sediments, with the presumed thermal-dependent trend shaded"
+    caption: "Lipid distributions reflect archaea ecology fingerprints"
+  - src: assets/img/png/fig3_PNAS_SPM_GMM_revised.png
+    alt: "Gaussian mixture model clusters of GDGT-2/GDGT-3 against TEX86 for shallow and deep samples"
+    caption: "GDGT-2/GDGT-3 clusters from a Gaussian mixture model"

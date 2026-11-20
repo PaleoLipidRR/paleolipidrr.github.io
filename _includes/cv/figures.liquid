@@ -1,0 +1,20 @@
+{%- comment -%}
+  The figures of one CV entry, from the hand-kept _data/cv_figures.yml (keyed by entry id); nothing is drawn when there are none.
+  Parameter: entry. Markup: <div class="cv-figures"> of <figure class="cv-figure"> (an <img> and a <figcaption>). The image carries
+  data-zoomable, which the theme's zoom script (al_img_tools, loaded on every page while enable_medium_zoom is true in _config.yml)
+  selects to enlarge it on click. src goes through relative_url; alt and caption are plain text and escaped. The thumbnail box is
+  sized in CSS (_sass/_cv.scss) because the files' dimensions are not known here. Lazy loading keeps a closed <details> from
+  fetching its images.
+{%- endcomment -%}
+{%- comment -%} A name of its own, so it does not overwrite the `figures` capture of cv/entry.liquid, which includes this file. {%- endcomment -%}
+{%- assign cv_entry_figure_list = site.data.cv_figures[include.entry.id] -%}
+{%- if cv_entry_figure_list.size > 0 -%}
+  <div class="cv-figures">
+    {%- for figure in cv_entry_figure_list -%}
+      <figure class="cv-figure">
+        <img src="{{ figure.src | relative_url }}" alt="{{ figure.alt | escape }}" loading="lazy" decoding="async" data-zoomable>
+        <figcaption>{{ figure.caption | escape }}</figcaption>
+      </figure>
+    {%- endfor -%}
+  </div>
+{%- endif -%}

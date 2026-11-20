@@ -5,9 +5,10 @@ github_username: PaleoLipidRR
 linkedin_username: ronnakritr
 orcid_id: 0000-0002-1425-8737
 scholar_userid: AGcBWlAAAAAJ
-cv_pdf: /assets/pdf/CV_Rattanasriampaipong.pdf
-# # Custom CV link - this will use the else clause in social.liquid
-# cv:
-#   url: /assets/pdf/CV_Rattanasriampaipong.pdf
-#   title: CV
-#   logo: CV
+# The CV icon links to the CV page, which links the PDF. It is a custom entry (url, title, logo) rather than the theme's
+# `cv_pdf` key, because jekyll-socials names a built-in key's icon after the key ("Cv pdf") but a custom one after its
+# `title`. `url` is used as written (no baseurl is added), which is right while the site has no baseurl.
+cv:
+  url: /cv/
+  title: CV
+  logo: ai ai-cv

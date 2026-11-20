@@ -1,0 +1,684 @@
+// _sass/_cv.scss
+// The CV page (/cv/, _layouts/cv_page.liquid), Revision 2: every entry is a card with a quiet border, and a section panel
+// sits beside the content. Without the CV script every section shows, one after another, and the panel is a list of in-page
+// links; the "one section at a time" rules apply only under .cv-page.cv-js, the class the script adds. Only the theme's
+// colour variables are used, so dark mode follows the site.
+
+.cv-page {
+  // Muted text mixed from the theme's text and background colours: quieter than body text but with
+  // better contrast than --global-text-color-light in both themes.
+  --cv-muted: color-mix(in srgb, var(--global-text-color) 68%, var(--global-bg-color));
+  // The cards' and the current panel link's background: the page background with a trace of the text colour, so it is a
+  // shade lighter than the page in dark mode and a shade darker in light mode.
+  --cv-soft: color-mix(in srgb, var(--global-text-color) 3.5%, var(--global-bg-color));
+  --cv-tint: color-mix(in srgb, var(--global-theme-color) 7%, transparent);
+  // Clears the theme's fixed navbar (57px) for in-page jumps and the sticky panel.
+  --cv-navbar-clearance: 76px;
+  // Clears the theme's fixed footer (footer.fixed-bottom, 35px tall, above the page at z-index 1030) under the sticky
+  // panel, plus a small gap, so the panel's last link stays visible and clickable when the panel is scrolled to its end.
+  --cv-footer-clearance: 51px;
+  --cv-font-size: 0.95rem;
+  --cv-line-height: 1.5;
+  --cv-summary-size: 0.8rem;
+
+  font-size: var(--cv-font-size);
+  line-height: var(--cv-line-height);
+}
+
+// Text for screen readers only (the ", 11 entries" after a panel link's title).
+.cv-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ---------------------------------------------------------------------------
+// Header line, download button, headline numbers
+// ---------------------------------------------------------------------------
+
+.cv-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 14px;
+}
+
+.cv-updated {
+  margin: 0;
+  color: var(--cv-muted);
+  font-size: 0.85rem;
+}
+
+.cv-page .cv-download {
+  display: inline-block;
+  padding: 7px 13px;
+  border-radius: 6px;
+  background: var(--global-theme-color);
+  color: var(--global-bg-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--global-bg-color);
+    text-decoration: underline;
+  }
+}
+
+.cv-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 26px;
+  margin: 0 0 20px;
+  padding: 10px 0;
+  border-top: 1px solid var(--global-divider-color);
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+.cv-stat-value {
+  margin-right: 5px;
+  font-size: 1.15rem;
+}
+
+.cv-stat-label {
+  color: var(--cv-muted);
+  font-size: 0.85rem;
+}
+
+// ---------------------------------------------------------------------------
+// The panel beside the content
+// ---------------------------------------------------------------------------
+
+.cv-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 26px;
+  align-items: start;
+}
+
+// Sticky on wide screens so it stays at hand on the long script-less page; a panel taller than the window scrolls on its own.
+.cv-nav {
+  position: sticky;
+  top: var(--cv-navbar-clearance);
+  max-height: calc(100vh - var(--cv-navbar-clearance) - var(--cv-footer-clearance));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.cv-page .cv-nav-link {
+  // Positioned so the absolutely placed .cv-sr-only stays inside the link (and inside the phone row's scroller).
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding: 7px 12px;
+  border-left: 2px solid var(--global-divider-color);
+  color: var(--cv-muted);
+  font-size: 0.85rem;
+  line-height: 1.35;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--global-text-color);
+    background: var(--cv-tint);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: -2px;
+  }
+
+  // The current section: accent colour, a heavier weight and the soft background, so it does not rely on colour alone.
+  &[aria-current="true"] {
+    border-left-color: var(--global-theme-color);
+    background: var(--cv-soft);
+    color: var(--global-theme-color);
+    font-weight: 600;
+  }
+}
+
+.cv-nav-count {
+  flex: none;
+  color: var(--cv-muted);
+  font-size: 0.75rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+// ---------------------------------------------------------------------------
+// Sections and groups
+// ---------------------------------------------------------------------------
+
+.cv-section {
+  margin-bottom: 26px;
+  scroll-margin-top: var(--cv-navbar-clearance);
+}
+
+// Without the script nothing is hidden; with it, the sections it marks hidden are not displayed.
+// The page script must add cv-js no later than it sets hidden on a section.
+.cv-page:not(.cv-js) .cv-section[hidden] {
+  display: block;
+}
+
+.cv-page.cv-js .cv-section[hidden] {
+  display: none;
+}
+
+.cv-page .cv-section-title {
+  margin: 0 0 10px;
+  color: var(--global-theme-color);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cv-page .cv-group-title {
+  margin: 16px 0 8px;
+  color: var(--global-text-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.cv-intro {
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+}
+
+.cv-footnotes {
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+  color: var(--cv-muted);
+  font-size: 0.8rem;
+
+  p {
+    margin: 0 0 4px;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Cards
+// ---------------------------------------------------------------------------
+
+.cv-card {
+  min-width: 0;
+  margin-bottom: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 10px;
+  background: var(--cv-soft);
+  // Long unbroken strings (URLs, long names) wrap instead of overflowing on a narrow screen.
+  overflow-wrap: anywhere;
+  scroll-margin-top: var(--cv-navbar-clearance);
+}
+
+// The title block on the left, the date on the right; a long date wraps within its share of the line.
+.cv-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.cv-head {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.cv-date {
+  flex: 0 0 auto;
+  max-width: 40%;
+  color: var(--cv-muted);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.cv-place {
+  color: var(--cv-muted);
+}
+
+.cv-roles,
+.cv-role {
+  display: block;
+}
+
+.cv-roles {
+  margin-top: 2px;
+}
+
+.cv-role-when {
+  color: var(--cv-muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+
+  &::before {
+    content: "· ";
+  }
+}
+
+.cv-note {
+  display: block;
+  color: var(--cv-muted);
+  font-size: 0.875rem;
+}
+
+// Skills lines ("Languages: Thai, English"): the note continues the title's line in body text.
+.cv-note.cv-note-inline {
+  display: inline;
+  color: inherit;
+  font-size: inherit;
+}
+
+// ---------------------------------------------------------------------------
+// What opens inside a card
+// ---------------------------------------------------------------------------
+
+.cv-details > summary {
+  position: relative;
+  display: block;
+  margin-top: 8px;
+  // Right padding keeps the label clear of the marker.
+  // At least 24px tall, the minimum click target size.
+  min-height: 24px;
+  padding: 3px 22px 3px 0;
+  border-radius: 4px;
+  color: var(--global-theme-color);
+  font-size: var(--cv-summary-size);
+  cursor: pointer;
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  // The ▸/▾ marker, pinned to the top right and centred on the summary's first line (one line box of the
+  // summary's text, below its 3px top padding).
+  &::after {
+    content: "▸";
+    content: "▸" / "";
+    position: absolute;
+    top: 3px;
+    right: 4px;
+    display: flex;
+    align-items: center;
+    height: calc(var(--cv-summary-size) * var(--cv-line-height));
+    color: var(--cv-muted);
+    font-size: 0.7rem;
+    line-height: 1;
+  }
+
+  &:hover {
+    background: var(--cv-tint);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: 1px;
+  }
+}
+
+.cv-details[open] > summary::after {
+  content: "▾";
+  content: "▾" / "";
+}
+
+.cv-more {
+  margin-top: 8px;
+  font-size: 0.875rem;
+
+  p,
+  ul {
+    margin: 0 0 6px;
+  }
+
+  ul {
+    padding-left: 1.2rem;
+  }
+}
+
+.cv-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 6px;
+}
+
+.cv-table {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+
+  th,
+  td {
+    padding: 2px 16px 2px 0;
+    border-bottom: 1px solid var(--global-divider-color);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    color: var(--cv-muted);
+    font-weight: 600;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Links on an entry: plain coloured text
+// ---------------------------------------------------------------------------
+
+.cv-links {
+  margin: 0;
+}
+
+.cv-page .cv-link {
+  display: inline-block;
+  margin: 6px 14px 0 0;
+  color: var(--global-theme-color);
+  font-size: 0.8rem;
+}
+
+// ---------------------------------------------------------------------------
+// Publications: filter chips, the tag row, folded paragraphs
+// ---------------------------------------------------------------------------
+
+// The bar carries the hidden attribute in the markup and is shown by the CV script; the explicit rule keeps
+// `display: flex` from overriding [hidden].
+.cv-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 10px;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.cv-page .cv-filter {
+  padding: 1px 10px;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cv-muted);
+  font: inherit;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--cv-tint);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: 2px;
+  }
+
+  // The pressed state is shown by fill and weight as well as by aria-pressed, not by colour alone.
+  &[aria-pressed="true"] {
+    border-color: var(--global-text-color);
+    background: var(--global-text-color);
+    color: var(--global-bg-color);
+    font-weight: 600;
+  }
+}
+
+.cv-page {
+  // The tag row under a citation.
+  .cv-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin: 8px 0 0;
+  }
+
+  // A plain tag: a quiet outlined chip. The role tag is bold; metric tags are links whose number is bold.
+  .cv-tag {
+    display: inline-block;
+    padding: 0 8px;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 999px;
+    color: var(--cv-muted);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  .cv-tag-role {
+    color: var(--global-text-color);
+    font-weight: 600;
+  }
+
+  a.cv-tag-metric {
+    text-decoration: none;
+
+    &:hover {
+      border-color: var(--global-theme-color);
+      color: var(--global-theme-color);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--global-theme-color);
+      outline-offset: 2px;
+    }
+  }
+
+  // The Dimensions and Altmetric widgets are third-party and size themselves. Their elements are empty until the scripts
+  // run (or for good when the scripts are blocked), and an empty inline-flex item takes no width, so the row stays complete.
+  // The widgets draw inline images and boxes that sit on the text baseline, which leaves them a few pixels lower than the
+  // text tags; as flex items with block-level contents they centre on the row like the tags do.
+  .cv-embeds {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+
+    > * {
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+    }
+
+    img,
+    svg,
+    iframe {
+      display: block;
+    }
+  }
+
+  // "★ Journal cover": outlined in the accent colour, bold, with a star glyph, so it does not rely on colour alone.
+  .cv-badge {
+    display: inline-block;
+    padding: 0 8px;
+    border: 1px solid var(--global-theme-color);
+    border-radius: 999px;
+    color: var(--global-theme-color);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+}
+
+.cv-more .cv-abstract,
+.cv-more .cv-contribution,
+.cv-more .cv-authors {
+  margin: 0 0 6px;
+}
+
+// ---------------------------------------------------------------------------
+// Figures inside an opened entry: fixed-size thumbnails (the files' sizes are not known to the template, so the
+// box is reserved here and nothing shifts when an image loads); a click enlarges one through the theme's zoom.
+// ---------------------------------------------------------------------------
+
+.cv-figures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 8px 0 6px;
+}
+
+.cv-figure {
+  width: 220px;
+  max-width: 100%;
+  margin: 0;
+
+  img {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 150px;
+    padding: 4px;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 4px;
+    // Plots with transparent backgrounds need a light ground to stay legible in dark mode.
+    background: #fff;
+    object-fit: contain;
+  }
+
+  figcaption {
+    margin-top: 4px;
+    color: var(--cv-muted);
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Added by the CV script: "Show all" buttons and focus moved to a heading or a card
+// ---------------------------------------------------------------------------
+
+.cv-page .cv-show-all {
+  display: block;
+  min-height: 24px;
+  margin: 0 0 10px;
+  padding: 3px 12px;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--global-theme-color);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--cv-tint);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: 2px;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+// The script focuses a section heading after a switch and a card after a deep link or "Show all"; the ring shows for
+// keyboard users only.
+.cv-page .cv-section-title:focus,
+.cv-page .cv-card:focus {
+  outline: none;
+}
+
+.cv-page .cv-section-title:focus-visible,
+.cv-page .cv-card:focus-visible {
+  outline: 2px solid var(--global-theme-color);
+  outline-offset: 2px;
+}
+
+// Shown only in print (see below).
+.cv-print-note {
+  display: none;
+}
+
+// ---------------------------------------------------------------------------
+// Phones: one column, the panel a single horizontally scrolling row
+// ---------------------------------------------------------------------------
+
+@media (max-width: 640px) {
+  .cv-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .cv-nav {
+    position: static;
+    display: flex;
+    gap: 4px;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .cv-page .cv-nav-link {
+    flex: none;
+    white-space: nowrap;
+    border-left: 0;
+    border-bottom: 2px solid var(--global-divider-color);
+
+    &[aria-current="true"] {
+      border-bottom-color: var(--global-theme-color);
+    }
+  }
+
+  .cv-card {
+    padding: 10px 12px;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Print: every section and entry, in PDF order, without the controls. The CV script also shows every section and card
+// and opens every <details> on beforeprint; these rules cover printing with JavaScript off as well.
+// ---------------------------------------------------------------------------
+
+@media print {
+  .cv-layout {
+    display: block;
+  }
+
+  .cv-nav,
+  .cv-filters,
+  .cv-page .cv-show-all,
+  .cv-page .cv-download {
+    display: none !important;
+  }
+
+  .cv-page .cv-section[hidden],
+  .cv-page .cv-card[hidden],
+  .cv-page .cv-group-title[hidden] {
+    display: block !important;
+  }
+
+  .cv-page .cv-section-title,
+  .cv-page .cv-group-title {
+    break-after: avoid;
+  }
+
+  .cv-print-note {
+    display: block;
+    margin: 0 0 14px;
+    font-size: 0.85rem;
+  }
+}
+
+// Printing with JavaScript off: show the contents of closed <details> where the browser supports ::details-content
+// (a separate rule, so a browser that does not know the selector drops only this one).
+@media print {
+  .cv-details::details-content {
+    display: block;
+    content-visibility: visible;
+  }
+}

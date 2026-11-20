@@ -1,0 +1,2745 @@
+{
+  "schema_version": 1,
+  "updated": "2026-11-20",
+  "source_commit": "8788dff4a9a4c13e8e06c8cbb9237f6ceb80e049",
+  "stats": {
+    "funding": "$326,000",
+    "citations": "159",
+    "hindex": "4",
+    "students": "700"
+  },
+  "sections": [
+    {
+      "id": "education",
+      "title": "Education",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": null,
+          "title": null,
+          "entries": [
+            {
+              "id": "education-texas-a-m-university",
+              "title_html": "<b>Texas A&amp;M University</b>",
+              "place": "College Station, TX",
+              "when": null,
+              "roles": [
+                {
+                  "title_html": "Ph.D. in Oceanography (Paleoceanography/Organic Geochemistry)",
+                  "when": "2018–2023"
+                }
+              ],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "education-chulalongkorn-university",
+              "title_html": "<b>Chulalongkorn University</b>",
+              "place": "Bangkok, Thailand",
+              "when": null,
+              "roles": [
+                {
+                  "title_html": "M.S. in Petroleum Geoscience (International Program)",
+                  "when": "2015–2016"
+                },
+                {
+                  "title_html": "B.S. in Geology",
+                  "when": "2009–2013"
+                }
+              ],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "professional-appointments",
+      "title": "Professional Appointments",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": null,
+          "title": null,
+          "entries": [
+            {
+              "id": "professional-appointments-the-university-of-arizona-department-of-geosciences",
+              "title_html": "<b>The University of Arizona</b>, Department of Geosciences",
+              "place": "Tucson, AZ",
+              "when": null,
+              "roles": [
+                {
+                  "title_html": "Postdoctoral Research Associate",
+                  "when": "2026–Present"
+                },
+                {
+                  "title_html": "NOAA Climate &amp; Global Change Postdoctoral Fellow",
+                  "when": "2023–2025"
+                }
+              ],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "professional-appointments-texas-a-m-university-department-of-oceanography",
+              "title_html": "<b>Texas A&amp;M University</b>, Department of Oceanography",
+              "place": "College Station, TX",
+              "when": null,
+              "roles": [
+                {
+                  "title_html": "Graduate Research Assistant",
+                  "when": "2018–2023"
+                },
+                {
+                  "title_html": "Graduate Assistant — Teaching <i>(teaching assistant)</i>",
+                  "when": "2023"
+                },
+                {
+                  "title_html": "Graduate Assistant Lecturer <i>(instructor of record)</i>",
+                  "when": "2021–2022"
+                }
+              ],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "professional-appointments-chevron-thailand-exploration-and-production-limited",
+              "title_html": "<b>Chevron Thailand Exploration and Production, Limited</b>",
+              "place": "Bangkok, Thailand",
+              "when": null,
+              "roles": [
+                {
+                  "title_html": "Development Geologist, Satun-Funan Asset Team",
+                  "when": "2016–2018"
+                },
+                {
+                  "title_html": "Horizons Earth Scientist, Reservoir Management Team",
+                  "when": "2013–2016"
+                },
+                {
+                  "title_html": "Undergraduate Student Intern, Reservoir Management Team",
+                  "when": "Summer 2012, 2013"
+                }
+              ],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grants-fellowships",
+      "title": "Grants & Fellowships",
+      "intro_html": [
+        "Total research and fellowship funding awarded: <b>$326,000</b>."
+      ],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": "external",
+          "title": "External",
+          "entries": [
+            {
+              "id": "grants-noaa",
+              "title_html": "NOAA Climate &amp; Global Change Postdoctoral Fellowship",
+              "place": null,
+              "when": "2023–2025",
+              "roles": [],
+              "notes_html": [
+                "<i>$200,000 over two years; up to 8 fellows selected worldwide.</i>"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "grants-fellowships-schlanger-ocean-drilling-fellowship-nsf-u-s-science-support-program-2021-2022",
+              "title_html": "Schlanger Ocean Drilling Fellowship, NSF/U.S. Science Support Program",
+              "place": null,
+              "when": "2021–2022",
+              "roles": [],
+              "notes_html": [
+                "<i>$30,000 for one year; up to 8 fellows selected nationwide.</i>"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "grants-fellowships-fulbright-thai-graduate-scholarship-2018-2020",
+              "title_html": "Fulbright Thai Graduate Scholarship",
+              "place": null,
+              "when": "2018–2020",
+              "roles": [],
+              "notes_html": [
+                "<i>$70,000 over two years; up to 7 scholars selected nationwide.</i>"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "grants-fellowships-texas-sea-grant-grants-in-aid-graduate-research-grant-2022-2024",
+              "title_html": "Texas Sea Grant Grants-In-Aid Graduate Research Grant",
+              "place": null,
+              "when": "2022–2024",
+              "roles": [],
+              "notes_html": [
+                "<i>$2,000 over two years; competitive state-wide award, NOAA Sea Grant College Program.</i>"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "internal",
+          "title": "Internal",
+          "entries": [
+            {
+              "id": "grants-fellowships-texas-a-m-dissertation-fellowship-2023-2024",
+              "title_html": "Texas A&amp;M Dissertation Fellowship",
+              "place": null,
+              "when": "2023–2024",
+              "roles": [],
+              "notes_html": [
+                "<i>$24,000 for one year; up to 15 fellows selected university-wide.</i>"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "publications",
+      "title": "Publications",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": "published",
+          "title": "Papers published in refereed journals",
+          "entries": [
+            {
+              "id": "pub-Elling2026",
+              "title_html": "Archaeal tetraether lipids as tracers for past marine environmental change",
+              "place": null,
+              "when": "2026",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": "Journal cover and Eos highlight",
+              "paper": null,
+              "pub": {
+                "key": "Elling2026",
+                "status": "published",
+                "first_author": false,
+                "authors_short_html": "Elling, F. J., …, <b>Rattanasriampaipong, R.</b>, …",
+                "authors_full_html": "Elling, F. J., Inglis, G. N., Davtian, N., Hurley, S. J., Naafs, B. D. A., O'Connor, L. K., Pancost, R. D., Peterse, F., <b>Rattanasriampaipong, R.</b>, Rice, A., Schubotz, F., Sinninghe Damsté, J. S., Wörmer, L., Auderset, A., Becker, K. W., Berke, M. A., Bijl, P. K., De Jonge, C., Dong, L., Duncan, B. J., Dunkley Jones, T., Fenies, P., Fietz, S., Ho, S. L., Huguet, A., Huguet, C., Kaiser, J., Liu, X.-L., Mollenhauer, G., Naeher, S., Pearson, A., Śliwińska, K. K., Sluijs, A., Sosa-Montes de Oca, C., Tian, Q., Tierney, J. E., Varma, D., Xiao, W., Zhang, Y. G., Zhao, X.",
+                "year": "2026",
+                "title_html": "Archaeal tetraether lipids as tracers for past marine environmental change",
+                "venue_html": "<i>Paleoceanography and Paleoclimatology</i>, 41(7)",
+                "doi": "10.1029/2025pa005373",
+                "abstract": "Archaea are single-celled microorganisms that are abundant in marine environments and play a key role in the carbon and nitrogen cycles. Archaea can biosynthesize a wide variety of isoprenoid membrane lipids, including isoprenoid glycerol dibiphytanyl glycerol tetraethers (isoGDGTs). Experimental and empirical evidence demonstrates that the number of cyclopentane moieties in isoGDGTs is related to growth temperature, leading to the formulation and development of the TEX86 ocean temperature proxy. The TEX86 proxy has been widely applied to marine sediments spanning the last 190 million years and has revealed unique insights into the evolution of ocean temperatures over diverse timescales. Other indices have been developed using archaeal lipids to reconstruct ecological and biogeochemical processes that operate within the marine realm. However, several knowledge gaps (e.g., depth of export production, non-temperature controls, application in non-analogue climates) limit the application of archaeal lipid-based proxies in modern and ancient marine environments. In this review, we critically assess the utility of archaeal lipids as tracers for (paleo) environmental change, with an emphasis on the TEX86 paleotemperature proxy.",
+                "contribution_html": "<i>Contributing author. Drafted the review's synthesis of the biological sources of marine tetraether lipids, distributed across several sections of the final paper. Designed the first draft of the figure (Figure 13) and finalized it with Felix Elling; it is featured on the journal cover, 41(7), July 2026. The paper was also an <i>Eos</i> Editors' Highlight (3 August 2026), which used the figure.</i>",
+                "code_url": null
+              }
+            },
+            {
+              "id": "pub-Tran2026",
+              "title_html": "Biomarker constraints on Indo-Pacific Warm Pool temperature during the Late Pleistocene: The role of orbital forcing",
+              "place": null,
+              "when": "2026",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": {
+                "key": "Tran2026",
+                "status": "published",
+                "first_author": false,
+                "authors_short_html": "Tran, T. T., Tierney, J. E., Holbourn, A., <b>Rattanasriampaipong, R.</b>",
+                "authors_full_html": "Tran, T. T., Tierney, J. E., Holbourn, A., <b>Rattanasriampaipong, R.</b>",
+                "year": "2026",
+                "title_html": "Biomarker constraints on Indo-Pacific Warm Pool temperature during the Late Pleistocene: The role of orbital forcing",
+                "venue_html": "<i>Paleoceanography and Paleoclimatology</i>, 41(3)",
+                "doi": "10.1029/2025pa005276",
+                "abstract": null,
+                "contribution_html": null,
+                "code_url": null
+              }
+            },
+            {
+              "id": "pub-Bijl2025_gdgtcookbook",
+              "title_html": "Reviews and syntheses: Best practices for the application of marine GDGTs as proxy for paleotemperatures: sampling, processing, analyses, interpretation, and archiving protocols",
+              "place": null,
+              "when": "2025",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": {
+                "key": "Bijl2025_gdgtcookbook",
+                "status": "published",
+                "first_author": false,
+                "authors_short_html": "Bijl, P. K., …, <b>Rattanasriampaipong, R.</b>, …",
+                "authors_full_html": "Bijl, P. K., Śliwińska, K. K., Duncan, B., Huguet, A., Naeher, S., <b>Rattanasriampaipong, R.</b>, Sosa-Montes de Oca, C., Auderset, A., Berke, M. A., Kim, B. S., Davtian, N., Dunkley Jones, T., Eefting, D. D., Elling, F. J., Fenies, P., Inglis, G. N., O'Connor, L., Pancost, R. D., Peterse, F., Rice, A., Sluijs, A., Varma, D., Xiao, W., Zhang, Y. G.",
+                "year": "2025",
+                "title_html": "Reviews and syntheses: Best practices for the application of marine GDGTs as proxy for paleotemperatures: sampling, processing, analyses, interpretation, and archiving protocols",
+                "venue_html": "<i>Biogeosciences</i>, 22(21)",
+                "doi": "10.5194/bg-22-6465-2025",
+                "abstract": "Abstract. Marine glycerol dialkyl glycerol tetraethers (GDGTs) are used in various proxies (such as TEX86) to reconstruct past ocean temperatures. Over 20 years of improvements in GDGT sample processing, analytical techniques, data interpretation and our understanding of proxy functioning have led to the collective development of a set of best practices in all these areas. Further, the importance of Open Science in research has increased the emphasis on the systematic documentation of data generation, reporting and archiving processes for optimal reusability of data. In this paper, we provide protocols and best practices for obtaining, interpreting and presenting GDGT data (with a focus on marine GDGTs), from sampling to data archiving. The purpose of this paper is to optimize inter-laboratory comparability of GDGT data, and to ensure published data follows modern open access principles.",
+                "contribution_html": "<i>Contributing author. Led the writing of the `data reporting and archiving' section and produced Figures 1 and 4.</i>",
+                "code_url": null
+              }
+            },
+            {
+              "id": "pub-Rattanasriampaipong2025",
+              "title_html": "A nutrient effect on the TEX<sub>86</sub> paleotemperature proxy",
+              "place": null,
+              "when": "2025",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": {
+                "key": "Rattanasriampaipong2025",
+                "status": "published",
+                "first_author": true,
+                "authors_short_html": "<b>Rattanasriampaipong, R.</b>, Tierney, J. E., Abell, J. T., Gilmore, L. D.",
+                "authors_full_html": "<b>Rattanasriampaipong, R.</b>, Tierney, J. E., Abell, J. T., Gilmore, L. D.",
+                "year": "2025",
+                "title_html": "A nutrient effect on the TEX<sub>86</sub> paleotemperature proxy",
+                "venue_html": "<i>Geophysical Research Letters</i>, 52(12)",
+                "doi": "10.1029/2025gl115237",
+                "abstract": "The TEX<sub>86</sub> paleotemperature proxy is widely used to reconstruct ocean surface temperatures over the past 100 million years. However, archaeal culture experiments show that nutrient stress elevates TEX<sub>86</sub> values by increasing glycerol dialkyl glycerol tetraether (GDGT) cyclization. Here, we demonstrate that this “nutrient effect” is also recorded in sedimentary GDGTs. Using an expanded core-top database, we find a significant negative correlation between TEX<sub>86</sub> and nitrate concentrations (ρ = -0.31; <i>P</i>&lt;.001) once the thermal effect is removed. There are stronger correlations (ρ -0.73 to -0.91; <i>P</i>&lt;.001) in regions with steep nitrate gradients. Comparisons between TEX<sub>86</sub> and U<sup>K'</sup><sub>37</sub>-based reconstructions from the Arabian Sea and Tasman Sea suggest that nutrient stress influenced GDGT distributions during glacial-interglacial cycles. Our findings underscore the need to account for nutrient effects when applying TEX<sub>86</sub> paleothermometry.",
+                "contribution_html": null,
+                "code_url": "https://github.com/PaleoLipidRR/nutrient-effect-on-TEX"
+              }
+            },
+            {
+              "id": "pub-Judd2022TheData",
+              "title_html": "The PhanSST global database of Phanerozoic sea surface temperature proxy data",
+              "place": null,
+              "when": "2022",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": {
+                "key": "Judd2022TheData",
+                "status": "published",
+                "first_author": false,
+                "authors_short_html": "Judd, E. J., …, <b>Rattanasriampaipong, R.</b>, …",
+                "authors_full_html": "Judd, E. J., Tierney, J. E., Huber, B. T., Wing, S. L., Lunt, D. J., Ford, H. L., Inglis, G. N., McClymont, E. L., O'Brien, C. L., <b>Rattanasriampaipong, R.</b>, Si, W., Staitis, M. L., Thirumalai, K., Anagnostou, E., Cramwinckel, M. J., Dawson, R. R., Evans, D., Gray, W. R., Grossman, E. L., Henehan, M. J., Hupp, B. N., MacLeod, K. G., O'Connor, L. K., Sánchez Montes, M. L., Song, H., Zhang, Y. G.",
+                "year": "2022",
+                "title_html": "The PhanSST global database of Phanerozoic sea surface temperature proxy data",
+                "venue_html": "<i>Scientific Data</i>, 9(1)",
+                "doi": "10.1038/s41597-022-01826-0",
+                "abstract": "Paleotemperature proxy data form the cornerstone of paleoclimate research and are integral to understanding the evolution of the Earth system across the Phanerozoic Eon. Here, we present PhanSST, a database containing over 150,000 data points from five proxy systems that can be used to estimate past sea surface temperature. The geochemical data have a near-global spatial distribution and temporally span most of the Phanerozoic. Each proxy value is associated with consistent and queryable metadata fields, including information about the location, age, and taxonomy of the organism from which the data derive. To promote transparency and reproducibility, we include all available published data, regardless of interpreted preservation state or vital effects. However, we also provide expert-assigned diagenetic assessments, ecological and environmental flags, and other proxy-specific fields, which facilitate informed and responsible reuse of the database. The data are quality control checked and the foraminiferal taxonomy has been updated. PhanSST will serve as a valuable resource to the paleoclimate community and has myriad applications, including evolutionary, geochemical, diagenetic, and proxy calibration studies.",
+                "contribution_html": "<i>Contributing author. Entered and quality-controlled a substantial share of the compiled records.</i>",
+                "code_url": null
+              }
+            },
+            {
+              "id": "pub-Rattanasriampaipong2022",
+              "title_html": "Archaeal lipids trace ecology and evolution of marine ammonia-oxidizing archaea",
+              "place": null,
+              "when": "2022",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": {
+                "key": "Rattanasriampaipong2022",
+                "status": "published",
+                "first_author": true,
+                "authors_short_html": "<b>Rattanasriampaipong, R.</b>, Zhang, Y. G., Pearson, A., Hedlund, B. P., Zhang, S.",
+                "authors_full_html": "<b>Rattanasriampaipong, R.</b>, Zhang, Y. G., Pearson, A., Hedlund, B. P., Zhang, S.",
+                "year": "2022",
+                "title_html": "Archaeal lipids trace ecology and evolution of marine ammonia-oxidizing archaea",
+                "venue_html": "<i>Proceedings of the National Academy of Sciences</i>, 119(31)",
+                "doi": "10.1073/pnas.2123193119",
+                "abstract": "Archaeal membrane lipids are widely used for paleotemperature reconstructions, yet these molecular fossils also bear rich information about ecology and evolution of marine ammonia-oxidizing archaea (AOA). Here we identified ‘thermal’ and ‘non-thermal’ behaviors of archaeal glycerol dialkyl glycerol tetraethers (GDGTs) by comparing the GDGT-based temperature index (TEX<sub>86</sub>) to the ratio of GDGTs with two and three cyclopentane rings (GDGT-2/GDGT-3). Thermal-dependent biosynthesis should increase TEX<sub>86</sub> and decrease GDGT-2/GDGT-3 when the ambient temperature increases. This presumed temperature-dependent (PTD) trend is observed in GDGTs derived from cultures of thermophilic and mesophilic AOA. The distribution of GDGTs in suspended particulate matter (SPM) and sediments collected from above the pycnocline— ‘shallow-water’ samples—also follows the PTD trend. These similar GDGT distributions between AOA cultures and shallow-water environmental samples reflect ‘shallow’ ecotypes of marine AOA. While there are currently no cultures of ‘deep’ AOA clades, GDGTs derived from ‘deep-water’ SPM and marine sediment samples exhibit non-thermal behavior deviating from the PTD trend. The presence of ‘deep’ AOA increases the GDGT-2/GDGT-3 ratio and distorts the temperature-controlled correlation between GDGT-2/GDGT-3 and TEX<sub>86</sub>. We used Gaussian Mixture Models to statistically characterize these diagnostic patterns of modern AOA ecology from paleo-GDGT records to infer the evolution of marine AOA from the Mid-Mesozoic to the present. Long-term GDGT-2/GDGT-3 trends suggest the suppression of today’s ‘deep-water’ marine AOA during the Mesozoic–early Cenozoic greenhouse climates. Our analysis provides insights into the evolutionary timeline and the expansion of AOA niches associated with major oceanographic and climate changes.",
+                "contribution_html": null,
+                "code_url": "https://github.com/PaleoLipidRR/marine-AOA-GDGT-distribution"
+              }
+            },
+            {
+              "id": "pub-Rattanasriampaipong16",
+              "title_html": "Potential sources of mercury in Southern Pattani Basin, the Gulf of Thailand",
+              "place": null,
+              "when": "2016",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": {
+                "key": "Rattanasriampaipong16",
+                "status": "published",
+                "first_author": true,
+                "authors_short_html": "<b>Rattanasriampaipong, R.</b>",
+                "authors_full_html": "<b>Rattanasriampaipong, R.</b>",
+                "year": "2016",
+                "title_html": "Potential sources of mercury in Southern Pattani Basin, the Gulf of Thailand",
+                "venue_html": "<i>Bulletin of Earth Sciences of Thailand</i>, 8(2)",
+                "doi": "10.13140/rg.2.2.33243.67369",
+                "abstract": null,
+                "contribution_html": null,
+                "code_url": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "under-review",
+          "title": "Manuscript(s) submitted, under review, under revision, preprint and/or in-press",
+          "entries": [
+            {
+              "id": "pub-WanZhang_submitted",
+              "title_html": "Enhanced production and methylation of branched GDGTs responding to water content-mediated redox changes in Tibetan Plateau permafrost soils",
+              "place": null,
+              "when": "2026",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": {
+                "key": "WanZhang_submitted",
+                "status": "under-review",
+                "first_author": false,
+                "authors_short_html": "Zhang, W., …, <b>Rattanasriampaipong, R.</b>, …",
+                "authors_full_html": "Zhang, W., Tang, X., Yao, W., Qian, J., He, W., Zheng, Y., Zhu, Y., <b>Rattanasriampaipong, R.</b>, Chen, Y., Zheng, F., Zhang, C.",
+                "year": "2026",
+                "title_html": "Enhanced production and methylation of branched GDGTs responding to water content-mediated redox changes in Tibetan Plateau permafrost soils",
+                "venue_html": "<i>EGUsphere [preprint]</i>",
+                "doi": "10.5194/egusphere-2026-3837",
+                "abstract": null,
+                "contribution_html": null,
+                "code_url": null
+              }
+            },
+            {
+              "id": "pub-Rattanasriampaipong2026",
+              "title_html": "TEXAS: A proxy system model for TEX<sub>86</sub> paleothermometry",
+              "place": null,
+              "when": "2026",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": {
+                "key": "Rattanasriampaipong2026",
+                "status": "under-review",
+                "first_author": true,
+                "authors_short_html": "<b>Rattanasriampaipong, R.</b>, Tierney, J. E., Elling, F. J., Inglis, G. N.",
+                "authors_full_html": "<b>Rattanasriampaipong, R.</b>, Tierney, J. E., Elling, F. J., Inglis, G. N.",
+                "year": "2026",
+                "title_html": "TEXAS: A proxy system model for TEX<sub>86</sub> paleothermometry",
+                "venue_html": "<i>ESS Open Archive</i>",
+                "doi": "10.22541/essoar.15002926/v3",
+                "abstract": null,
+                "contribution_html": null,
+                "code_url": "https://github.com/PaleoLipidRR/TEXAS"
+              }
+            },
+            {
+              "id": "pub-Rattanasriampaipong2024preprint",
+              "title_html": "Methylation index of Overly Branched tetraether lipids (MOB): a proxy for deep ocean (de)oxygenation?",
+              "place": null,
+              "when": "2024",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": {
+                "key": "Rattanasriampaipong2024preprint",
+                "status": "under-review",
+                "first_author": true,
+                "authors_short_html": "<b>Rattanasriampaipong, R.</b>, …",
+                "authors_full_html": "<b>Rattanasriampaipong, R.</b>, Zhang, Y. G., Alo, O., Liu, X.-L., Zhang, Y., Kim, B., Marcantonio, F., Bassinot, F., Li, T.",
+                "year": "2024",
+                "title_html": "Methylation index of Overly Branched tetraether lipids (MOB): a proxy for deep ocean (de)oxygenation?",
+                "venue_html": "<i>ESS Open Archive</i>",
+                "doi": "10.22541/essoar.171415886.62339907/v1",
+                "abstract": null,
+                "contribution_html": null,
+                "code_url": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "reports",
+          "title": "Technical Reports",
+          "entries": [
+            {
+              "id": "publications-recommended-location-logging-and-coring-program-geological-reports-chevron-thailand-2013-2018",
+              "title_html": "<b>Recommended Location, Logging and Coring Program Geological Reports</b>, Chevron Thailand, 2013–2018.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "p",
+                  "html": "Full pre-drill assessments for four drilling projects, including geological risk, economic justification, and wireline logging and formation testing programs."
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-open-source-contributions",
+      "title": "Software & Open-Source Contributions",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": null,
+          "title": null,
+          "entries": [
+            {
+              "id": "software-texas",
+              "title_html": "<b>TEXAS</b> (TetraEther indeX of Ammonia oxidizerS)",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "p",
+                  "html": "Hierarchical Bayesian proxy system model for TEX<sub>86</sub> paleothermometry, implemented in Stan. Released as the open-source Python package <code>texas-psm</code> (MIT), with archived, versioned releases on Zenodo. Linked to Rattanasriampaipong et al. (2026)."
+                }
+              ],
+              "links": [
+                {
+                  "label": "github.com/PaleoLipidRR/TEXAS",
+                  "url": "https://github.com/PaleoLipidRR/TEXAS"
+                },
+                {
+                  "label": "pypi.org/project/texas-psm",
+                  "url": "https://pypi.org/project/texas-psm/"
+                },
+                {
+                  "label": "doi.org/10.5281/zenodo.19671664",
+                  "url": "https://doi.org/10.5281/zenodo.19671664"
+                }
+              ],
+              "badge": null,
+              "paper": "Rattanasriampaipong2026",
+              "pub": null
+            },
+            {
+              "id": "software-open-source-contributions-analysis-code-nutrient-effect-on-tex86",
+              "title_html": "<b>Analysis code: Nutrient Effect on TEX<sub>86</sub></b>",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [
+                {
+                  "label": "github.com/PaleoLipidRR/nutrient-effect-on-TEX",
+                  "url": "https://github.com/PaleoLipidRR/nutrient-effect-on-TEX"
+                }
+              ],
+              "badge": null,
+              "paper": "Rattanasriampaipong2025",
+              "pub": null
+            },
+            {
+              "id": "software-open-source-contributions-analysis-code-gdgt-2-gdgt-3-traces-aoa-ecology-and-evolution",
+              "title_html": "<b>Analysis code: GDGT-2/GDGT-3 traces AOA Ecology and Evolution</b>",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [
+                {
+                  "label": "github.com/PaleoLipidRR/marine-AOA-GDGT-distribution",
+                  "url": "https://github.com/PaleoLipidRR/marine-AOA-GDGT-distribution"
+                }
+              ],
+              "badge": null,
+              "paper": "Rattanasriampaipong2022",
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "technical-skills-languages",
+      "title": "Technical Skills & Languages",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": null,
+          "title": null,
+          "entries": [
+            {
+              "id": "technical-skills-languages-languages",
+              "title_html": "<b>Languages:</b>",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "Thai (Native), English (Full professional proficiency)"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "technical-skills-languages-programming-statistical-software",
+              "title_html": "<b>Programming &amp; Statistical Software:</b>",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "Python (Proficient), MATLAB (Intermediate), Stan (Intermediate)"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "technical-skills-languages-laboratory",
+              "title_html": "<b>Laboratory:</b>",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "Accelerated solvent extraction, silica-gel column chromatography, LC-MS lipid biomarker analysis"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "technical-skills-languages-data-visualization-analysis",
+              "title_html": "<b>Data Visualization &amp; Analysis:</b>",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "Tableau, Spotfire, Python visualization libraries"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "technical-skills-languages-documentation-design",
+              "title_html": "<b>Documentation &amp; Design:</b>",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "LaTeX/Overleaf, MS Office Suite, Adobe Illustrator, Inkscape"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "research-experience",
+      "title": "Research Experience",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": null,
+          "title": null,
+          "entries": [
+            {
+              "id": "research-experience-postdoctoral-research-department-of-geosciences-the-university-of-arizona-2023-present",
+              "title_html": "<b>Postdoctoral Research</b>, Department of Geosciences, The University of Arizona",
+              "place": null,
+              "when": "2023–Present",
+              "roles": [],
+              "notes_html": [
+                "Mentor: Jessica E. Tierney",
+                "Title: <i>TEXAS: Towards a full proxy system modeling of TetraEther indeX of Ammonia oxidizerS and reanalysis of temperature trends for the past 100 million years</i>"
+              ],
+              "detail": [
+                {
+                  "type": "ul",
+                  "items_html": [
+                    "Designed and developed a comprehensive proxy system modeling framework for the TEX<sub>86</sub> paleotemperature proxy to reconstruct ancient climate conditions",
+                    "Discovered and quantified the influence of nutrient levels on TEX<sub>86</sub> proxy accuracy, identifying “nutrient stress” effects in surface marine sediments through analysis of global and regional lipid distribution patterns",
+                    "Developing an innovative lipid-based paleotemperature proxy using Bayesian inference methodology implemented in Stan programming language"
+                  ]
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "research-experience-doctoral-research-department-of-oceanography-texas-a-m-university-2018-2023",
+              "title_html": "<b>Doctoral Research</b>, Department of Oceanography, Texas A&amp;M University",
+              "place": null,
+              "when": "2018–2023",
+              "roles": [],
+              "notes_html": [
+                "Committee: Yige Zhang (Chair), Ethan Grossman, Robert Korty, Jason Sylvan",
+                "Collaborators &amp; Mentors: Ann Pearson (Harvard), Brian Hedlund (UNLV), Shuang Zhang (TAMU)",
+                "“<i>Beyond TEX<sub>86</sub>: Evaluating Archaeal Evolution Coupled with Oceans and Climate Changes using Tetraether Lipids</i>”"
+              ],
+              "detail": [
+                {
+                  "type": "ul",
+                  "items_html": [
+                    "Compiled and synthesized a large archaeal membrane lipid database (N&gt;3000) spanning 192 million years, and identified the spatio-temporal gaps that thin the record before ca. 100 Ma",
+                    "Characterized archaeal lipid distribution patterns linked to archaeal ecology in marine environments",
+                    "Investigated potential of novel subclasses of archaeal membrane lipids as a proxy for ocean (de)oxygenation"
+                  ]
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "research-experience-master-s-thesis-department-of-geology-chulalongkorn-university-2016",
+              "title_html": "<b>Master's Thesis</b>, Department of Geology, Chulalongkorn University",
+              "place": null,
+              "when": "2016",
+              "roles": [],
+              "notes_html": [
+                "Advisor: John Warren",
+                "“<i>Potential Sources of Mercury in Southern Pattani Basin, the Gulf of Thailand</i>”"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "research-experience-undergraduate-senior-year-research-department-of-geology-chulalongkorn-university-2011-2013",
+              "title_html": "<b>Undergraduate Senior Year Research</b>, Department of Geology, Chulalongkorn University",
+              "place": null,
+              "when": "2011–2013",
+              "roles": [],
+              "notes_html": [
+                "Advisor: Kruawun Jankaew",
+                "“<i>Quantification of Tsunami Magnitude from Sedimentation Modeling of Re-occurring Indian Ocean Tsunamiites at Phra Thong Island, Phang Nga, Thailand</i>”"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "field-shipboard-experience",
+      "title": "Field & Shipboard Experience",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": null,
+          "title": null,
+          "entries": [
+            {
+              "id": "field-shipboard-experience-graduate-research-staff-on-r-v-trident-galveston-bay-texas-a-m-university-2018",
+              "title_html": "<b>Graduate Research Staff</b> on R/V <i>Trident</i>, Galveston Bay, Texas A&amp;M University",
+              "place": null,
+              "when": "2018",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "ul",
+                  "items_html": [
+                    "Conducted oceanographic sampling operations on a day cruise in Galveston Bay: Niskin-bottle and handheld CTD seawater sampling, seafloor grab sampling, Secchi-disk turbidity, and seawater pumping for biological and trace-metal analyses."
+                  ]
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "field-shipboard-experience-shore-based-operational-geologist-chevron-thailand-exploration-and-production-limited-2017",
+              "title_html": "<b>Shore-based Operational Geologist</b>, Chevron Thailand Exploration and Production Limited",
+              "place": null,
+              "when": "2017",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "ul",
+                  "items_html": [
+                    "Achieved 90% accuracy in pre-drill vs. post-drill hydrocarbon reserves estimation across 20 gas wells.",
+                    "Performed real-time stratigraphic correlation using wireline triple-combo logs and reassessed pore-pressure profiles during drilling."
+                  ]
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "field-shipboard-experience-wellsite-geologist-trainee-chevron-thailand-exploration-and-production-limited-2014",
+              "title_html": "<b>Wellsite Geologist Trainee</b>, Chevron Thailand Exploration and Production Limited",
+              "place": null,
+              "when": "2014",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "ul",
+                  "items_html": [
+                    "Monitored real-time drilling operations in the Gulf of Thailand for two weeks on a barge tender rig, covering formation pressure acquisition, formation integrity tests (FIT), and rig-floor operations."
+                  ]
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "field-shipboard-experience-undergraduate-field-assistant-chulalongkorn-university-summers-2011-2013",
+              "title_html": "<b>Undergraduate Field Assistant</b>, Chulalongkorn University",
+              "place": null,
+              "when": "Summers 2011–2013",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "ul",
+                  "items_html": [
+                    "Conducted multi-season field excavation and stratigraphic analysis of tsunami deposits on Phra Thong Island, Thailand: trench logging, grain-size and sedimentological description, and sample collection for geochemical analysis."
+                  ]
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teaching-experience",
+      "title": "Teaching Experience",
+      "intro_html": [
+        "Taught and mentored over <b>700</b> undergraduate students, the large majority of them non-majors, across four sections as <b>instructor of record</b> for an introductory ocean-and-climate course and two courses as a <b>teaching assistant</b>. My teaching emphasizes active learning through hands-on data analysis, real-world applications of Earth science, and practices that support students from a wide range of backgrounds and preparation levels."
+      ],
+      "footnotes_html": [
+        "** Student evaluations of my own teaching, on the item <i>“The instructor fostered an effective learning environment”</i> (Scale: 1 = Strongly Disagree, 5 = Strongly Agree). Ratings are shown only for roles in which students evaluated me directly."
+      ],
+      "groups": [
+        {
+          "id": "department-of-oceanography-texas-a-m-university",
+          "title": "Department of Oceanography, Texas A&M University",
+          "entries": [
+            {
+              "id": "teaching-ocng-251",
+              "title_html": "The Blue Planet — Our Oceans (OCNG 251)",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "table",
+                  "columns": [
+                    "Role",
+                    "Term",
+                    "Students (rating)"
+                  ],
+                  "rows": [
+                    [
+                      "Instructor of record",
+                      "Spring 2021",
+                      "194 (4.78/5.00)"
+                    ],
+                    [
+                      "Instructor of record",
+                      "Summer 2021",
+                      "48 (4.86/5.00)"
+                    ],
+                    [
+                      "Instructor of record",
+                      "Summer 2022",
+                      "116 (4.64/5.00)"
+                    ],
+                    [
+                      "Instructor of record",
+                      "Fall 2022",
+                      "36 (4.41/5.00)"
+                    ],
+                    [
+                      "Teaching assistant",
+                      "Spring 2023",
+                      "300"
+                    ]
+                  ]
+                },
+                {
+                  "type": "p",
+                  "html": "<b>OCNG 251, The Blue Planet — Our Oceans</b>, is Texas A&amp;M's introductory oceanography course for non-majors and satisfies a general-education science requirement. As instructor of record I held sole responsibility for syllabus design, recorded lectures, assessment, and grading across four asynchronous online sections enrolling up to 194 students. Its central theme is the ocean's role in the climate system."
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "teaching-geos-470",
+              "title_html": "Data Analysis Methods in Geosciences (GEOS 470)",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "table",
+                  "columns": [
+                    "Role",
+                    "Term",
+                    "Students (rating)"
+                  ],
+                  "rows": [
+                    [
+                      "Teaching assistant",
+                      "Spring 2023",
+                      "30 (5.00/5.00)"
+                    ]
+                  ]
+                },
+                {
+                  "type": "p",
+                  "html": "<b>GEOS 470, Data Analysis Methods in Geosciences</b>, is an upper-level, project-based course in which students analyze real geoscience datasets in MATLAB; I led programming sessions and one-on-one code review for a class of 30."
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "professional-experience",
+      "title": "Professional Experience",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": null,
+          "title": null,
+          "entries": [
+            {
+              "id": "professional-experience-chevron-thailand-exploration-and-production-limited-bangkok-thailand-2013-2018",
+              "title_html": "<b>Chevron Thailand Exploration and Production, Limited</b>, Bangkok, Thailand",
+              "place": null,
+              "when": "2013–2018",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "ul",
+                  "items_html": [
+                    "Conducted detailed geological assessments in extensional basins (fluvio-deltaic environments) using integrated datasets including 3D seismic, wireline logs, and production records.",
+                    "Managed and analyzed geological data from over 5,000 wells to generate pore pressure analyses, geostatistical reserve estimates, and regional pressure-temperature models.",
+                    "Collaborated across disciplines (geology, drilling, reservoir engineering) to optimize exploration and development strategies in the Gulf of Thailand.",
+                    "Developed a novel method for evaluating reservoir pressure using gas shows and wireline log data.",
+                    "Contributed to reserves estimation, stratigraphic correlation, and target redefinition for future platforms within the Dara geologic trend."
+                  ]
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invited-talks-lectures",
+      "title": "Invited Talks & Lectures",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": "conducted-in-english",
+          "title": "Conducted in English",
+          "entries": [
+            {
+              "id": "invited-talks-lectures-university-of-nevada-las-vegas-las-vegas-nv-12-2025",
+              "title_html": "<b>University of Nevada, Las Vegas</b>, Las Vegas, NV",
+              "place": null,
+              "when": "12/2025",
+              "roles": [],
+              "notes_html": [
+                "<i>Archaeal lipids and ocean paleoecology</i>, Virtual Lecture."
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invited-talks-lectures-university-of-colorado-boulder-geobiosupergroup-meeting-boulder-co-4-2025",
+              "title_html": "<b>University of Colorado Boulder GeoBioSupergroup Meeting</b>, Boulder, CO",
+              "place": null,
+              "when": "4/2025",
+              "roles": [],
+              "notes_html": [
+                "<i>Disentangling nutrient effects on TEX<sub>86</sub> paleotemperature proxy</i>, Virtual Talk."
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invited-talks-lectures-50th-sacnas-ndistem-portland-or-10-2023",
+              "title_html": "<b>50<sup>th</sup> SACNAS NDiSTEM</b>, Portland, OR",
+              "place": null,
+              "when": "10/2023",
+              "roles": [],
+              "notes_html": [
+                "<i>Archaeal lipids trace ecology and evolution of marine ammonia-oxidizing archaea</i>, Talk."
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invited-talks-lectures-2nd-international-gdgt-workshop-virtual-eth-zurich-switzerland-9-2023",
+              "title_html": "<b>2<sup>nd</sup> International GDGT Workshop</b>, Virtual, ETH Zurich, Switzerland",
+              "place": null,
+              "when": "9/2023",
+              "roles": [],
+              "notes_html": [
+                "<i>Marine AOA ecology shifts with Earth's climate</i>, Talk."
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Slides",
+                  "url": "https://tamucs-my.sharepoint.com/:b:/g/personal/rrattan_tamu_edu/EZQsnDcppXpAkxq9H8E_L1YBK_Jnd2zL1lPQwsRLIZZ_xw?e=ilpAa1"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invited-talks-lectures-southern-university-of-science-and-technology-sustech-china-10-2022",
+              "title_html": "<b>Southern University of Science and Technology (SUSTech)</b>, China",
+              "place": null,
+              "when": "10/2022",
+              "roles": [],
+              "notes_html": [
+                "<i>Archaeal lipids reveal distinct AOA ecology in past warm oceans</i>, Lecture Series on Modern Geobiology."
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Slides",
+                  "url": "https://tamucs-my.sharepoint.com/:b:/g/personal/rrattan_tamu_edu/ET9FxsRS79dBv4giDLNmCKIB0X_tnPspwI18D1e8uKEFLw?e=6On32v"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invited-talks-lectures-lamont-doherty-earth-observatory-ldeo-columbia-university-ny-10-2022",
+              "title_html": "<b>Lamont-Doherty Earth Observatory (LDEO), Columbia University</b>, NY",
+              "place": null,
+              "when": "10/2022",
+              "roles": [],
+              "notes_html": [
+                "<i>A suppression of deep-water clades of marine ammonia oxidizers in past warm oceans</i>, Biology and Paleo Environment (BPE) Seminar Series, Talk."
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invited-talks-lectures-pal-a-eo-early-career-seminar-pal-a-eopercs-virtual-10-2022",
+              "title_html": "<b>Pal(a)eo EaRly Career Seminar (Pal(a)eoPERCS)</b>, Virtual",
+              "place": null,
+              "when": "10/2022",
+              "roles": [],
+              "notes_html": [
+                "<i>Untapped potential of archaeal lipids beyond ocean temperature reconstructions</i>, Talk."
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Recording",
+                  "url": "https://www.youtube.com/watch?v=95o7ogv_T9I"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invited-talks-lectures-u-s-advisory-committee-for-scientific-ocean-drilling-usac-summer-meeting-virtual-7-2022",
+              "title_html": "<b>U.S. Advisory Committee for Scientific Ocean Drilling (USAC)</b>, Summer Meeting, Virtual",
+              "place": null,
+              "when": "7/2022",
+              "roles": [],
+              "notes_html": [
+                "Invited Talk on marine geochemistry and scientific ocean drilling."
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invited-talks-lectures-chulalongkorn-university-marine-science-department-thailand-12-2021",
+              "title_html": "<b>Chulalongkorn University, Marine Science Department</b>, Thailand",
+              "place": null,
+              "when": "12/2021",
+              "roles": [],
+              "notes_html": [
+                "<i>The Anthropocene: Human Footprints on Planet Earth</i>, Lecture."
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Slides",
+                  "url": "https://docs.google.com/presentation/d/1XTTknlXZghoFSpxdI-8KNPqmwrOvbwUQ9sDqNNvJDf0/edit?usp=sharing"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "conducted-in-thai",
+          "title": "Conducted in Thai",
+          "entries": [
+            {
+              "id": "invited-talks-lectures-early-career-ocean-professionals-ecop-thailand-virtual-6-2025",
+              "title_html": "<b>Early Career Ocean Professionals (ECOP) Thailand, Virtual</b>",
+              "place": null,
+              "when": "6/2025",
+              "roles": [],
+              "notes_html": [
+                "<i>Identifying nutrient stress on TEX<sub>86</sub> paleotemperature proxy</i>, Talk."
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Slides",
+                  "url": "https://docs.google.com/presentation/d/1dN6chZoiv3K4qLR8Im4Y9yl9MC4ZOqmpz8Gf8zEKqXY/edit?usp=sharing"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invited-talks-lectures-kasetsart-university-department-of-earth-sciences-thailand-1-2023",
+              "title_html": "<b>Kasetsart University, Department of Earth Sciences</b>, Thailand",
+              "place": null,
+              "when": "1/2023",
+              "roles": [],
+              "notes_html": [
+                "<i>Ammonia Oxidizers in Past Warm Oceans</i>, Lecture."
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Slides",
+                  "url": "https://tamucs-my.sharepoint.com/:b:/g/personal/rrattan_tamu_edu/ESdkQzE0k-xNufbKOW7oMxwBUtcPdXOOMauWxMsfEqFgkA?e=Xk2nDl"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invited-talks-lectures-burapha-university-department-of-marine-technology-virtual-10-2022",
+              "title_html": "<b>Burapha University, Department of Marine Technology</b>, Virtual",
+              "place": null,
+              "when": "10/2022",
+              "roles": [],
+              "notes_html": [
+                "<i>Inferred paleoecology of marine archaea from today's oceans</i>, Marine Technology Colloquium #62."
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Recording",
+                  "url": "https://fb.watch/grZcLZQSbV/"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invited-talks-lectures-chulalongkorn-university-department-of-geology-virtual-2-2022",
+              "title_html": "<b>Chulalongkorn University, Department of Geology</b>, Virtual",
+              "place": null,
+              "when": "2/2022",
+              "roles": [],
+              "notes_html": [
+                "<i>Life after Resignation: ‘Fulbright’ has So Much to Offer</i>, Talk."
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Slides",
+                  "url": "https://www.canva.com/design/DAE4hfYUXJk/3E9PACt31gAkqAKfjnURkg/edit?utm_content=DAE4hfYUXJk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invited-talks-lectures-burapha-university-department-of-marine-technology-virtual-9-2020",
+              "title_html": "<b>Burapha University, Department of Marine Technology</b>, Virtual",
+              "place": null,
+              "when": "9/2020",
+              "roles": [],
+              "notes_html": [
+                "<i>Fossil lipids: Thermometers for the Earth's Climate History</i>, Talk."
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Recording",
+                  "url": "https://www.facebook.com/watch/?v=405982837057621"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "presentations",
+      "title": "Presentations",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": "academic-scientific-conferences",
+          "title": "Academic & Scientific Conferences",
+          "entries": [
+            {
+              "id": "presentations-the-petm-is-not-that-hot-in-texas-reconstructing-hyperthermals-with-a-proxy-system-model-for-tetraether-lipids-2025-december",
+              "title_html": "<b>Rattanasriampaipong, R.</b>, Tierney, J. E., Elling, F., and Inglis, G. N. (2025, December). <i>The PETM is not that hot in TEXAS: Reconstructing hyperthermals with a proxy system model for tetraether lipids</i>. Poster presentation at the 2025 AGU Fall Meeting, New Orleans Ernest N. Morial Convention Center, New Orleans, LA, USA.",
+              "place": null,
+              "when": "2025",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-disentangling-nutrient-effect-on-tex86-paleotemperature-proxy-2025-september",
+              "title_html": "<b>Rattanasriampaipong, R.</b>, Tierney, J. E., Abell, J. T., and Gilmore, L. D. (2025, September). <i>Disentangling nutrient effect on TEX<sub>86</sub> paleotemperature proxy</i>. Oral presentation at the 2025 International Meeting on Organic Geochemistry, Hilton Porto Gaia, Vila Nova de Gaia, Portugal.",
+              "place": null,
+              "when": "2025",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-rethinking-tex86-temperature-calibration-with-texas-psm-2024-december",
+              "title_html": "<b>Rattanasriampaipong, R.</b>, Tierney, J. E., Elling, F., and Inglis, G. N. (2024, December). <i>Rethinking TEX<sub>86</sub> temperature calibration with TEXAS-PSM</i>. Oral presentation at the 2024 AGU Fall Meeting, Walter E. Washington Convention Center, Washington, D.C., USA.",
+              "place": null,
+              "when": "2024",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-texas-psm-towards-a-full-proxy-system-modeling-of-tetraether-index-of-ammonia-oxidizers-2024-august",
+              "title_html": "<b>Rattanasriampaipong, R.</b> and Tierney, J. E. (2024, August). <i>TEXAS-PSM: Towards a full proxy system modeling of TetraEther indeX of Ammonia oxidizerS</i>. Poster presentation at the 2024 Gordon Research Conference on Organic Geochemistry, Holderness School, Holderness, NH, USA.",
+              "place": null,
+              "when": "2024",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-texas-psm-towards-a-full-proxy-system-modeling-of-tetraether-index-of-ammonia-oxidizers-2024-july",
+              "title_html": "<b>Rattanasriampaipong, R.</b> and Tierney, J. E. (2024, July). <i>TEXAS-PSM: Towards a full proxy system modeling of TetraEther indeX of Ammonia oxidizerS</i>. Poster presentation at the 2024 Gordon Research Seminar on Organic Geochemistry, Holderness School, Holderness, NH, USA.",
+              "place": null,
+              "when": "2024",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-rethinking-proxy-calibration-framework-for-tex86-paleothermometry-2024-july",
+              "title_html": "<b>Rattanasriampaipong, R.</b> and Tierney, J. E. (2024, July). <i>Rethinking proxy calibration framework for TEX<sub>86</sub> paleothermometry</i>. Oral presentation at the 16th NOAA Climate and Global Change Postdoctoral Fellowship Summer Institute, Holiday Inn, Steamboat Springs, CO, USA.",
+              "place": null,
+              "when": "2024",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-bacterial-tetraether-lipids-as-a-proxy-for-ocean-de-oxygenation-2023-december",
+              "title_html": "<b>Rattanasriampaipong, R.</b>, Zhang, Y. G., Alo, O., Liu, X. L., Zhang, Y., Kim, B., Marcantonio, F., and Bassinot, F. (2023, December). <i>Bacterial tetraether lipids as a proxy for ocean (de)oxygenation</i>. Abstract (PP33B-04) presented at the 2023 AGU Fall Meeting, Moscone Center, San Francisco, CA, USA.",
+              "place": null,
+              "when": "2023",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-archaeal-lipids-suggest-ecological-shifts-of-marine-ammonia-oxidizing-archaea-in-greenhouse-worlds-2022-december",
+              "title_html": "<b>Rattanasriampaipong, R.</b>, Zhang, Y. G., Pearson, A., Hedlund, B., and Zhang, S. (2022, December). <i>Archaeal lipids suggest ecological shifts of marine ammonia-oxidizing archaea in greenhouse worlds</i>. Abstract (PP13C-04) presented at the 2022 AGU Fall Meeting, McCormick Place Convention Center, Chicago, IL, USA.",
+              "place": null,
+              "when": "2022",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-tracing-ecology-and-evolution-of-marine-ammonia-oxidizing-archaea-using-archaeal-lipid-biomarkers-2022-april",
+              "title_html": "<b>Rattanasriampaipong, R.</b>, Zhang, Y. G., Pearson, A., Hedlund, B., and Zhang, S. (2022, April). <i>Tracing ecology and evolution of marine ammonia-oxidizing archaea using archaeal lipid biomarkers</i>. Oral presentation, Departmental Seminar, Department of Oceanography, Texas A&amp;M University, College Station, TX, USA.",
+              "place": null,
+              "when": "2022",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-beyond-tex86-gdgts-inform-marine-archaeal-community-ecology-and-evolution-2021-december",
+              "title_html": "<b>Rattanasriampaipong, R.</b>, Zhang, Y. G., Pearson, A., and Hedlund, B. (2021, December). <i>Beyond TEX<sub>86</sub>: GDGTs Inform Marine Archaeal Community Ecology and Evolution</i>. Hybrid oral presentation at the 2021 AGU Fall Meeting, Ernest N. Morial Convention Center, New Orleans, LA, USA.",
+              "place": null,
+              "when": "2021",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-beyond-tex86-gdgt-distributions-inform-archaeal-ecology-2021-september",
+              "title_html": "<b>Rattanasriampaipong, R.</b>, Zhang, Y. G., Pearson, A., Hedlund, B., and Zhang, S. (2021, September). <i>Beyond TEX<sub>86</sub>: GDGT Distributions Inform Archaeal Ecology</i>. Lightning (3-minute) oral presentation at the 2021 PhanTASTIC Workshop.",
+              "place": null,
+              "when": "2021",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-closing-the-gaps-of-cenozoic-sea-surface-temperature-history-using-tetraether-archaeal-lipid-biomarkers-2021-april",
+              "title_html": "<b>Rattanasriampaipong, R.</b> (2021, April). <i>Closing the gaps of Cenozoic sea surface temperature history using tetraether archaeal lipid biomarkers</i>. Oral presentation, Departmental Seminar, Department of Oceanography, Texas A&amp;M University, College Station, TX, USA.",
+              "place": null,
+              "when": "2021",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-towards-complete-global-sea-surface-temperature-reconstructions-over-the-cenozoic-era-2019-december",
+              "title_html": "<b>Rattanasriampaipong, R.</b> and Zhang, Y. G. (2019, December). <i>Towards complete global sea surface temperature reconstructions over the Cenozoic Era</i>. Poster presentation at the 2019 AGU Fall Meeting, Moscone Center, San Francisco, CA, USA.",
+              "place": null,
+              "when": "2019",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-quantification-of-tsunami-magnitude-from-sedimentation-modeling-of-re-occurring-indian-ocean-tsunamiites-at-phra-thong-island-phang-nga-thailand-2013-april",
+              "title_html": "<b>Rattanasriampaipong, R.</b> (2013, April). <i>Quantification of Tsunami Magnitude from Sedimentation Modeling of Re-occurring Indian Ocean Tsunamiites at Phra Thong Island, Phang Nga, Thailand</i>. Oral presentation at the Annual Hitachi Senior Project Competition, Faculty of Science, Chulalongkorn University, Bangkok, Thailand.",
+              "place": null,
+              "when": "2013",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "industry",
+          "title": "Industry",
+          "entries": [
+            {
+              "id": "presentations-a-new-approach-for-pore-pressure-prediction-using-neutron-density-log-separation-2018-april",
+              "title_html": "<b>Rattanasriampaipong, R.</b>, Marksamer, A., and Kantatong, P. (2018, April). <i>A new approach for pore pressure prediction using neutron-density log separation</i>. Oral presentation at the 2018 Sub-Surface Technical Forum, Chevron Thailand Headquarters, Bangkok, Thailand.",
+              "place": null,
+              "when": "2018",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-pattani-basin-regional-pore-pressure-study-2015-february",
+              "title_html": "<b>Rattanasriampaipong, R.</b>, Paiboon, P., and Thatmali, P. (2015, February). <i>Pattani Basin Regional Pore Pressure Study</i>. Oral presentation at the Annual Meeting of Chevron Thailand Reservoir Management Forum, Swissotel Le Concorde, Bangkok, Thailand.",
+              "place": null,
+              "when": "2015",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-causes-of-ballooning-and-lost-circulation-in-erawan-and-satun-fields-2014-june",
+              "title_html": "<b>Rattanasriampaipong, R.</b>, Kananithikorn, N., Keawmoon, N., and Prasongtham, P. (2014, June). <i>Causes of ballooning and lost circulation in Erawan and Satun fields</i>. Poster presentation at the Bi-Annual Meeting of Chevron Reservoir Management Forum, The Woodlands Waterway Marriott Hotel, Houston, TX, USA.",
+              "place": null,
+              "when": "2014",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "presentations-causes-of-ballooning-and-lost-circulation-in-erawan-and-satun-fields-2014-april",
+              "title_html": "<b>Rattanasriampaipong, R.</b>, Kananithikorn, N., Keawmoon, N., and Prasongtham, P. (2014, April). <i>Causes of ballooning and lost circulation in Erawan and Satun fields</i>. Oral presentation at the Annual Meeting of Chevron Thailand Reservoir Management Forum, Renaissance Hotel, Bangkok, Thailand.",
+              "place": null,
+              "when": "2014",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "research-mentoring-advising",
+      "title": "Research Mentoring & Advising",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": null,
+          "title": null,
+          "entries": [
+            {
+              "id": "research-mentoring-advising-undergraduate-research-mentor-organic-geochemistry-laboratory-texas-a-m-university-2021-2023",
+              "title_html": "<b>Undergraduate Research Mentor</b>, Organic Geochemistry Laboratory, Texas A&amp;M University",
+              "place": null,
+              "when": "2021–2023",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "p",
+                  "html": "Trained and supervised <b>4</b> on-campus and visiting undergraduate students in laboratory preparation and analysis of archaeal lipid biomarkers (GDGTs) by LC-MS, from sample intake through data quality control:"
+                },
+                {
+                  "type": "ul",
+                  "items_html": [
+                    "Freeze-drying and homogenizing marine mud samples from ocean drilling programs.",
+                    "Extracting total lipid extracts (TLE) using an Accelerated Solvent Extractor (ASE).",
+                    "Purifying samples for LC-MS analysis via cellulose filtering and silica-gel column chromatography."
+                  ]
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "research-mentoring-advising-geology-mentor-chevron-thailand-exploration-and-production-limited-2014-2015",
+              "title_html": "<b>Geology Mentor</b>, Chevron Thailand Exploration and Production Limited",
+              "place": null,
+              "when": "2014–2015",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "p",
+                  "html": "Mentored <b>2</b> newly hired geologists on a Gulf of Thailand drilling project in wireline log interpretation, stratigraphic correlation, pore pressure prediction, and well design."
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invitations-awards-honors",
+      "title": "Invitations, Awards & Honors",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": "invitations",
+          "title": "Invitations",
+          "entries": [
+            {
+              "id": "invitations-awards-honors-invited-to-sail-as-physical-properties-downhole-measurements-specialist-iodp-expedition-388-equatorial-atlantic-gateway-joides-resolution-science-operator-2019",
+              "title_html": "Invited to sail as Physical Properties/Downhole Measurements Specialist, IODP Expedition 388 (Equatorial Atlantic Gateway), JOIDES Resolution Science Operator",
+              "place": null,
+              "when": "2019",
+              "roles": [],
+              "notes_html": [
+                "<i>Berth in the international science party offered 12 August 2019 for the 26 June–26 August 2020 expedition; canceled owing to the COVID-19 pandemic.</i>"
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "awards",
+          "title": "Awards",
+          "entries": [
+            {
+              "id": "invitations-awards-honors-agu-editor-s-citation-for-excellence-in-refereeing-paleoceanography-and-paleoclimatology-2025",
+              "title_html": "AGU Editor's Citation for Excellence in Refereeing — <i>Paleoceanography and Paleoclimatology</i>",
+              "place": null,
+              "when": "2025",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "scholarships",
+          "title": "Scholarships",
+          "entries": [
+            {
+              "id": "invitations-awards-honors-texas-a-m-oceanography-graduate-scholarship-2018-2024",
+              "title_html": "Texas A&amp;M Oceanography Graduate Scholarship",
+              "place": null,
+              "when": "2018–2024",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invitations-awards-honors-chevron-thailand-graduate-scholarship-2015-2016",
+              "title_html": "Chevron Thailand Graduate Scholarship",
+              "place": null,
+              "when": "2015–2016",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invitations-awards-honors-chevron-undergraduate-scholarship-2012-2013",
+              "title_html": "Chevron Undergraduate Scholarship",
+              "place": null,
+              "when": "2012–2013",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invitations-awards-honors-mitsui-oil-exploration-company-moeco-undergraduate-scholarship-2011-2013",
+              "title_html": "Mitsui Oil Exploration Company (MOECO) Undergraduate Scholarship",
+              "place": null,
+              "when": "2011–2013",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "honors",
+          "title": "Honors",
+          "entries": [
+            {
+              "id": "invitations-awards-honors-cover-image-figure-drafted-by-r-rattanasriampaipong-and-finalized-with-f-j-elling-paleoceanography-and-paleoclimatology-volume-41-issue-7-july-2026",
+              "title_html": "Cover image (figure drafted by R. Rattanasriampaipong and finalized with F. J. Elling), <i>Paleoceanography and Paleoclimatology</i>, Volume 41, Issue 7, July 2026.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invitations-awards-honors-paper-highlighted-in-eos-editors-highlights-the-definitive-guide-to-the-tex86-paleothermometer-3-august-2026-the-highlight-used-the-figure-by-r-rattanasriampaipong",
+              "title_html": "Paper highlighted in <i>Eos</i> Editors' Highlights (“The Definitive Guide to the TEX<sub>86</sub> Paleothermometer”), 3 August 2026; the highlight used the figure by R. Rattanasriampaipong.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invitations-awards-honors-invited-student-speaker-agu-student-travel-grant-luncheon-agu-fall-meeting-chicago-il-december-12-2022",
+              "title_html": "Invited Student Speaker, AGU Student Travel Grant Luncheon, AGU Fall Meeting, Chicago, IL, December 12, 2022.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invitations-awards-honors-invited-student-speaker-award-recognition-ceremony-ministry-of-foreign-affairs-bangkok-june-6-2018",
+              "title_html": "Invited Student Speaker, Award Recognition Ceremony, Ministry of Foreign Affairs, Bangkok, June 6, 2018.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invitations-awards-honors-first-place-in-physical-sciences-category-hitachi-trophy-2013-senior-project-competition-faculty-of-science-chulalongkorn-university-april-2013",
+              "title_html": "First place in Physical Sciences category, Hitachi Trophy 2013 Senior Project Competition, Faculty of Science, Chulalongkorn University, April 2013.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "travel-grants",
+          "title": "Travel Grants",
+          "entries": [
+            {
+              "id": "invitations-awards-honors-fas-research-and-academic-exchange-faculty-of-arts-and-sciences-harvard-university-10-2024",
+              "title_html": "FAS Research and Academic Exchange, Faculty of Arts and Sciences, Harvard University",
+              "place": null,
+              "when": "10/2024",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invitations-awards-honors-fall-meeting-student-travel-grant-american-geophysical-union-agu-12-2022",
+              "title_html": "Fall Meeting Student Travel Grant, American Geophysical Union (AGU)",
+              "place": null,
+              "when": "12/2022",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invitations-awards-honors-oceanography-graduate-council-ogc-mini-grant-tamu-oceanography-12-2019-12-2021-12-2022",
+              "title_html": "Oceanography Graduate Council (OGC) Mini Grant, TAMU Oceanography",
+              "place": null,
+              "when": "12/2019, 12/2021, 12/2022",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "invitations-awards-honors-tamu-research-and-presentation-award-graduate-and-professional-school-gps-tamu-12-2019",
+              "title_html": "TAMU Research and Presentation Award, Graduate and Professional School (GPS), TAMU",
+              "place": null,
+              "when": "12/2019",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synergistic-activities-leadership-service-outreach",
+      "title": "Synergistic Activities (Leadership, Service, & Outreach)",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": null,
+          "title": null,
+          "entries": [
+            {
+              "id": "synergistic-activities-leadership-service-outreach-manuscript-reviewer",
+              "title_html": "<b>Manuscript Reviewer</b>",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "35 reviews (22 unique manuscripts) for 12 journals since November 2021"
+              ],
+              "detail": [
+                {
+                  "type": "p",
+                  "html": "Journals reviewed for:"
+                },
+                {
+                  "type": "p",
+                  "html": "<i>Biogeosciences (n = 1), Chemical Geology (2), Climate of the Past (1), Frontiers in Marine Science (2), Folia Microbiologica (1), Geochimica et Cosmochimica Acta (3), Geophysical Research Letters (6), Global and Planetary Change (2), Nature Geoscience (1), Organic Geochemistry (4), Paleoceanography and Paleoclimatology (10), Science Advances (2)</i>."
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-session-co-convener-and-co-chair-agu-fall-meeting-2022-present",
+              "title_html": "<b>Session Co-Convener and Co-Chair</b>, AGU Fall Meeting",
+              "place": null,
+              "when": "2022–Present",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "p",
+                  "html": "Co-initiated (with Jarunetr Sae-lim), coordinated, and presided over the session <i>Past Climates and Environments of Southeast Asia and the Indo-Pacific (PaleoSEA)</i> within the Paleoclimatology and Paleoceanography (PP) section."
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-founder-virtual-community-of-thai-earth-and-climate-scientists-2020-present",
+              "title_html": "<b>Founder</b>, Virtual Community of Thai Earth and Climate Scientists",
+              "place": null,
+              "when": "2020–Present",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "p",
+                  "html": "Founded a virtual community connecting Thai graduate students and early-career researchers in the Earth and climate sciences across U.S. institutions, begun during the pandemic to share mentoring, application advice, and research talks."
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-interpreter-regeneron-international-science-and-engineering-fair-isef-2026-phoenix-arizona-may-2026",
+              "title_html": "<b>Interpreter</b>, Regeneron International Science and Engineering Fair (ISEF) 2026, Phoenix, Arizona",
+              "place": null,
+              "when": "May 2026",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "p",
+                  "html": "Served as a volunteer Thai interpreter for Thai high school participants presenting their year-long science research projects at the world’s largest pre-collegiate science competition."
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-judge-earth-week-events-the-university-of-arizona-spring-2026",
+              "title_html": "<b>Judge</b>, Earth Week Events, The University of Arizona",
+              "place": null,
+              "when": "Spring 2026",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "p",
+                  "html": "Served as a judge for the Climate Talk session at GeoDaze, Department of Geosciences, and evaluated undergraduate posters for the School of Earth and Environmental Sciences (SEES) poster session."
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-discussion-leader-gordon-research-seminar-on-organic-geochemistry-july-27-2024",
+              "title_html": "<b>Discussion Leader</b>, Gordon Research Seminar on Organic Geochemistry",
+              "place": null,
+              "when": "July 27, 2024",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "p",
+                  "html": "Led the keynote session <i>Disciplinary Integrations with Organic Geochemistry</i> at the 2024 Gordon Research Seminar."
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-co-author-open-letter-to-nsf-on-u-s-scientific-ocean-drilling-july-8-2022",
+              "title_html": "<b>Co-Author</b>, Open Letter to NSF on U.S. Scientific Ocean Drilling",
+              "place": null,
+              "when": "July 8, 2022",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "p",
+                  "html": "Co-authored a letter advocating for continued NSF funding of U.S. Scientific Ocean Drilling (SciOD), which was signed by 208 Early Career Researchers from 98 institutions across 17 countries."
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-graduate-student-senator-texas-a-m-university-2018-2022",
+              "title_html": "<b>Graduate Student Senator</b>, Texas A&amp;M University",
+              "place": null,
+              "when": "2018–2022",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-co-author-gpsg-resolution-on-decarbonization-and-fossil-fuel-divestment-april-21-2020",
+              "title_html": "<b>Co-Author</b>, GPSG Resolution on Decarbonization and Fossil Fuel Divestment",
+              "place": null,
+              "when": "April 21, 2020",
+              "roles": [],
+              "notes_html": [],
+              "detail": [
+                {
+                  "type": "p",
+                  "html": "Co-authored GPSG.R.53.05, a resolution advocating for Texas A&amp;M University to reduce fossil fuel investments, which was subsequently passed by the Graduate and Professional Student Government (GPSG) Senate."
+                }
+              ],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-treasurer-fulbright-students-association-texas-a-m-university-2019-2020",
+              "title_html": "<b>Treasurer</b>, Fulbright Students' Association, Texas A&amp;M University",
+              "place": null,
+              "when": "2019–2020",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-tour-docent-r-v-sally-ride-agu-fall-meeting-december-11-2019",
+              "title_html": "<b>Tour Docent</b>, R/V <i>Sally Ride</i>, AGU Fall Meeting",
+              "place": null,
+              "when": "December 11, 2019",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-board-member-fulbright-students-association-texas-a-m-university-2018-2019",
+              "title_html": "<b>Board Member</b>, Fulbright Students' Association, Texas A&amp;M University",
+              "place": null,
+              "when": "2018–2019",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-geology-undergraduate-student-president-chulalongkorn-university-2012-2013",
+              "title_html": "<b>Geology Undergraduate Student President</b>, Chulalongkorn University",
+              "place": null,
+              "when": "2012–2013",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "press-and-media-coverage",
+          "title": "Press and Media Coverage",
+          "entries": []
+        },
+        {
+          "id": "interviewed-articles-in-english",
+          "title": "Interviewed Articles in English",
+          "entries": [
+            {
+              "id": "synergistic-activities-leadership-service-outreach-brave-the-world-stories-of-fulbrighters-impact-70th-anniversary-of-the-fulbright-program-in-thailand",
+              "title_html": "<b>Brave the World</b> – Stories of Fulbrighters’ Impact, 70<sup>th</sup> Anniversary of the Fulbright Program in Thailand.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "<i>Fulbright Thailand, December 24, 2021.</i>"
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Online Article",
+                  "url": "https://issuu.com/fulbrightthailand/docs/storeis_fo_fulbrighters_impact"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "interviewed-articles-in-thai",
+          "title": "Interviewed Articles in Thai",
+          "entries": [
+            {
+              "id": "synergistic-activities-leadership-service-outreach-learn-plearn-plearn-by-ptip-podcast-episode-190",
+              "title_html": "<b>Learn Plearn Plearn by PTip Podcast</b> – Episode 190.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "<i>Fulbright Thailand, January 23, 2024.</i>"
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Podcast",
+                  "url": "https://open.spotify.com/episode/5iJYhIJBjMwboy3JaC0Rp3?si=7d5a29447a72444b"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-talk-with-fulbrighter-ronnakrit-rattanasriampaipong",
+              "title_html": "<b>Talk with Fulbrighter: Ronnakrit Rattanasriampaipong</b>",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "<i>Fulbright Thailand, May 18, 2022.</i>"
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Online Article",
+                  "url": "https://www.fulbrightthai.org/fulbright-stories/khuykab-fulbrighter-rnkrsdi-ratnsrii-amaiphphngs"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-recommended-field-of-study-paleoclimatology-paleoceanography",
+              "title_html": "<b>Recommended Field of Study: Paleoclimatology/Paleoceanography</b>",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "<i>Fulbright Thailand, December 8, 2021.</i>"
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Online Article",
+                  "url": "https://www.fulbrightthai.org/knowledge-sharing/saakhaa-yaakaenanam-1-paleoclimatology-paleoceanography"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-fulbright-in-my-view-fulbright-experiences",
+              "title_html": "<b>Fulbright in My View</b> – Fulbright Experiences.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "<i>Fulbright Thailand, October 6, 2021.</i>"
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Online Article",
+                  "url": "https://anyflip.com/afeb/buat/?fbclid=IwAR08dv9XF7UCimtM9SjwICdCSwSQfuTHNtPbbaepT4WZlTcNRXB9eNtUsi8"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-a-journey-without-a-map",
+              "title_html": "<b>A Journey Without a Map</b>",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "<i>The Science Scholars Facebook Page, June 16, 2020.</i>"
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Online Article",
+                  "url": "https://www.facebook.com/ThaiScienceScholars/photos/a.114754726700839/170670231109288/?type=3"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "panel-discussions-in-thai",
+          "title": "Panel Discussions in Thai",
+          "entries": [
+            {
+              "id": "synergistic-activities-leadership-service-outreach-fulbright-thai-graduate-scholarship-tgs-more-than-just-a-scholarship-virtual-event",
+              "title_html": "<b>Fulbright Thai Graduate Scholarship (TGS): More Than Just a Scholarship</b> – Virtual Event.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "<i>Fulbright Thailand, February 17, 2023.</i>"
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Recording",
+                  "url": "https://fb.watch/iLwkVkeNjJ/"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-meet-the-fulbrighter-series-study-pure-applied-science-in-the-u-s-virtual-event",
+              "title_html": "<b>Meet the Fulbrighter Series: Study Pure &amp; Applied Science in the U.S.</b> – Virtual Event.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "<i>Fulbright Thailand, March 31, 2021.</i>"
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Recording",
+                  "url": "https://www.facebook.com/watch/?v=192470062421053"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "synergistic-activities-leadership-service-outreach-meet-the-fulbrighter-series-doctoral-studies-in-the-u-s-virtual-event",
+              "title_html": "<b>Meet the Fulbrighter Series: Doctoral Studies in the U.S.</b> – Virtual Event.",
+              "place": null,
+              "when": null,
+              "roles": [],
+              "notes_html": [
+                "<i>Fulbright Thailand, March 5, 2021.</i>"
+              ],
+              "detail": [],
+              "links": [
+                {
+                  "label": "Recording",
+                  "url": "https://www.facebook.com/watch/?v=1018096972055863"
+                }
+              ],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "workshops",
+      "title": "Workshops",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": "professional-development",
+          "title": "Professional Development",
+          "entries": [
+            {
+              "id": "workshops-cores-for-research-and-education-core-school-gulf-coast-repository-formerly-under-the-international-ocean-discovery-program-texas-a-m-university-college-station-tx-july-14-18-2025",
+              "title_html": "<b>COres for Research and Education (CORE) School</b>, Gulf Coast Repository (formerly under the International Ocean Discovery Program), Texas A&amp;M University, College Station, TX",
+              "place": null,
+              "when": "July 14–18, 2025",
+              "roles": [],
+              "notes_html": [
+                "Inaugural cohort."
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-community-earth-system-model-cesm-tutorial-ncar-boulder-co-july-7-11-2025",
+              "title_html": "<b>Community Earth System Model (CESM) Tutorial</b>, NCAR, Boulder, CO",
+              "place": null,
+              "when": "July 7–11, 2025",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-lab-visit-lab-for-molecular-biogeochemistry-and-organic-geochemistry-pearson-lab-harvard-university-cambridge-ma-october-24-30-2024",
+              "title_html": "<b>Lab Visit</b>, Lab for Molecular Biogeochemistry and Organic Geochemistry (Pearson Lab), Harvard University, Cambridge, MA",
+              "place": null,
+              "when": "October 24–30, 2024",
+              "roles": [],
+              "notes_html": [
+                "Hands-on experience with the Spooling-Wire Microcombustion device interfaced with an Isotope-Ratio Mass Spectrometer (SWiM-IRMS) under the guidance of Dr. Ann Pearson and PhD student Amanda Calhoun."
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-noaa-climate-global-change-summer-institute-holiday-inn-steamboat-co-july-14-19-2024",
+              "title_html": "<b>NOAA Climate &amp; Global Change Summer Institute</b>, Holiday Inn, Steamboat, CO",
+              "place": null,
+              "when": "July 14–19, 2024",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-paleoclimate-data-assimilation-workshop-the-university-of-arizona-tucson-az-october-18-21-2022",
+              "title_html": "<b>Paleoclimate Data Assimilation Workshop</b>, The University of Arizona, Tucson, AZ",
+              "place": null,
+              "when": "October 18–21, 2022",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-paleocamp-2022-summer-school-heising-simons-foundation-sierra-nevada-aquatic-research-laboratory-snarl-mammoth-lakes-ca-july-11-22-2022",
+              "title_html": "<b>PaleoCAMP 2022 Summer School</b>, Heising-Simons Foundation, Sierra Nevada Aquatic Research Laboratory (SNARL), Mammoth Lakes, CA",
+              "place": null,
+              "when": "July 11–22, 2022",
+              "roles": [],
+              "notes_html": [
+                "Inaugural cohort. Selected as 1 of 25 attendees from 132 applicants."
+              ],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-science-mission-requirements-smr-workshop-nsf-usssp-iodp-chicago-il-may-17-18-2022",
+              "title_html": "<b>Science Mission Requirements (SMR) Workshop</b>, NSF/USSSP-IODP, Chicago, IL",
+              "place": null,
+              "when": "May 17–18, 2022",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-linkedearth-paleohackathon-2-virtual-python-workshop-october-28-29-2021",
+              "title_html": "<b>LinkedEarth PaleoHackathon 2</b>, Virtual Python Workshop",
+              "place": null,
+              "when": "October 28–29, 2021",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "texas-a-m-university-s-g-r-a-d-aggies-professional-development-program",
+          "title": "Texas A&M University's G.R.A.D. Aggies Professional Development Program",
+          "entries": [
+            {
+              "id": "workshops-nsf-the-agency-proposal-preparation-review-february-19-2020",
+              "title_html": "NSF: The Agency, Proposal Preparation &amp; Review",
+              "place": null,
+              "when": "February 19, 2020",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-open-educational-resources-workshop-september-13-2019",
+              "title_html": "Open Educational Resources Workshop",
+              "place": null,
+              "when": "September 13, 2019",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-creating-a-life-of-balance-wellness-september-10-2019",
+              "title_html": "Creating a Life of Balance &amp; Wellness",
+              "place": null,
+              "when": "September 10, 2019",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "foreign-fulbright-student-program",
+          "title": "Foreign Fulbright Student Program",
+          "entries": [
+            {
+              "id": "workshops-innovations-in-civic-engagement-harnessing-data-for-the-public-good-philadelphia-pa-march-7-10-2019",
+              "title_html": "Innovations in Civic Engagement: Harnessing Data for the Public Good, Philadelphia, PA",
+              "place": null,
+              "when": "March 7–10, 2019",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-pre-academic-orientation-program-ohio-university-athens-oh-july-28-august-18-2018",
+              "title_html": "Pre-Academic Orientation Program, Ohio University, Athens, OH",
+              "place": null,
+              "when": "July 28–August 18, 2018",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        },
+        {
+          "id": "chevron-in-house-training-energy-company-technology",
+          "title": "Chevron In-House Training (Energy Company Technology)",
+          "entries": [
+            {
+              "id": "workshops-reservoir-geophysics-november-21-25-2017",
+              "title_html": "Reservoir Geophysics",
+              "place": null,
+              "when": "November 21–25, 2017",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-applied-concepts-of-structural-geology-june-12-16-2017",
+              "title_html": "Applied Concepts of Structural Geology",
+              "place": null,
+              "when": "June 12–16, 2017",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-stratigraphic-analysis-of-shallow-marine-and-fluvial-reservoirs-may-29-june-2-2017",
+              "title_html": "Stratigraphic Analysis of Shallow Marine and Fluvial Reservoirs",
+              "place": null,
+              "when": "May 29–June 2, 2017",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-interpretation-of-3d-seismic-data-november-14-17-2016",
+              "title_html": "Interpretation of 3D Seismic Data",
+              "place": null,
+              "when": "November 14–17, 2016",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-basic-reservoir-engineering-december-15-19-2014",
+              "title_html": "Basic Reservoir Engineering",
+              "place": null,
+              "when": "December 15–19, 2014",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-formation-evaluation-fundamentals-october-6-9-2014",
+              "title_html": "Formation Evaluation (Fundamentals)",
+              "place": null,
+              "when": "October 6–9, 2014",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-applied-stratigraphic-concepts-august-4-8-2014",
+              "title_html": "Applied Stratigraphic Concepts",
+              "place": null,
+              "when": "August 4–8, 2014",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-applied-subsurface-geological-mapping-june-23-27-2014",
+              "title_html": "Applied Subsurface Geological Mapping",
+              "place": null,
+              "when": "June 23–27, 2014",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "workshops-applied-petroleum-geochemistry-april-21-24-2014",
+              "title_html": "Applied Petroleum Geochemistry",
+              "place": null,
+              "when": "April 21–24, 2014",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "professional-societies",
+      "title": "Professional Societies",
+      "intro_html": [],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": null,
+          "title": null,
+          "entries": [
+            {
+              "id": "professional-societies-member-american-geophysical-union-agu-2018-present",
+              "title_html": "<b>Member</b>, American Geophysical Union (AGU)",
+              "place": null,
+              "when": "2018–Present",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "professional-societies-member-european-association-of-geoscientists-engineers-eage-2025-present",
+              "title_html": "<b>Member</b>, European Association of Geoscientists &amp; Engineers (EAGE)",
+              "place": null,
+              "when": "2025–Present",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "professional-societies-student-member-american-association-for-the-advancement-of-science-aaas-2019-2023",
+              "title_html": "<b>Student Member</b>, American Association for the Advancement of Science (AAAS)",
+              "place": null,
+              "when": "2019–2023",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "professional-societies-student-member-american-association-of-petroleum-geologists-aapg-2013-2023",
+              "title_html": "<b>Student Member</b>, American Association of Petroleum Geologists (AAPG)",
+              "place": null,
+              "when": "2013–2023",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "professional-societies-secretary-thailand-society-of-exploration-geophysicists-tseg-2015-2016",
+              "title_html": "<b>Secretary</b>, Thailand Society of Exploration Geophysicists (TSEG)",
+              "place": null,
+              "when": "2015–2016",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            },
+            {
+              "id": "professional-societies-student-member-society-of-petroleum-engineers-spe-2010-2013",
+              "title_html": "<b>Student Member</b>, Society of Petroleum Engineers (SPE)",
+              "place": null,
+              "when": "2010–2013",
+              "roles": [],
+              "notes_html": [],
+              "detail": [],
+              "links": [],
+              "badge": null,
+              "paper": null,
+              "pub": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "personal-interests",
+      "title": "Personal Interests",
+      "intro_html": [
+        "Science communication, Infographics, Data visualization, Marathon and ultra-distance running"
+      ],
+      "footnotes_html": [],
+      "groups": [
+        {
+          "id": null,
+          "title": null,
+          "entries": []
+        }
+      ]
+    }
+  ]
+}

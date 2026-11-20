@@ -1,0 +1,172 @@
+---
+layout: page
+---
+{%- comment -%}
+  The CV page, rendered from _data/cv.json (generated from the LaTeX CV; never edited by hand).
+
+  Markup contract (later CV tasks and the CV script build on it):
+  - the wrapper: <div class="cv-page" data-landing="<page.landing_section>">. The CV script adds the class cv-js to it, and every
+    "one section at a time" rule in _sass/_cv.scss is scoped under .cv-page.cv-js, so without the script every section shows.
+  - the page header (.cv-top with the Updated line and the Download PDF link, then the .cv-stats line), then .cv-layout: the
+    section panel beside .cv-sections.
+  - the section panel: <nav class="cv-nav" aria-label="CV sections"> with one
+    <a class="cv-nav-link" href="#<section id>" data-section="<section id>"> per section, holding the section title and, when the
+    section has entries (counted across all its groups), <span class="cv-nav-count" aria-hidden="true">N</span> followed by a
+    visually hidden ", N entries", so a screen reader reads "Publications, 11 entries". Without the script the links are in-page
+    jumps; the script marks the current one with aria-current="true" and hides the other sections with the hidden attribute.
+  - each section: <section class="cv-section" id="<section id>" aria-labelledby="<section id>-heading">,
+    with <h2 class="cv-section-title" id="<section id>-heading">; sections listed in page.collapse_sections
+    also carry data-collapse-after="<page.collapse_after>"
+  - each group: <div class="cv-group" data-group="<group id>">, with an <h3 class="cv-group-title"> when it has a title
+  - each entry: _includes/cv/entry.liquid (see there)
+  - a section with publications also has, after its intro, <div class="cv-filters" role="group" aria-label="Filter publications" hidden>
+    holding <button type="button" class="cv-filter" data-filter="all|first-author|co-author|published|under-review" aria-pressed="true|false">;
+    "all" starts pressed. The bar is hidden in the markup, so without JavaScript it is not shown; the CV script reveals it and filters
+    the .cv-card elements by their data-status and data-first-author.
+
+  - each section heading carries tabindex="-1", so the script can move focus to it after a switch; after the layout come a
+    visually hidden <p class="cv-live" aria-live="polite"> for the script's filter announcements, and <p class="cv-print-note">
+    (shown only in print) naming where the PDF is. The script itself is assets/js/cv.js, loaded with defer on this page only.
+
+  Escaping: trusted, already-sanitised HTML is output as is: fields whose name is html or ends in _html (here a section's intro_html
+  and footnotes_html), table row cells, and pub.abstract (see cv/entry.liquid). Every other string is escaped. bin/check_cv_links.py,
+  run before every deploy, limits the trusted HTML to the tags b, i, em, sub, sup, code and a href.
+{%- endcomment -%}
+{%- assign cv = site.data.cv -%}
+{%- assign stats = cv.stats -%}
+{%- assign collapse_sections = page.collapse_sections -%}
+<div
+  class="cv-page"
+  {% if page.landing_section %}
+    data-landing="{{ page.landing_section | escape }}"
+  {% endif %}
+>
+  <div class="cv-top">
+    {% if cv.updated %}
+      <p class="cv-updated">Updated {{ cv.updated | date: '%B %Y' }} · same version as the PDF</p>
+    {% endif %}
+    {% if page.cv_pdf %}
+      <a class="cv-download" href="{{ page.cv_pdf | relative_url }}" download><span aria-hidden="true">↓</span> Download PDF</a>
+    {% endif %}
+  </div>
+
+  {% if stats %}
+    <p class="cv-stats">
+      {% if stats.funding %}
+        <span class="cv-stat"
+          ><b class="cv-stat-value">{{ stats.funding | escape }}</b> <span class="cv-stat-label">funding awarded</span></span
+        >
+      {% endif %}
+      {% if stats.citations %}
+        <span class="cv-stat"
+          ><b class="cv-stat-value">{{ stats.citations | escape }}</b>
+          <span class="cv-stat-label"
+            >citations{% if stats.hindex %} · h-index {{ stats.hindex | escape }}{% endif -%}
+          </span></span
+        >
+      {% endif %}
+      {% if stats.students %}
+        <span class="cv-stat"
+          ><b class="cv-stat-value">{{ stats.students | escape }}+</b> <span class="cv-stat-label">students taught</span></span
+        >
+      {% endif %}
+    </p>
+  {% endif %}
+
+  <div class="cv-layout">
+    <nav class="cv-nav" aria-label="CV sections">
+      {% for section in cv.sections %}
+        {%- assign entry_count = 0 -%}
+        {%- for group in section.groups -%}
+          {%- if group.entries -%}
+            {%- assign entry_count = entry_count | plus: group.entries.size -%}
+          {%- endif -%}
+        {%- endfor -%}
+        <a class="cv-nav-link" href="#{{ section.id | escape }}" data-section="{{ section.id | escape }}">
+          <span class="cv-nav-title">{{ section.title | escape }}</span>
+          {%- if entry_count > 0 -%}
+            <span class="cv-nav-count" aria-hidden="true">{{ entry_count }}</span>
+            <span class="cv-sr-only"
+              >, {{ entry_count }}
+              {% if entry_count == 1 %}entry{% else %}entries{% endif -%}
+            </span>
+          {%- endif -%}
+        </a>
+      {% endfor %}
+    </nav>
+
+    <div class="cv-sections">
+      {% for section in cv.sections %}
+        <section
+          class="cv-section"
+          id="{{ section.id | escape }}"
+          aria-labelledby="{{ section.id | escape }}-heading"
+          {% if collapse_sections contains section.id %}
+            data-collapse-after="{{ page.collapse_after | escape }}"
+          {% endif %}
+        >
+          <h2 class="cv-section-title" id="{{ section.id | escape }}-heading" tabindex="-1">{{ section.title | escape }}</h2>
+
+          {% for paragraph in section.intro_html %}
+            <p class="cv-intro">{{ paragraph }}</p>
+          {% endfor %}
+
+          {% assign has_pubs = false %}
+          {% for group in section.groups %}
+            {% for entry in group.entries %}
+              {% if entry.pub %}
+                {% assign has_pubs = true %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+          {% if has_pubs %}
+            <div class="cv-filters" role="group" aria-label="Filter publications" hidden>
+              <button type="button" class="cv-filter" data-filter="all" aria-pressed="true">All</button>
+              <button type="button" class="cv-filter" data-filter="first-author" aria-pressed="false">First author</button>
+              <button type="button" class="cv-filter" data-filter="co-author" aria-pressed="false">Co-author</button>
+              <button type="button" class="cv-filter" data-filter="published" aria-pressed="false">Published</button>
+              <button type="button" class="cv-filter" data-filter="under-review" aria-pressed="false">Under review / preprint</button>
+            </div>
+          {% endif %}
+
+          {% for group in section.groups %}
+            {% if group.title or group.entries.size > 0 %}
+              <div
+                class="cv-group"
+                {% if group.id %}
+                  data-group="{{ group.id | escape }}"
+                {% endif %}
+              >
+                {% if group.title %}
+                  <h3 class="cv-group-title">{{ group.title | escape }}</h3>
+                {% endif %}
+                {% for entry in group.entries %}
+                  {% include cv/entry.liquid entry=entry section=section %}
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endfor %}
+
+          {% if section.footnotes_html.size > 0 %}
+            <div class="cv-footnotes">
+              {% for footnote in section.footnotes_html %}
+                <p>{{ footnote }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </section>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% comment %} Filter results are announced here by the CV script ("Showing 4 of 11 publications"). {% endcomment %}
+  <p class="cv-sr-only cv-live" aria-live="polite" aria-atomic="true"></p>
+
+  {% if page.cv_pdf %}
+    <p class="cv-print-note">
+      The PDF version is at {{ site.url | remove: 'https://' | remove: 'http://' -}}
+      {{- page.cv_pdf | relative_url }}
+    </p>
+  {% endif %}
+</div>
+<script defer src="{{ '/assets/js/cv.js' | relative_url | bust_file_cache }}"></script>

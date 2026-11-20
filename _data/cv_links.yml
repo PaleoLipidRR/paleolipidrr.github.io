@@ -1,0 +1,6 @@
+# Extra links shown on CV entries, keyed by the entry id in _data/cv.json.
+# Each value is a list of { label, url }. A key with no matching entry fails CI.
+teaching-ocng-251:
+  - { label: Course page, url: /courses/the_blue_planet/ }
+teaching-geos-470:
+  - { label: Course page, url: /courses/data_methods_geos/ }
